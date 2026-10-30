@@ -1,0 +1,31 @@
+{
+  "vul_id": "VUL4J-1",
+  "cve_id": "CVE-2017-18349",
+  "repository": {
+    "name": [
+      "alibaba_fastjson"
+    ],
+    "url": "https://github.com/alibaba_fastjson",
+    "human_patch_url": "https://github.com/alibaba/fastjson/commit/f5903fa56497c00ed0703ac875b511f9bd5f1d8e"
+  },
+  "tests": {
+    "overall_metrics": {
+      "number_running": 1,
+      "number_passing": 0,
+      "number_error": 1,
+      "number_failing": 0,
+      "number_skipping": 0
+    },
+    "failures": [
+      {
+        "test_class": "com.alibaba.json.bvt.bug.Issue1005",
+        "test_method": "test_for_issue",
+        "failure_name": "java.lang.ClassCastException",
+        "detail": "java.lang.Integer cannot be cast to java.lang.Byte",
+        "is_error": true
+      }
+    ],
+    "passing_tests": [],
+    "skipping_tests": []
+  }
+}

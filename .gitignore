@@ -1,0 +1,13 @@
+# Reproducible build outputs and nested repository metadata
+**/.git/
+**/target/
+**/.m2/
+*.class
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Active per-sample workspace; validated outputs are stored separately
+baseline/
+
