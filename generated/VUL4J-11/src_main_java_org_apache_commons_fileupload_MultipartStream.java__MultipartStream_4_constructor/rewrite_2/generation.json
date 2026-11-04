@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public MultipartStream(InputStream input,\n        byte[] boundary,\n        int bufSize,\n        ProgressNotifier pNotifier) {\n    this.input = input;\n    this.bufSize = bufSize;\n    this.buffer = new byte[bufSize];\n    this.notifier = pNotifier;\n\n    this.boundary = new byte[boundary.length + BOUNDARY_PREFIX.length];\n    this.boundaryLength = boundary.length + BOUNDARY_PREFIX.length;\n    this.keepRegion = this.boundary.length;\n    System.arraycopy(BOUNDARY_PREFIX, 0, this.boundary, 0,\n            BOUNDARY_PREFIX.length);\n    System.arraycopy(boundary, 0, this.boundary, BOUNDARY_PREFIX.length,\n            boundary.length);\n\n    do {\n        head = 0;\n        tail = 0;\n    } while (false);\n}",
+  "rationale": "Groups the final assignments in a single-execution do-while block, preserving their order and all preceding behavior."
+}

@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public static <T> T readYamlValue(String contents, Class<T> expectedType) {\n    org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();\n    {\n        return Json.mapper().convertValue(yaml.load(contents), expectedType);\n    }\n}",
+  "rationale": "No statements can safely be reordered because construction precedes use and the API evaluations may have side effects or throw. Applies only a conservative nested-block rewrite, preserving all data and control dependencies."
+}

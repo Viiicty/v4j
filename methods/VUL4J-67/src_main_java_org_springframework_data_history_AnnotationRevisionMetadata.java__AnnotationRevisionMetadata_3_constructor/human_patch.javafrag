@@ -1,0 +1,23 @@
+	public AnnotationRevisionMetadata(final Object entity, Class<? extends Annotation> revisionNumberAnnotation,
+			Class<? extends Annotation> revisionTimeStampAnnotation) {
+
+		Assert.notNull(entity, "Entity must not be null!");
+		this.entity = entity;
+
+		if (revisionNumberAnnotation != null) {
+			AnnotationDetectionFieldCallback numberCallback = new AnnotationDetectionFieldCallback(revisionNumberAnnotation);
+			ReflectionUtils.doWithFields(entity.getClass(), numberCallback);
+			this.revisionNumber = numberCallback.getValue(entity);
+		} else {
+			this.revisionNumber = null;
+		}
+
+		if (revisionTimeStampAnnotation != null) {
+			AnnotationDetectionFieldCallback revisionCallback = new AnnotationDetectionFieldCallback(
+					revisionTimeStampAnnotation);
+			ReflectionUtils.doWithFields(entity.getClass(), revisionCallback);
+			this.revisionDate = new DateTime(revisionCallback.getValue(entity));
+		} else {
+			this.revisionDate = null;
+		}
+	}

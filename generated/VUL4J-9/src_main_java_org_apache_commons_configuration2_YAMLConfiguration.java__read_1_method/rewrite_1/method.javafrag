@@ -1,0 +1,13 @@
+public void read(final InputStream in) throws ConfigurationException
+{
+    try
+    {
+        final Yaml parser = new Yaml();
+        final Map<String, Object> configuration = (Map) (parser.load(in));
+        load(configuration);
+    }
+    catch (final Exception failure)
+    {
+        rethrowException(failure);
+    }
+}

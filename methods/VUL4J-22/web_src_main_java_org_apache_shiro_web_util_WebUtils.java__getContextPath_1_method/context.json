@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-22",
+  "unit_id": "web_src_main_java_org_apache_shiro_web_util_WebUtils.java__getContextPath_1_method",
+  "project_path": "web/src/main/java/org/apache/shiro/web/util/WebUtils.java",
+  "method_key": "getContextPath/1/method",
+  "vulnerable": {
+    "key": "getContextPath/1/method",
+    "name": "getContextPath",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 246,
+    "end_line": 256,
+    "start_offset": 10417,
+    "end_offset": 10901
+  },
+  "human_patch": {
+    "key": "getContextPath/1/method",
+    "name": "getContextPath",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 246,
+    "end_line": 257,
+    "start_offset": 10417,
+    "end_offset": 10961
+  }
+}

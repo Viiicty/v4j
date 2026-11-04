@@ -1,0 +1,11 @@
+{
+  "vul_id": "VUL4J-67",
+  "vulnerable_files": [
+    "src/main/java/org/springframework/data/history/AnnotationRevisionMetadata.java",
+    "src/main/java/org/springframework/data/mapping/PropertyPath.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/springframework/data/history/AnnotationRevisionMetadata.java",
+    "src/main/java/org/springframework/data/mapping/PropertyPath.java"
+  ]
+}

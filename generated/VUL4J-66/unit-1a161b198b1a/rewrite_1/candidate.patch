@@ -1,0 +1,61 @@
+--- a/resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java
++++ b/resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java
+@@ -29,33 +29,33 @@
+       return parse(type);
+    }
+ 
+-   protected static boolean isValid(String str)
+-   {
+-      if (str == null || str.length() == 0) return false;
+-      for (int i = 0; i < str.length(); i++) {
+-         switch (str.charAt(i))
+-         {
+-            case '/':
+-            case '\\':
+-            case '?':
+-            case ':':
+-            case '<':
+-            case '>':
+-            case ';':
+-            case '(':
+-            case ')':
+-            case '@':
+-            case ',':
+-            case '[':
+-            case ']':
+-            case '=':
+-               return false;
+-            default:
+-               break;
+-         }
++protected static boolean isValid(String str)
++{
++   if (str == null || 0 == str.length()) return false;
++   for (int offset = 0; offset < str.length(); offset += 1) {
++      switch (str.charAt(offset))
++      {
++         case '/':
++         case '\\':
++         case '?':
++         case ':':
++         case '<':
++         case '>':
++         case ';':
++         case '(':
++         case ')':
++         case '@':
++         case ',':
++         case '[':
++         case ']':
++         case '=':
++            return false;
++         default:
++            break;
+       }
+-      return true;
+    }
++   return true;
++}
+ 
+    public static MediaType parse(String type)
+    {

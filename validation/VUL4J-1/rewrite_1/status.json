@@ -1,0 +1,12 @@
+{
+  "checkout": "/work/validation_work/VUL4J-1-rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-1/src_main_java_com_alibaba_fastjson_serializer_ObjectArrayCodec.java__deserialze_3_method/rewrite_1/project_file/src/main/java/com/alibaba/fastjson/serializer/ObjectArrayCodec.java",
+  "project_path": "src/main/java/com/alibaba/fastjson/serializer/ObjectArrayCodec.java",
+  "compile_code": 0,
+  "compile_seconds": 286.085,
+  "pov_code": 0,
+  "pov_seconds": 165.434,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

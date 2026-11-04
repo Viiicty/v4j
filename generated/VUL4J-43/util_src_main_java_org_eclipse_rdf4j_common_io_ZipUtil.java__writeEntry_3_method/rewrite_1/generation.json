@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)\n    throws IOException\n{\n    File targetFile = new File((destDir), (entry.getName()));\n\n    if (entry.isDirectory()) {\n        targetFile.mkdirs();\n    }\n    else {\n        targetFile.getParentFile().mkdirs();\n\n        try (InputStream sourceStream = zipFile.getInputStream(entry)) {\n            IOUtil.writeStream(sourceStream, targetFile);\n        }\n    }\n}",
+  "rationale": "Renames local variables and parenthesizes constructor argument expressions without changing evaluation order, API calls, or behavior."
+}

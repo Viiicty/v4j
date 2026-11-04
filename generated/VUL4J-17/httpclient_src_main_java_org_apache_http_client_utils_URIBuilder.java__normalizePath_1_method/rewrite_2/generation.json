@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "private static String normalizePath(final String path) {\n    String s = path;\n    if (s == null) {\n        return null;\n    }\n    int n = 0;\n    for (; n < s.length(); n++) {\n        if (s.charAt(n) != '/') {\n            break;\n        }\n    }\n    if (n <= 1) {\n        return s;\n    }\n    s = s.substring(n - 1);\n    return s;\n}",
+  "rationale": "Inverts the final condition into an early return while retaining the original scan and substring behavior."
+}

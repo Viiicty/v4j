@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-57/unit-7f2e3c306133/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-57/unit-7f2e3c306133/rewrite_2/project_file/src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java",
+  "project_path": "src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java",
+  "compile_code": 0,
+  "compile_seconds": 89.752,
+  "pov_code": 0,
+  "pov_seconds": 137.085,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

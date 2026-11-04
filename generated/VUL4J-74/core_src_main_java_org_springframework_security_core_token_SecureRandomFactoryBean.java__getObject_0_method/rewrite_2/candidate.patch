@@ -1,0 +1,36 @@
+--- a/core/src/main/java/org/springframework/security/core/token/SecureRandomFactoryBean.java
++++ b/core/src/main/java/org/springframework/security/core/token/SecureRandomFactoryBean.java
+@@ -34,22 +34,19 @@
+ 	private String algorithm = "SHA1PRNG";
+ 	private Resource seed;
+ 
+-	public SecureRandom getObject() throws Exception {
+-		SecureRandom rnd = SecureRandom.getInstance(algorithm);
++public SecureRandom getObject() throws Exception {
++    SecureRandom rnd = SecureRandom.getInstance(algorithm);
+ 
+-		if (seed != null) {
+-			// Seed specified, so use it
+-			byte[] seedBytes = FileCopyUtils.copyToByteArray(seed.getInputStream());
+-			rnd.setSeed(seedBytes);
+-		}
+-		else {
+-			// Request the next bytes, thus eagerly incurring the expense of default
+-			// seeding
+-			rnd.nextBytes(new byte[1]);
+-		}
++    if (seed == null) {
++        rnd.nextBytes(new byte[1]);
++    }
++    else {
++        byte[] seedBytes = FileCopyUtils.copyToByteArray(seed.getInputStream());
++        rnd.setSeed(seedBytes);
++    }
+ 
+-		return rnd;
+-	}
++    return rnd;
++}
+ 
+ 	public Class<SecureRandom> getObjectType() {
+ 		return SecureRandom.class;

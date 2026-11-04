@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-73",
+  "vulnerable_files": [
+    "core/src/main/java/org/springframework/security/authentication/encoding/PlaintextPasswordEncoder.java"
+  ],
+  "human_patch_files": [
+    "core/src/main/java/org/springframework/security/authentication/encoding/PlaintextPasswordEncoder.java"
+  ]
+}

@@ -1,0 +1,11 @@
+private static boolean contains(final String[] list, String name) {
+    if (list == null) {
+        return false;
+    }
+    for (final String white : list) {
+        if (name.startsWith(white)) {
+            return true;
+        }
+    }
+    return false;
+}

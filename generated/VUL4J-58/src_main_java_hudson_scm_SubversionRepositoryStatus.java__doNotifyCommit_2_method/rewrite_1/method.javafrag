@@ -1,0 +1,52 @@
+public void doNotifyCommit(StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
+    requirePOST();
+
+    Set<String> changedPaths = new HashSet<String>();
+    String currentLine;
+    BufferedReader reader = new BufferedReader(req.getReader());
+
+    try {
+        while ((currentLine = reader.readLine()) != null) {
+            if (LOGGER.isLoggable(FINER)) {
+                LOGGER.finer("Reading line: " + (currentLine));
+            }
+            changedPaths.add(currentLine.substring(4));
+            if (currentLine.startsWith("svnlook changed --revision ")) {
+                String message = "Expecting the output from the svnlook command but instead you just sent me the svnlook invocation command line: " + (currentLine);
+                LOGGER.warning(message);
+                throw new IllegalArgumentException(message);
+            }
+        }
+    } finally {
+        IOUtils.closeQuietly(reader);
+    }
+
+    if (LOGGER.isLoggable(FINE))
+        LOGGER.fine("Change reported to Subversion repository " + (uuid) + " on " + (changedPaths));
+
+    QueryParameterMap parameters = new QueryParameterMap(req);
+    String revisionText = parameters.get("rev");
+    if (revisionText == null) {
+        revisionText = req.getHeader("X-Hudson-Subversion-Revision");
+    }
+
+    long revision = -1L;
+    if (revisionText != null) {
+        revision = Long.parseLong(revisionText);
+    }
+
+    boolean anyListenerActed = false;
+    for (Listener notificationListener : ExtensionList.lookup(Listener.class)) {
+        try {
+            if (notificationListener.onNotify(uuid, revision, changedPaths)) {
+                anyListenerActed = true;
+            }
+        } catch (Throwable failure) {
+            LOGGER.log(WARNING, "Listener " + notificationListener.getClass().getName() + " threw an uncaught exception", failure);
+        }
+    }
+
+    if (!anyListenerActed) LOGGER.log(Level.WARNING, "No interest in change to repository UUID {0} found", uuid);
+
+    rsp.setStatus(SC_OK);
+}

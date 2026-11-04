@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-59",
+  "vulnerable_files": [
+    "src/main/java/org/jsoup/parser/TokeniserState.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/jsoup/parser/TokeniserState.java"
+  ]
+}

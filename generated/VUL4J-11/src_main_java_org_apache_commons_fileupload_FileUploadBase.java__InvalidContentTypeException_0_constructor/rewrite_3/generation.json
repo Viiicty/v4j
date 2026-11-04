@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public InvalidContentTypeException() {\n    {\n    }\n}",
+  "rationale": "There are no statements available for dependency-independent reordering. An empty nested block is a conservative structural rewrite that preserves completion behavior and the implicit superclass invocation."
+}

@@ -1,0 +1,7 @@
+public Properties systemPropertiesAsProperties() {
+    if (null == properties || properties.isEmpty()) {
+        return new Properties();
+    }
+
+    return toProperties(properties);
+}

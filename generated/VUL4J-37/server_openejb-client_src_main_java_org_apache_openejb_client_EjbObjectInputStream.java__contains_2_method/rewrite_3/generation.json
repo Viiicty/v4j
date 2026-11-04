@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "private static boolean contains(final String[] list, String name) {\n    if (list != null) {\n        for (final String white : list) {\n            if (!name.startsWith(white)) {\n                continue;\n            }\n            return true;\n        }\n    }\n    return false;\n}",
+  "rationale": "No statements can safely be reordered independently; the conservative loop-control rewrite uses continue for nonmatches while preserving all data and control dependencies."
+}

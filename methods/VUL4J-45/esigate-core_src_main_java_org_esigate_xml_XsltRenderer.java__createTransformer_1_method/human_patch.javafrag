@@ -1,0 +1,11 @@
+    private static Transformer createTransformer(InputStream templateStream) throws IOException {
+        try {
+            // Ensure XSLT cannot use advanced extensions during processing.
+            TRANSFORMER_FACTORY.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            return TRANSFORMER_FACTORY.newTransformer(new StreamSource(templateStream));
+        } catch (TransformerConfigurationException e) {
+            throw new ProcessingFailedException("Failed to create XSLT template", e);
+        } finally {
+            templateStream.close();
+        }
+    }

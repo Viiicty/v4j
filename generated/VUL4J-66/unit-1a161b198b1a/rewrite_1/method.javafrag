@@ -1,0 +1,27 @@
+protected static boolean isValid(String str)
+{
+   if (str == null || 0 == str.length()) return false;
+   for (int offset = 0; offset < str.length(); offset += 1) {
+      switch (str.charAt(offset))
+      {
+         case '/':
+         case '\\':
+         case '?':
+         case ':':
+         case '<':
+         case '>':
+         case ';':
+         case '(':
+         case ')':
+         case '@':
+         case ',':
+         case '[':
+         case ']':
+         case '=':
+            return false;
+         default:
+            break;
+      }
+   }
+   return true;
+}

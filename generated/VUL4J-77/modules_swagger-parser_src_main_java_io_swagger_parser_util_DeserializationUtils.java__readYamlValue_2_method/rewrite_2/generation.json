@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public static <T> T readYamlValue(String contents, Class<T> expectedType) {\n    org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();\n    do {\n        return Json.mapper().convertValue(yaml.load(contents), expectedType);\n    } while (false);\n}",
+  "rationale": "Places the return in a single-entry do block. The return or exception exits before the loop condition, preserving all original calls and their order."
+}

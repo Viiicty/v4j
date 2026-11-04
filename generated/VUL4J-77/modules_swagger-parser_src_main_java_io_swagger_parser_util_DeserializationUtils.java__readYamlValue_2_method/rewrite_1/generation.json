@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static <T> T readYamlValue(String contents, Class<T> expectedType) {\n    org.yaml.snakeyaml.Yaml parser = new org.yaml.snakeyaml.Yaml();\n    return Json.mapper().convertValue((parser.load(contents)), expectedType);\n}",
+  "rationale": "Renames the local variable and parenthesizes the load expression without changing evaluation order, API calls, or behavior."
+}

@@ -1,0 +1,42 @@
+--- a/src/main/java/hudson/tasks/junit/XMLEntityResolver.java
++++ b/src/main/java/hudson/tasks/junit/XMLEntityResolver.java
+@@ -51,24 +51,24 @@
+     /**
+      * Intercepts the lookup of publicId, systemId
+      */
+-    public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+-        if (systemId != null) {
+-            if (LOGGER.isLoggable(Level.FINE)) {
+-                LOGGER.fine("Will try to resolve systemId [" + systemId + "]");
++public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
++    if (systemId != null) {
++        if (LOGGER.isLoggable(Level.FINE)) {
++            LOGGER.fine("Will try to resolve systemId [" + systemId + "]");
++        }
++        if (systemId.startsWith(TESTNG_NAMESPACE)) {
++            LOGGER.fine("It's a TestNG document, will try to lookup DTD in classpath");
++            URL url;
++            String dtdFileName = systemId.substring(TESTNG_NAMESPACE.length());
++            url = getClass().getClassLoader().getResource(dtdFileName);
++            if (url == null) {
++                return null;
+             }
+-            // TestNG system-ids
+-            if (systemId.startsWith(TESTNG_NAMESPACE)) {
+-                LOGGER.fine("It's a TestNG document, will try to lookup DTD in classpath");
+-                String dtdFileName = systemId.substring(TESTNG_NAMESPACE.length());
+-
+-                URL url = getClass().getClassLoader().getResource(dtdFileName);
+-                if (url != null)
+-                    return new InputSource(url.toString());
+-            }
++            return new InputSource(url.toString());
+         }
+-        // Default fallback
+-        return null;
+     }
++    return null;
++}
+ 
+     private static final Logger LOGGER = Logger.getLogger(XMLEntityResolver.class.getName());
+ }

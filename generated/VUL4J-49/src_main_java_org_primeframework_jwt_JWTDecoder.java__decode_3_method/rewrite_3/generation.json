@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {\n  Objects.requireNonNull(encodedJWT);\n  Objects.requireNonNull(verifiers);\n\n  String[] parts = getParts(encodedJWT);\n  Header header = Mapper.deserialize(base64Decode(parts[0].getBytes(StandardCharsets.UTF_8)), Header.class);\n  if (header.algorithm == Algorithm.none && parts.length == 2 && verifiers.isEmpty()) {\n    return Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);\n  }\n\n  Verifier verifier;\n  String key = keyFunction.apply(header);\n  verifier = verifiers.get(key);\n  if (verifier != null && !verifier.canVerify(header.algorithm)) {\n    verifier = null;\n  }\n\n  return decode(encodedJWT, header, parts, verifier);\n}",
+  "rationale": "Moves only the uninitialized verifier declaration before key computation, retaining every executable operation's order, and conservatively combines the nested verifier conditions."
+}

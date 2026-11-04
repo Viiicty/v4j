@@ -1,0 +1,60 @@
+        FileItemIteratorImpl(RequestContext ctx)
+                throws FileUploadException, IOException {
+            if (ctx == null) {
+                throw new NullPointerException("ctx parameter");
+            }
+
+            String requestContentType = ctx.getContentType();
+            if (requestContentType == null
+                    || !requestContentType.toLowerCase(Locale.ENGLISH).startsWith(MULTIPART)) {
+                throw new InvalidContentTypeException(
+                        format("the request doesn't contain a %s or %s stream, content type header is %s",
+                               MULTIPART_FORM_DATA, MULTIPART_FORM_DATA, requestContentType));
+            }
+
+            InputStream requestInput = ctx.getInputStream();
+
+            @SuppressWarnings("deprecation")
+            final int legacyContentLength = ctx.getContentLength();
+
+            final long uploadSize = UploadContext.class.isAssignableFrom(ctx.getClass())
+                                     ? ((UploadContext) ctx).contentLength()
+                                     : legacyContentLength;
+
+            if (sizeMax >= 0) {
+                if (uploadSize != -1 && uploadSize > sizeMax) {
+                    throw new SizeLimitExceededException(
+                        format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
+                                Long.valueOf(uploadSize), Long.valueOf(sizeMax)),
+                               uploadSize, sizeMax);
+                }
+                requestInput = new LimitedInputStream(requestInput, sizeMax) {
+                    @Override
+                    protected void raiseError(long maximumSize, long byteCount)
+                            throws IOException {
+                        FileUploadException uploadException = new SizeLimitExceededException(
+                        format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
+                                Long.valueOf(byteCount), Long.valueOf(maximumSize)),
+                               byteCount, maximumSize);
+                        throw new FileUploadIOException(uploadException);
+                    }
+                };
+            }
+
+            String selectedEncoding = headerEncoding;
+            if (selectedEncoding == null) {
+                selectedEncoding = ctx.getCharacterEncoding();
+            }
+
+            boundary = getBoundary(requestContentType);
+            if (boundary == null) {
+                throw new FileUploadException("the request was rejected because no multipart boundary was found");
+            }
+
+            notifier = new MultipartStream.ProgressNotifier(listener, uploadSize);
+            multi = new MultipartStream(requestInput, boundary, notifier);
+            multi.setHeaderEncoding(selectedEncoding);
+
+            skipPreamble = true;
+            findNextItem();
+        }

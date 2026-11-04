@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-77",
+  "unit_id": "modules_swagger-parser_src_main_java_io_swagger_parser_util_DeserializationUtils.java__readYamlValue_2_method",
+  "project_path": "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java",
+  "method_key": "readYamlValue/2/method",
+  "vulnerable": {
+    "key": "readYamlValue/2/method",
+    "name": "readYamlValue",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 64,
+    "end_line": 67,
+    "start_offset": 2026,
+    "end_offset": 2259
+  },
+  "human_patch": {
+    "key": "readYamlValue/2/method",
+    "name": "readYamlValue",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 65,
+    "end_line": 68,
+    "start_offset": 2102,
+    "end_offset": 2356
+  }
+}

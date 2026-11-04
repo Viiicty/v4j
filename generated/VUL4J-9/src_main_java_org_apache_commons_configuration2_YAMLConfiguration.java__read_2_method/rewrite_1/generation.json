@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public void read(final InputStream in, final LoaderOptions options)\n        throws ConfigurationException\n{\n    try\n    {\n        final Yaml parser = new Yaml(options);\n        final Map<String, Object> configuration = (Map) (parser.load(in));\n        load(configuration);\n    }\n    catch (final Exception failure)\n    {\n        rethrowException(failure);\n    }\n}",
+  "rationale": "Renames local identifiers and parenthesizes the load expression without changing evaluation order, calls, or exception handling."
+}

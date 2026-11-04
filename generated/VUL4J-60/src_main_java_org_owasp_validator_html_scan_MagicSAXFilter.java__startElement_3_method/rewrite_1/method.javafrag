@@ -1,0 +1,115 @@
+public void startElement(QName element, XMLAttributes attributes, Augmentations augs) throws XNIException {
+    String lowercaseTagName = element.localpart.toLowerCase();
+    Tag tag = policy.getTagByLowercaseName(lowercaseTagName);
+    boolean paramAsEmbed = !true;
+    String embedName = null;
+    String embedValue = null;
+    if (tag == null && isValidateParamAsEmbed && "param".equals(lowercaseTagName)) {
+        Tag embedPolicy = policy.getEmbedTag();
+        if (embedPolicy != null && embedPolicy.isAction(Policy.ACTION_VALIDATE)) {
+            tag = embedPolicy;
+            paramAsEmbed = true;
+            embedName = attributes.getValue("name");
+            embedValue = attributes.getValue("value");
+            XMLAttributes replacementAttributes = new XMLAttributesImpl();
+            replacementAttributes.addAttribute(makeSimpleQname(embedName), "CDATA", embedValue);
+            attributes = replacementAttributes;
+        }
+    }
+    XMLAttributes acceptedAttributes = new XMLAttributesImpl();
+    Ops currentOperation = peekTop();
+    if (Ops.REMOVE == currentOperation || Ops.CSS == currentOperation) {
+        this.operations.push(Ops.REMOVE);
+    } else if ((tag == null && policy.isEncodeUnknownTag()) || (tag != null && tag.isAction("encode"))) {
+        String encodedTag = ("<" + element.localpart) + ">";
+        super.characters(new XMLString(encodedTag.toCharArray(), 0, encodedTag.length()), augs);
+        this.operations.push(Ops.FILTER);
+    } else if (tag == null) {
+        addError(ErrorMessageUtil.ERROR_TAG_NOT_IN_POLICY, new Object[] { HTMLEntityEncoder.htmlEntityEncode(element.localpart) });
+        this.operations.push(Ops.FILTER);
+    } else if (tag.isAction("filter")) {
+        addError(ErrorMessageUtil.ERROR_TAG_FILTERED, new Object[] { HTMLEntityEncoder.htmlEntityEncode(element.localpart) });
+        this.operations.push(Ops.FILTER);
+    } else if (tag.isAction("validate")) {
+        boolean styleElement = "style".endsWith(element.localpart);
+        if (styleElement) {
+            this.operations.push(Ops.CSS);
+            cssContent = new StringBuffer();
+            cssAttributes = attributes;
+        } else {
+            boolean removeElement = false;
+            boolean filterElement = false;
+            for (int attributeIndex = 0; attributeIndex < attributes.getLength(); attributeIndex++) {
+                String attributeName = attributes.getQName(attributeIndex);
+                String attributeValue = attributes.getValue(attributeIndex);
+                String lowercaseAttributeName = attributeName.toLowerCase();
+                Attribute attribute = tag.getAttributeByName(lowercaseAttributeName);
+                if (attribute == null) {
+                    attribute = policy.getGlobalAttributeByName(lowercaseAttributeName);
+                }
+                if ("style".equalsIgnoreCase(attributeName)) {
+                    CssScanner inlineScanner = makeCssScanner();
+                    try {
+                        CleanResults results = inlineScanner.scanInlineStyle(attributeValue, element.localpart, maxInputSize);
+                        attributes.setValue(attributeIndex, results.getCleanHTML());
+                        acceptedAttributes.addAttribute(makeSimpleQname(attributeName), "CDATA", results.getCleanHTML());
+                        errorMessages.addAll(results.getErrorMessages());
+                    } catch (ScanException exception) {
+                        addError(ErrorMessageUtil.ERROR_CSS_ATTRIBUTE_MALFORMED, new Object[] { element.localpart, HTMLEntityEncoder.htmlEntityEncode(attributeValue) });
+                    }
+                } else if (attribute != null) {
+                    boolean accepted = false;
+                    if (attribute.containsAllowedValue(attributeValue.toLowerCase())) {
+                        acceptedAttributes.addAttribute(makeSimpleQname(attributeName), "CDATA", attributeValue);
+                        accepted = true;
+                    }
+                    if (!accepted) {
+                        accepted = attribute.matchesAllowedExpression(attributeValue);
+                        if (accepted) {
+                            acceptedAttributes.addAttribute(makeSimpleQname(attributeName), "CDATA", attributeValue);
+                        }
+                    }
+                    if (!accepted && "removeTag".equals(attribute.getOnInvalid())) {
+                        addError(ErrorMessageUtil.ERROR_ATTRIBUTE_INVALID_REMOVED, new Object[] { tag.getName(), HTMLEntityEncoder.htmlEntityEncode(attributeName), HTMLEntityEncoder.htmlEntityEncode(attributeValue) });
+                        removeElement = true;
+                    } else if (!accepted && ("filterTag".equals(attribute.getOnInvalid()) || paramAsEmbed)) {
+                        addError(ErrorMessageUtil.ERROR_ATTRIBUTE_CAUSE_FILTER, new Object[] { tag.getName(), HTMLEntityEncoder.htmlEntityEncode(attributeName), HTMLEntityEncoder.htmlEntityEncode(attributeValue) });
+                        filterElement = true;
+                    } else if (!accepted) {
+                        addError(ErrorMessageUtil.ERROR_ATTRIBUTE_INVALID, new Object[] { tag.getName(), HTMLEntityEncoder.htmlEntityEncode(attributeName), HTMLEntityEncoder.htmlEntityEncode(attributeValue) });
+                    }
+                } else {
+                    addError(ErrorMessageUtil.ERROR_ATTRIBUTE_NOT_IN_POLICY, new Object[] { element.localpart, HTMLEntityEncoder.htmlEntityEncode(attributeName), HTMLEntityEncoder.htmlEntityEncode(attributeValue) });
+                    if (paramAsEmbed) {
+                        filterElement = true;
+                    }
+                }
+            }
+            if (removeElement) {
+                this.operations.push(Ops.REMOVE);
+            } else if (filterElement) {
+                this.operations.push(Ops.FILTER);
+            } else {
+                if (isNofollowAnchors && "a".equals(element.localpart)) {
+                    acceptedAttributes.addAttribute(makeSimpleQname("rel"), "CDATA", "nofollow");
+                }
+                if (paramAsEmbed) {
+                    acceptedAttributes = new XMLAttributesImpl();
+                    acceptedAttributes.addAttribute(makeSimpleQname("name"), "CDATA", embedName);
+                    acceptedAttributes.addAttribute(makeSimpleQname("value"), "CDATA", embedValue);
+                }
+                this.operations.push(Ops.KEEP);
+            }
+        }
+    } else if (tag.isAction("truncate")) {
+        this.operations.push(Ops.TRUNCATE);
+    } else {
+        addError(ErrorMessageUtil.ERROR_TAG_DISALLOWED, new Object[] { HTMLEntityEncoder.htmlEntityEncode(element.localpart) });
+        this.operations.push(Ops.REMOVE);
+    }
+    if (Ops.TRUNCATE.equals(operations.peek())) {
+        super.startElement(element, new XMLAttributesImpl(), augs);
+    } else if (Ops.KEEP.equals(operations.peek())) {
+        super.startElement(element, acceptedAttributes, augs);
+    }
+}

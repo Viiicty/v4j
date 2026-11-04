@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)\n        throws DocumentException, IOException, InterruptedException {\n    List<SuiteResult> r = new ArrayList<SuiteResult>();\n\n    SAXReader saxReader = new SAXReader();\n    saxReader.setEntityResolver(new XMLEntityResolver());\n\n    FileInputStream xmlReportStream = new FileInputStream(xmlReport);\n    try {\n        Document result = saxReader.read(xmlReportStream);\n        Element root = result.getRootElement();\n\n        parseSuite(xmlReport, keepLongStdio, r, root, pipelineTestDetails);\n        return r;\n    } finally {\n        xmlReportStream.close();\n    }\n}",
+  "rationale": "Moves the return into the try block. The finally block still closes the stream before the method returns, and a close exception still overrides normal completion. Evaluating the unchanged local reference before cleanup introduces no side effect."
+}

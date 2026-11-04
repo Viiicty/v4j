@@ -1,0 +1,14 @@
+﻿vul_id,unit_id,project_path,method_key,method_name,vulnerable_start_line,vulnerable_end_line,status
+VUL4J-10,src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method,src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java,readObject/1/method,readObject,654,671,ready
+VUL4J-17,httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method,httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java,normalizePath/1/method,normalizePath,493,508,ready
+VUL4J-3,camel-core_src_main_java_org_apache_camel_converter_jaxp_XmlConverter.java__toSAXSourceFromStream_2_method,camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java,toSAXSourceFromStream/2/method,toSAXSourceFromStream,575,607,ready
+VUL4J-4,camel-core_src_main_java_org_apache_camel_builder_xml_XPathBuilder.java__doGetDocument_2_method,camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java,doGetDocument/2/method,doGetDocument,1097,1148,ready
+VUL4J-41,src_main_java_org_codehaus_plexus_archiver_AbstractUnArchiver.java__extractFile_8_method,src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java,extractFile/8/method,extractFile,303,361,ready
+VUL4J-49,src_main_java_org_primeframework_jwt_JWTDecoder.java__decode_3_method,src/main/java/org/primeframework/jwt/JWTDecoder.java,decode/3/method,decode,112,133,ready
+VUL4J-49,src_main_java_org_primeframework_jwt_JWTDecoder.java__decode_4_method,src/main/java/org/primeframework/jwt/JWTDecoder.java,decode/4/method,decode,143,172,ready
+VUL4J-52,src_main_java_org_kohsuke_groovy_sandbox_SandboxTransformer.java__call_3_method,src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java,call/3/method,call,131,148,ready
+VUL4J-57,src_main_java_org_jenkinsci_plugins_workflow_support_steps_build_BuildTriggerStepExecution.java__start_0_method,src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java,start/0/method,start,60,148,ready
+VUL4J-61,src_main_java_apoc_load_Xml.java__xmlXpathToMapResult_4_method,src/main/java/apoc/load/Xml.java,xmlXpathToMapResult/4/method,xmlXpathToMapResult,60,105,ready
+VUL4J-66,resteasy-core_src_main_java_org_jboss_resteasy_plugins_delegates_MediaTypeHeaderDelegate.java__isValid_1_method,resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java,isValid/1/method,isValid,32,58,ready
+VUL4J-9,src_main_java_org_apache_commons_configuration2_YAMLConfiguration.java__read_1_method,src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java,read/1/method,read,116,128,ready
+VUL4J-9,src_main_java_org_apache_commons_configuration2_YAMLConfiguration.java__read_2_method,src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java,read/2/method,read,130,143,ready

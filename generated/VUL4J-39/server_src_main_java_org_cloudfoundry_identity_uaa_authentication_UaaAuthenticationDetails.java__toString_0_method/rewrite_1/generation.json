@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public String toString() {\n    StringBuilder result = new StringBuilder();\n    if (origin != null) {\n        result.append(\"remoteAddress=\").append(origin);\n    }\n    if (clientId != null) {\n        if (result.length() != 0) {\n            result.append(\", \");\n        }\n        result.append(\"clientId=\").append(clientId);\n    }\n    if (sessionId != null) {\n        if (result.length() != 0) {\n            result.append(\", \");\n        }\n        result.append(\"sessionId=\").append(sessionId);\n    }\n    return result.toString();\n}",
+  "rationale": "Renames the local builder and replaces positive-length checks with nonzero-length checks, equivalent because StringBuilder lengths are nonnegative. Evaluation order and API calls remain unchanged."
+}

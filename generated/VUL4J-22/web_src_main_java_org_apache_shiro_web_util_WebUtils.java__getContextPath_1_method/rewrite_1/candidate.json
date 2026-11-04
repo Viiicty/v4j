@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-22",
+  "unit_id": "web_src_main_java_org_apache_shiro_web_util_WebUtils.java__getContextPath_1_method",
+  "project_path": "web/src/main/java/org/apache/shiro/web/util/WebUtils.java",
+  "method_key": "getContextPath/1/method",
+  "status": "materialized",
+  "rewrite_type": "identifier_expression"
+}

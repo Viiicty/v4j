@@ -1,0 +1,14 @@
+[36m2026-11-02 13:48:18[0m | [1m====================== START CHECKOUT ======================[0m
+[36m2026-11-02 13:48:18[0m | [1mCloning project into temporary folder: '/root/vul4j_data/clone/VUL4J-64'[0m
+[36m2026-11-02 13:49:18[0m | [31m[1mGitCommandError: Cmd('git') failed due to: exit code(128)
+  cmdline: git clone -v -- https://github.com/OpenRefine/OpenRefine /root/vul4j_data/clone/VUL4J-64
+  stderr: 'Cloning into '/root/vul4j_data/clone/VUL4J-64'...
+POST git-upload-pack (181 bytes)
+POST git-upload-pack (gzip 7573 to 3823 bytes)
+error: RPC failed; curl 56 GnuTLS recv error (-9): Error decoding the received TLS packet.
+error: 12504 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+'[0m
+[36m2026-11-02 13:49:19[0m | [1m======================= END CHECKOUT =======================[0m

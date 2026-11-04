@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-62",
+  "unit_id": "enterprise_security_src_main_java_org_neo4j_server_security_enterprise_auth_LdapRealm.java__getLdapContextUsingStartTls_3_method",
+  "project_path": "enterprise/security/src/main/java/org/neo4j/server/security/enterprise/auth/LdapRealm.java",
+  "method_key": "getLdapContextUsingStartTls/3/method",
+  "vulnerable": {
+    "key": "getLdapContextUsingStartTls/3/method",
+    "name": "getLdapContextUsingStartTls",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 211,
+    "end_line": 251,
+    "start_offset": 8724,
+    "end_offset": 10470
+  },
+  "human_patch": {
+    "key": "getLdapContextUsingStartTls/3/method",
+    "name": "getLdapContextUsingStartTls",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 211,
+    "end_line": 254,
+    "start_offset": 8724,
+    "end_offset": 10584
+  }
+}

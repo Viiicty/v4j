@@ -1,0 +1,57 @@
+protected void extractFile( final File srcF, final File dir, final InputStream compressedInputStream,
+                            final String entryName, final Date entryDate, final boolean isDirectory,
+                            final Integer mode, String symlinkDestination )
+    throws IOException, ArchiverException
+{
+    final File targetFile = FileUtils.resolveFile( dir, entryName );
+
+    try
+    {
+        if ( !isOverwrite() && targetFile.exists() && ( entryDate.getTime() <= targetFile.lastModified() ) )
+        {
+            return;
+        }
+
+        final File parentDirectory = targetFile.getParentFile();
+        if ( parentDirectory != null )
+        {
+            parentDirectory.mkdirs();
+        }
+
+        if ( !StringUtils.isEmpty( symlinkDestination ) )
+        {
+            SymlinkUtils.createSymbolicLink( targetFile, new File( symlinkDestination ) );
+        }
+        else if ( isDirectory )
+        {
+            targetFile.mkdirs();
+        }
+        else
+        {
+            OutputStream outputStream = null;
+            try
+            {
+                outputStream = new FileOutputStream( targetFile );
+
+                IOUtil.copy( compressedInputStream, outputStream );
+                outputStream.close();
+                outputStream = null;
+            }
+            finally
+            {
+                IOUtil.close( outputStream );
+            }
+        }
+
+        targetFile.setLastModified( entryDate.getTime() );
+
+        if ( !isIgnorePermissions() && mode != null && !isDirectory )
+        {
+            ArchiveEntryUtils.chmod( targetFile, mode );
+        }
+    }
+    catch ( final FileNotFoundException failure )
+    {
+        getLogger().warn( "Unable to expand to file " + targetFile.getPath() );
+    }
+}

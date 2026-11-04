@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-58/src_main_java_hudson_scm_SubversionRepositoryStatus.java__doNotifyCommit_2_method/rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-58/src_main_java_hudson_scm_SubversionRepositoryStatus.java__doNotifyCommit_2_method/rewrite_1/project_file/src/main/java/hudson/scm/SubversionRepositoryStatus.java",
+  "project_path": "src/main/java/hudson/scm/SubversionRepositoryStatus.java",
+  "compile_code": 0,
+  "compile_seconds": 186.648,
+  "pov_code": 0,
+  "pov_seconds": 213.813,
+  "pov_failure_count": 3,
+  "pov_reproduced": true,
+  "valid": true
+}

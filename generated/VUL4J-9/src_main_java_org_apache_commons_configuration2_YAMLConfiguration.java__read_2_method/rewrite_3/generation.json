@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public void read(final InputStream in, final LoaderOptions options)\n        throws ConfigurationException\n{\n    try\n    {\n        final Yaml yaml = new Yaml(options);\n        final Map<String, Object> map = (Map) yaml.load(in);\n        load(map);\n    }\n    catch (final Exception e)\n    {\n        rethrowException(e);\n        return;\n    }\n}",
+  "rationale": "No existing statements are dependency-independent, so their order is retained. The conservative control-flow rewrite explicitly returns if rethrowException completes normally, matching the original fall-through completion."
+}

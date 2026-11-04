@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-17/httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-17/httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method/rewrite_2/project_file/httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java",
+  "project_path": "httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java",
+  "compile_code": 0,
+  "compile_seconds": 377.884,
+  "pov_code": 0,
+  "pov_seconds": 75.921,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

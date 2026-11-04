@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-11",
+  "unit_id": "src_main_java_org_apache_commons_fileupload_MultipartStream.java__MultipartStream_4_constructor",
+  "project_path": "src/main/java/org/apache/commons/fileupload/MultipartStream.java",
+  "method_key": "MultipartStream/4/constructor",
+  "status": "materialized",
+  "rewrite_type": "dependency_reorder"
+}

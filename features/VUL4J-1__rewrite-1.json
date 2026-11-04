@@ -1,0 +1,10 @@
+{
+  "pair_id": "VUL4J-1__rewrite-1",
+  "query_ast_nodes": 92,
+  "candidate_ast_nodes": 92,
+  "query_pdg_nodes": 92,
+  "candidate_pdg_nodes": 92,
+  "query_pdg_edges": 199,
+  "candidate_pdg_edges": 197,
+  "feature_builder": "lightweight_checkpoint_encoder_adapter"
+}

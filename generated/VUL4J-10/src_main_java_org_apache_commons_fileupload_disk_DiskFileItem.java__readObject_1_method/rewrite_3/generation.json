@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "private void readObject(ObjectInputStream in)\n        throws IOException, ClassNotFoundException {\n    OutputStream output;\n    in.defaultReadObject();\n\n    output = getOutputStream();\n    if (cachedContent == null) {\n        FileInputStream input = new FileInputStream(dfosFile);\n        IOUtils.copy(input, output);\n        dfosFile.delete();\n        dfosFile = null;\n    } else {\n        output.write(cachedContent);\n    }\n    output.close();\n\n    cachedContent = null;\n}",
+  "rationale": "Moves only the uninitialized local declaration before deserialization, leaving its assignment and every runtime operation in dependency-preserving order. Also conservatively inverts the conditional and exchanges its branches."
+}

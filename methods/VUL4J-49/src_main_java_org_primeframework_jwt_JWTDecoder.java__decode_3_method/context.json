@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-49",
+  "unit_id": "src_main_java_org_primeframework_jwt_JWTDecoder.java__decode_3_method",
+  "project_path": "src/main/java/org/primeframework/jwt/JWTDecoder.java",
+  "method_key": "decode/3/method",
+  "vulnerable": {
+    "key": "decode/3/method",
+    "name": "decode",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 112,
+    "end_line": 133,
+    "start_offset": 4388,
+    "end_offset": 5390
+  },
+  "human_patch": {
+    "key": "decode/3/method",
+    "name": "decode",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 117,
+    "end_line": 142,
+    "start_offset": 4556,
+    "end_offset": 5659
+  }
+}

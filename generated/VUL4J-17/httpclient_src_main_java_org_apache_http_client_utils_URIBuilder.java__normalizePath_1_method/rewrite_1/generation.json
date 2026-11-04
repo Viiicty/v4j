@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "private static String normalizePath(final String path) {\n    String normalized = path;\n    if (normalized == null) {\n        return null;\n    }\n    int leadingSlashCount = 0;\n    for (; leadingSlashCount < normalized.length(); leadingSlashCount++) {\n        if (normalized.charAt(leadingSlashCount) != '/') {\n            break;\n        }\n    }\n    if (leadingSlashCount > 1) {\n        normalized = normalized.substring(leadingSlashCount + (-1));\n    }\n    return normalized;\n}",
+  "rationale": "Renames local identifiers and expresses subtraction as addition of negative one, preserving evaluation order and behavior."
+}

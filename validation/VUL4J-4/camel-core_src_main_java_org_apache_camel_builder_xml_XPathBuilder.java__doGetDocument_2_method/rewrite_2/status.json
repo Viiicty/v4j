@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-4/camel-core_src_main_java_org_apache_camel_builder_xml_XPathBuilder.java__doGetDocument_2_method/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-4/camel-core_src_main_java_org_apache_camel_builder_xml_XPathBuilder.java__doGetDocument_2_method/rewrite_2/project_file/camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java",
+  "project_path": "camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java",
+  "compile_code": 0,
+  "compile_seconds": 1083.952,
+  "pov_code": 0,
+  "pov_seconds": 291.919,
+  "pov_failure_count": 3,
+  "pov_reproduced": true,
+  "valid": true
+}

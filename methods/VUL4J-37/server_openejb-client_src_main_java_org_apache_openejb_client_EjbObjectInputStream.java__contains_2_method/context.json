@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-37",
+  "unit_id": "server_openejb-client_src_main_java_org_apache_openejb_client_EjbObjectInputStream.java__contains_2_method",
+  "project_path": "server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+  "method_key": "contains/2/method",
+  "vulnerable": {
+    "key": "contains/2/method",
+    "name": "contains",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 123,
+    "end_line": 132,
+    "start_offset": 4457,
+    "end_offset": 4791
+  },
+  "human_patch": {
+    "key": "contains/2/method",
+    "name": "contains",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 123,
+    "end_line": 132,
+    "start_offset": 4457,
+    "end_offset": 4812
+  }
+}

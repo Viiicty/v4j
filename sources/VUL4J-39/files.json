@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-39",
+  "vulnerable_files": [
+    "server/src/main/java/org/cloudfoundry/identity/uaa/authentication/UaaAuthenticationDetails.java"
+  ],
+  "human_patch_files": [
+    "server/src/main/java/org/cloudfoundry/identity/uaa/authentication/UaaAuthenticationDetails.java"
+  ]
+}

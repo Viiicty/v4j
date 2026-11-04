@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {\n    if (systemId != null) {\n        if (LOGGER.isLoggable(Level.FINE)) {\n            LOGGER.fine((\"Will try to resolve systemId [\" + systemId) + \"]\");\n        }\n        if (systemId.startsWith(TESTNG_NAMESPACE)) {\n            LOGGER.fine(\"It's a TestNG document, will try to lookup DTD in classpath\");\n            String resourceName = systemId.substring(TESTNG_NAMESPACE.length());\n            URL resourceUrl = getClass().getClassLoader().getResource(resourceName);\n            if (resourceUrl != null)\n                return new InputSource(resourceUrl.toString());\n        }\n    }\n    return null;\n}",
+  "rationale": "Renames local variables and explicitly groups the original left-associative concatenation without changing evaluation order or API calls."
+}

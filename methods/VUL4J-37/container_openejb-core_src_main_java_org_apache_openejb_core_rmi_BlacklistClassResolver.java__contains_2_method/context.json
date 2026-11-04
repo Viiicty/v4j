@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-37",
+  "unit_id": "container_openejb-core_src_main_java_org_apache_openejb_core_rmi_BlacklistClassResolver.java__contains_2_method",
+  "project_path": "container/openejb-core/src/main/java/org/apache/openejb/core/rmi/BlacklistClassResolver.java",
+  "method_key": "contains/2/method",
+  "vulnerable": {
+    "key": "contains/2/method",
+    "name": "contains",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 56,
+    "end_line": 65,
+    "start_offset": 2212,
+    "end_offset": 2512
+  },
+  "human_patch": {
+    "key": "contains/2/method",
+    "name": "contains",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 56,
+    "end_line": 65,
+    "start_offset": 2212,
+    "end_offset": 2533
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public boolean isPasswordValid(String encPass, String rawPass, Object salt) {\n    String encodedValue = (encPass + \"\");\n    String mergedValue = mergePasswordAndSalt(rawPass, salt, false);\n\n    if (ignorePasswordCase) {\n        encodedValue = encodedValue.toLowerCase(Locale.ENGLISH);\n        mergedValue = mergedValue.toLowerCase(Locale.ENGLISH);\n    }\n    return PasswordEncoderUtils.equals(encodedValue, mergedValue);\n}",
+  "rationale": "Renames local identifiers and parenthesizes the concatenation expression while retaining evaluation order and all API calls."
+}

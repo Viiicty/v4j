@@ -1,0 +1,58 @@
+--- a/src/main/java/org/primeframework/jwt/JWTDecoder.java
++++ b/src/main/java/org/primeframework/jwt/JWTDecoder.java
+@@ -140,36 +140,31 @@
+     }
+   }
+ 
+-  private JWT decode(String encodedJWT, Header header, String[] parts, Verifier verifier) {
+-    int index = encodedJWT.lastIndexOf(".");
+-    // The message comprises the first two segments of the entire JWT, the signature is the last segment.
+-    byte[] message = encodedJWT.substring(0, index).getBytes(StandardCharsets.UTF_8);
++private JWT decode(String encodedJWT, Header header, String[] parts, Verifier verifier) {
++  int separatorIndex = encodedJWT.lastIndexOf(".");
++  byte[] signedMessage = encodedJWT.substring(0, separatorIndex).getBytes(StandardCharsets.UTF_8);
+ 
+-    // If a signature is provided and verifier must be provided.
+-    if (parts.length == 3 && verifier == null) {
+-      throw new MissingVerifierException("No Verifier has been provided for verify a signature signed using [" + header.algorithm.getName() + "]");
+-    }
++  if (parts.length == 3 && verifier == null) {
++    throw new MissingVerifierException("No Verifier has been provided for verify a signature signed using [" + header.algorithm.getName() + "]");
++  }
+ 
+-    if (parts.length == 3) {
+-      // Verify the signature before de-serializing the payload.
+-      byte[] signature = base64Decode(parts[2].getBytes(StandardCharsets.UTF_8));
+-      verifier.verify(header.algorithm, message, signature);
+-    }
++  if (parts.length == 3) {
++    byte[] decodedSignature = base64Decode(parts[1 + 1].getBytes(StandardCharsets.UTF_8));
++    verifier.verify(header.algorithm, signedMessage, decodedSignature);
++  }
+ 
+-    JWT jwt = Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
++  JWT decodedToken = Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
+ 
+-    // Verify expiration claim
+-    if (jwt.isExpired()) {
+-      throw new JWTExpiredException();
+-    }
++  if (decodedToken.isExpired()) {
++    throw new JWTExpiredException();
++  }
+ 
+-    // Verify the notBefore claim
+-    if (jwt.isUnavailableForProcessing()) {
+-      throw new JWTUnavailableForProcessingException();
+-    }
++  if (decodedToken.isUnavailableForProcessing()) {
++    throw new JWTUnavailableForProcessingException();
++  }
+ 
+-    return jwt;
+-  }
++  return decodedToken;
++}
+ 
+   private String[] getParts(String encodedJWT) {
+     String[] parts = encodedJWT.split("\\.");

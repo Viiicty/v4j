@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-60",
+  "unit_id": "src_main_java_org_owasp_validator_html_scan_MagicSAXFilter.java__startElement_3_method",
+  "project_path": "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java",
+  "method_key": "startElement/3/method",
+  "status": "materialized",
+  "rewrite_type": "condition_structure"
+}

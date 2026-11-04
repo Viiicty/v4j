@@ -1,0 +1,11 @@
+{
+  "vul_id": "VUL4J-11",
+  "vulnerable_files": [
+    "src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+    "src/main/java/org/apache/commons/fileupload/MultipartStream.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+    "src/main/java/org/apache/commons/fileupload/MultipartStream.java"
+  ]
+}

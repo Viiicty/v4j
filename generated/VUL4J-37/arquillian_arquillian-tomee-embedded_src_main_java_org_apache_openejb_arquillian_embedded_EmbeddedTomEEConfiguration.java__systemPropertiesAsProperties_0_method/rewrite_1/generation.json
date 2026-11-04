@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public Properties systemPropertiesAsProperties() {\n    if (null == properties || properties.isEmpty()) {\n        return new Properties();\n    }\n\n    return toProperties(properties);\n}",
+  "rationale": "No local identifiers exist to rename. Reversing the null equality operands preserves the field read and short-circuit behavior."
+}

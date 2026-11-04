@@ -1,0 +1,49 @@
+protected Document createDocument(InputSource is)
+    throws IOException {
+    try {
+        if (parserClassName != null) {
+            parser = XMLReaderFactory.createXMLReader(parserClassName);
+        } else {
+            SAXParser readerFactoryResult;
+            try {
+                readerFactoryResult = saxFactory.newSAXParser();
+            } catch (ParserConfigurationException configurationFailure) {
+                throw new IOException("Could not create SAXParser: "
+                        + configurationFailure.getMessage());
+            }
+            parser = readerFactoryResult.getXMLReader();
+        }
+
+        parser.setContentHandler(this);
+        parser.setDTDHandler(this);
+        parser.setEntityResolver(this);
+        parser.setErrorHandler((null == errorHandler) ?
+                               this : errorHandler);
+
+        parser.setFeature("http://xml.org/sax/features/namespaces",
+                          true);
+        parser.setFeature("http://xml.org/sax/features/namespace-prefixes",
+                          true);
+        parser.setFeature("http://xml.org/sax/features/validation",
+                          isValidating);
+        parser.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        parser.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        parser.setProperty("http://xml.org/sax/properties/lexical-handler",
+                           this);
+        parser.parse(is);
+    } catch (SAXException parsingFailure) {
+        Exception nestedFailure = parsingFailure.getException();
+        if (nestedFailure != null && nestedFailure instanceof InterruptedIOException) {
+            throw (InterruptedIOException) nestedFailure;
+        }
+        throw new SAXIOException(parsingFailure);
+    }
+
+    currentNode = null;
+    Document resultDocument = document;
+    document = null;
+    doctype = null;
+    locator = null;
+    parser = null;
+    return resultDocument;
+}

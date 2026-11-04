@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-37",
+  "unit_id": "tomee_tomee-common_src_main_java_org_apache_tomee_installer_Installer.java__installConfigFiles_1_method",
+  "project_path": "tomee/tomee-common/src/main/java/org/apache/tomee/installer/Installer.java",
+  "method_key": "installConfigFiles/1/method",
+  "vulnerable": {
+    "key": "installConfigFiles/1/method",
+    "name": "installConfigFiles",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 590,
+    "end_line": 797,
+    "start_offset": 22613,
+    "end_offset": 35911
+  },
+  "human_patch": {
+    "key": "installConfigFiles/1/method",
+    "name": "installConfigFiles",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 590,
+    "end_line": 805,
+    "start_offset": 22613,
+    "end_offset": 36475
+  }
+}

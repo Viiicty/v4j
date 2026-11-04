@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public String getForwardPage( HttpServletRequest servletRequest )\n{\n    return servletRequest.getPathInfo();\n}",
+  "rationale": "Renames only the parameter identifier, preserving the API call and its return value, exceptions, and side effects."
+}

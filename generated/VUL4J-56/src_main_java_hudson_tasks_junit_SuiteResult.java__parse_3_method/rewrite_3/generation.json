@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)\n        throws DocumentException, IOException, InterruptedException {\n    List<SuiteResult> r = new ArrayList<SuiteResult>();\n    FileInputStream xmlReportStream;\n\n    SAXReader saxReader = new SAXReader();\n    saxReader.setEntityResolver(new XMLEntityResolver());\n\n    xmlReportStream = new FileInputStream(xmlReport);\n    try {\n        Document result = saxReader.read(xmlReportStream);\n        Element root = result.getRootElement();\n\n        parseSuite(xmlReport, keepLongStdio, r, root, pipelineTestDetails);\n        return r;\n    } finally {\n        xmlReportStream.close();\n    }\n}",
+  "rationale": "Hoists only the dependency-independent, uninitialized stream declaration; its allocation remains in the original evaluation order. Moving the return into the try block conservatively reorganizes control flow while preserving cleanup, return values, and exceptions."
+}

@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-37",
+  "unit_id": "arquillian_arquillian-tomee-embedded_src_main_java_org_apache_openejb_arquillian_embedded_EmbeddedTomEEConfiguration.java__systemPropertiesAsProperties_0_method",
+  "project_path": "arquillian/arquillian-tomee-embedded/src/main/java/org/apache/openejb/arquillian/embedded/EmbeddedTomEEConfiguration.java",
+  "method_key": "systemPropertiesAsProperties/0/method",
+  "vulnerable": {
+    "key": "systemPropertiesAsProperties/0/method",
+    "name": "systemPropertiesAsProperties",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 170,
+    "end_line": 176,
+    "start_offset": 4464,
+    "end_offset": 4671
+  },
+  "human_patch": {
+    "key": "systemPropertiesAsProperties/0/method",
+    "name": "systemPropertiesAsProperties",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 170,
+    "end_line": 184,
+    "start_offset": 4464,
+    "end_offset": 5033
+  }
+}

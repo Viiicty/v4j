@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-10",
+  "vulnerable_files": [
+    "src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java"
+  ]
+}

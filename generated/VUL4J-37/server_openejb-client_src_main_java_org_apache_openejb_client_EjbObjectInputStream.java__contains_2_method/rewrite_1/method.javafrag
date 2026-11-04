@@ -1,0 +1,10 @@
+private static boolean contains(final String[] list, String name) {
+    if (list != null) {
+        for (final String prefix : list) {
+            if (name.startsWith(prefix) != false) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

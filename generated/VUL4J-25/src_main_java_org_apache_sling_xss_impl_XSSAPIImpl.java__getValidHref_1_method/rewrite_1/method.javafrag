@@ -1,0 +1,25 @@
+public String getValidHref(final String url) {
+    if (StringUtils.isNotEmpty(url)) {
+        try {
+            String decodedHref = URLDecoder.decode(url, StandardCharsets.UTF_8.name());
+            decodedHref = StringEscapeUtils.unescapeXml(decodedHref);
+            String escapedHref = decodedHref.replaceAll("\"", "%22")
+                    .replaceAll("'", "%27")
+                    .replaceAll(">", "%3E")
+                    .replaceAll("<", "%3C")
+                    .replaceAll("`", "%60")
+                    .replaceAll(" ", "%20");
+            int queryStart = escapedHref.indexOf('?');
+            if (0 < queryStart) {
+                escapedHref = escapedHref.substring(0, queryStart) + escapedHref.substring(queryStart).replaceAll(":", "%3A");
+            }
+            escapedHref = mangleNamespaces(escapedHref);
+            if (xssFilter.isValidHref(escapedHref)) {
+                return escapedHref;
+            }
+        } catch (UnsupportedEncodingException decodeFailure) {
+            LOGGER.error("Unable to decode url: {}.", url);
+        }
+    }
+    return "";
+}

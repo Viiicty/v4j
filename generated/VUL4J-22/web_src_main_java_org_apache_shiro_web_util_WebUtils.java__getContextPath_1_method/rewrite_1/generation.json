@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static String getContextPath(HttpServletRequest request) {\n    String resolvedPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);\n    if (null == resolvedPath) {\n        resolvedPath = request.getContextPath();\n    }\n    if (\"/\".equals(resolvedPath)) {\n        resolvedPath = \"\";\n    }\n    return decodeRequestString(request, resolvedPath);\n}",
+  "rationale": "Renames the local identifier and reverses the null comparison operands without changing observable evaluation order or behavior."
+}

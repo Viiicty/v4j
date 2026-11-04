@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public static String getContextPath(HttpServletRequest request) {\n    String contextPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);\n    if (contextPath == null) {\n        contextPath = request.getContextPath();\n    }\n    if (\"/\".equals(contextPath)) {\n        return decodeRequestString(request, \"\");\n    }\n    return decodeRequestString(request, contextPath);\n}",
+  "rationale": "Uses an early return for the slash case while preserving the arguments and exactly one decoding call on each execution path."
+}

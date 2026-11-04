@@ -1,0 +1,28 @@
+--- a/server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java
++++ b/server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java
+@@ -120,15 +120,16 @@
+             return property == null ? null : property.split(" *, *");
+         }
+ 
+-        private static boolean contains(final String[] list, String name) {
+-            if (list != null) {
+-                for (final String white : list) {
+-                    if (name.startsWith(white)) {
+-                        return true;
+-                    }
+-                }
+-            }
+-            return false;
++private static boolean contains(final String[] list, String name) {
++    if (list == null) {
++        return false;
++    }
++    for (final String white : list) {
++        if (name.startsWith(white)) {
++            return true;
+         }
+     }
++    return false;
+ }
++    }
++}

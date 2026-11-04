@@ -1,0 +1,30 @@
+--- a/util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java
++++ b/util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java
+@@ -63,17 +63,17 @@
+ 	 * @throws IOException
+ 	 *         when something untowards happens during the extraction process
+ 	 */
+-	public static void extract(ZipFile zipFile, File destDir)
+-		throws IOException
+-	{
+-		assert destDir.isDirectory();
++public static void extract(ZipFile zipFile, File destDir)
++    throws IOException
++{
++    assert destDir.isDirectory();
+ 
+-		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+-		while (entries.hasMoreElements()) {
+-			ZipEntry entry = entries.nextElement();
+-			writeEntry(zipFile, entry, destDir);
+-		}
+-	}
++    Enumeration<? extends ZipEntry> remainingEntries = zipFile.entries();
++    while ((remainingEntries.hasMoreElements())) {
++        ZipEntry currentEntry = remainingEntries.nextElement();
++        writeEntry(zipFile, currentEntry, destDir);
++    }
++}
+ 
+ 	/**
+ 	 * Write an entry to a zip file.

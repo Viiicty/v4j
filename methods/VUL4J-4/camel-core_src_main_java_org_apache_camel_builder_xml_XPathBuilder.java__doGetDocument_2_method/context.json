@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-4",
+  "unit_id": "camel-core_src_main_java_org_apache_camel_builder_xml_XPathBuilder.java__doGetDocument_2_method",
+  "project_path": "camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java",
+  "method_key": "doGetDocument/2/method",
+  "vulnerable": {
+    "key": "doGetDocument/2/method",
+    "name": "doGetDocument",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 1097,
+    "end_line": 1148,
+    "start_offset": 41204,
+    "end_offset": 43431
+  },
+  "human_patch": {
+    "key": "doGetDocument/2/method",
+    "name": "doGetDocument",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 1095,
+    "end_line": 1127,
+    "start_offset": 41120,
+    "end_offset": 42187
+  }
+}

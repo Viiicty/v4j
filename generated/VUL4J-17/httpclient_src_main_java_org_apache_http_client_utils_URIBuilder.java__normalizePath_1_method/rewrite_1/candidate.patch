@@ -1,0 +1,41 @@
+--- a/httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java
++++ b/httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java
+@@ -490,21 +490,21 @@
+         return buildString();
+     }
+ 
+-    private static String normalizePath(final String path) {
+-        String s = path;
+-        if (s == null) {
+-            return null;
+-        }
+-        int n = 0;
+-        for (; n < s.length(); n++) {
+-            if (s.charAt(n) != '/') {
+-                break;
+-            }
+-        }
+-        if (n > 1) {
+-            s = s.substring(n - 1);
+-        }
+-        return s;
+-    }
+-
++private static String normalizePath(final String path) {
++    String normalized = path;
++    if (normalized == null) {
++        return null;
++    }
++    int leadingSlashCount = 0;
++    for (; leadingSlashCount < normalized.length(); leadingSlashCount++) {
++        if (normalized.charAt(leadingSlashCount) != '/') {
++            break;
++        }
++    }
++    if (leadingSlashCount > 1) {
++        normalized = normalized.substring(leadingSlashCount + (-1));
++    }
++    return normalized;
+ }
++
++}

@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)\n    throws IOException\n{\n    File outFile = new File(destDir, entry.getName());\n\n    if (entry.isDirectory()) {\n        outFile.mkdirs();\n        return;\n    }\n\n    outFile.getParentFile().mkdirs();\n\n    try (InputStream in = zipFile.getInputStream(entry)) {\n        IOUtil.writeStream(in, outFile);\n    }\n}",
+  "rationale": "No statements can safely be reordered independently, so the smallest conservative control-flow rewrite replaces the else branch with an early return while preserving all data dependencies and operation ordering."
+}

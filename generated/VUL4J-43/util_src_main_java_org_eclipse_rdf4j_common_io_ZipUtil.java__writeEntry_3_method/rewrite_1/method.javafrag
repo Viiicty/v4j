@@ -1,0 +1,16 @@
+public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)
+    throws IOException
+{
+    File targetFile = new File((destDir), (entry.getName()));
+
+    if (entry.isDirectory()) {
+        targetFile.mkdirs();
+    }
+    else {
+        targetFile.getParentFile().mkdirs();
+
+        try (InputStream sourceStream = zipFile.getInputStream(entry)) {
+            IOUtil.writeStream(sourceStream, targetFile);
+        }
+    }
+}

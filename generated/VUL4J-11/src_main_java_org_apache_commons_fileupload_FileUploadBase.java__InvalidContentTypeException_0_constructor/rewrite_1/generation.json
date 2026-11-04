@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public InvalidContentTypeException() {\n}",
+  "rationale": "The constructor has no local identifiers or expressions to transform. Removing the comment is the smallest behavior-preserving change; the signature and implicit superclass invocation remain unchanged."
+}

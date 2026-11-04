@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {\n    if (classNode != null) {\n        ClassCodeExpressionTransformer visitor = createVisitor(source, classNode);\n\n        processConstructors(visitor, classNode);\n        for (MethodNode m : classNode.getMethods()) {\n            visitor.visitMethod(m);\n        }\n        for (Statement s : classNode.getObjectInitializerStatements()) {\n            s.visit(visitor);\n        }\n        for (FieldNode f : classNode.getFields()) {\n            visitor.visitField(f);\n        }\n    }\n}",
+  "rationale": "Inverts the null guard and nests processing under the non-null branch. A null input still returns without performing any processing."
+}

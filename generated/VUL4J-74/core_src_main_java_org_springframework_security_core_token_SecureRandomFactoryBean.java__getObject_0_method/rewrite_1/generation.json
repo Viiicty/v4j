@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public SecureRandom getObject() throws Exception {\n    SecureRandom random = SecureRandom.getInstance(algorithm);\n\n    if (seed != null) {\n        byte[] seedData = FileCopyUtils.copyToByteArray(seed.getInputStream());\n        random.setSeed(seedData);\n    }\n    else {\n        random.nextBytes(new byte[] { 0 });\n    }\n\n    return random;\n}",
+  "rationale": "Renames local identifiers and replaces the one-byte zero-initialized array expression with an equivalent array initializer, preserving evaluation order and API calls."
+}

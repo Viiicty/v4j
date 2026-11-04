@@ -1,0 +1,10 @@
+public boolean isPasswordValid(String encPass, String rawPass, Object salt) {
+    String encodedValue = (encPass + "");
+    String mergedValue = mergePasswordAndSalt(rawPass, salt, false);
+
+    if (ignorePasswordCase) {
+        encodedValue = encodedValue.toLowerCase(Locale.ENGLISH);
+        mergedValue = mergedValue.toLowerCase(Locale.ENGLISH);
+    }
+    return PasswordEncoderUtils.equals(encodedValue, mergedValue);
+}

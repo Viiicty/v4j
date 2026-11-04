@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-45",
+  "unit_id": "esigate-core_src_main_java_org_esigate_xml_XsltRenderer.java__createTransformer_1_method",
+  "project_path": "esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java",
+  "method_key": "createTransformer/1/method",
+  "status": "materialized",
+  "rewrite_type": "condition_structure"
+}

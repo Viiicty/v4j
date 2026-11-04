@@ -1,0 +1,17 @@
+private void readObject(ObjectInputStream in)
+        throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+
+    OutputStream destination = getOutputStream();
+    if (null != cachedContent) {
+        destination.write(cachedContent);
+    } else {
+        FileInputStream source = new FileInputStream(dfosFile);
+        IOUtils.copy(source, destination);
+        dfosFile.delete();
+        dfosFile = null;
+    }
+    destination.close();
+
+    cachedContent = null;
+}

@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-11",
+  "unit_id": "src_main_java_org_apache_commons_fileupload_FileUploadBase.java__FileItemIteratorImpl_1_constructor",
+  "project_path": "src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+  "method_key": "FileItemIteratorImpl/1/constructor",
+  "vulnerable": {
+    "key": "FileItemIteratorImpl/1/constructor",
+    "name": "FileItemIteratorImpl",
+    "kind": "constructor",
+    "parameters": 1,
+    "start_line": 938,
+    "end_line": 999,
+    "start_offset": 33316,
+    "end_offset": 36295
+  },
+  "human_patch": {
+    "key": "FileItemIteratorImpl/1/constructor",
+    "name": "FileItemIteratorImpl",
+    "kind": "constructor",
+    "parameters": 1,
+    "start_line": 938,
+    "end_line": 1004,
+    "start_offset": 33316,
+    "end_offset": 36546
+  }
+}

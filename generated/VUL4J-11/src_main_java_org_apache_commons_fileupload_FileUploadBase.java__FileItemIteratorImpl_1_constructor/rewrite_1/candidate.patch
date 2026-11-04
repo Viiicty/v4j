@@ -1,0 +1,92 @@
+--- a/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
++++ b/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
+@@ -941,58 +941,56 @@
+                 throw new NullPointerException("ctx parameter");
+             }
+ 
+-            String contentType = ctx.getContentType();
+-            if ((null == contentType)
+-                    || (!contentType.toLowerCase(Locale.ENGLISH).startsWith(MULTIPART))) {
++            String requestContentType = ctx.getContentType();
++            if (requestContentType == null
++                    || !requestContentType.toLowerCase(Locale.ENGLISH).startsWith(MULTIPART)) {
+                 throw new InvalidContentTypeException(
+                         format("the request doesn't contain a %s or %s stream, content type header is %s",
+-                               MULTIPART_FORM_DATA, MULTIPART_FORM_DATA, contentType));
+-            }
+-
+-            InputStream input = ctx.getInputStream();
+-
+-            @SuppressWarnings("deprecation") // still has to be backward compatible
+-            final int contentLengthInt = ctx.getContentLength();
+-
+-            final long requestSize = UploadContext.class.isAssignableFrom(ctx.getClass())
+-                                     // Inline conditional is OK here CHECKSTYLE:OFF
++                               MULTIPART_FORM_DATA, MULTIPART_FORM_DATA, requestContentType));
++            }
++
++            InputStream requestInput = ctx.getInputStream();
++
++            @SuppressWarnings("deprecation")
++            final int legacyContentLength = ctx.getContentLength();
++
++            final long uploadSize = UploadContext.class.isAssignableFrom(ctx.getClass())
+                                      ? ((UploadContext) ctx).contentLength()
+-                                     : contentLengthInt;
+-                                     // CHECKSTYLE:ON
++                                     : legacyContentLength;
+ 
+             if (sizeMax >= 0) {
+-                if (requestSize != -1 && requestSize > sizeMax) {
++                if (uploadSize != -1 && uploadSize > sizeMax) {
+                     throw new SizeLimitExceededException(
+                         format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
+-                                Long.valueOf(requestSize), Long.valueOf(sizeMax)),
+-                               requestSize, sizeMax);
++                                Long.valueOf(uploadSize), Long.valueOf(sizeMax)),
++                               uploadSize, sizeMax);
+                 }
+-                input = new LimitedInputStream(input, sizeMax) {
++                requestInput = new LimitedInputStream(requestInput, sizeMax) {
+                     @Override
+-                    protected void raiseError(long pSizeMax, long pCount)
++                    protected void raiseError(long maximumSize, long byteCount)
+                             throws IOException {
+-                        FileUploadException ex = new SizeLimitExceededException(
++                        FileUploadException uploadException = new SizeLimitExceededException(
+                         format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
+-                                Long.valueOf(pCount), Long.valueOf(pSizeMax)),
+-                               pCount, pSizeMax);
+-                        throw new FileUploadIOException(ex);
++                                Long.valueOf(byteCount), Long.valueOf(maximumSize)),
++                               byteCount, maximumSize);
++                        throw new FileUploadIOException(uploadException);
+                     }
+                 };
+             }
+ 
+-            String charEncoding = headerEncoding;
+-            if (charEncoding == null) {
+-                charEncoding = ctx.getCharacterEncoding();
+-            }
+-
+-            boundary = getBoundary(contentType);
++            String selectedEncoding = headerEncoding;
++            if (selectedEncoding == null) {
++                selectedEncoding = ctx.getCharacterEncoding();
++            }
++
++            boundary = getBoundary(requestContentType);
+             if (boundary == null) {
+                 throw new FileUploadException("the request was rejected because no multipart boundary was found");
+             }
+ 
+-            notifier = new MultipartStream.ProgressNotifier(listener, requestSize);
+-            multi = new MultipartStream(input, boundary, notifier);
+-            multi.setHeaderEncoding(charEncoding);
++            notifier = new MultipartStream.ProgressNotifier(listener, uploadSize);
++            multi = new MultipartStream(requestInput, boundary, notifier);
++            multi.setHeaderEncoding(selectedEncoding);
+ 
+             skipPreamble = true;
+             findNextItem();

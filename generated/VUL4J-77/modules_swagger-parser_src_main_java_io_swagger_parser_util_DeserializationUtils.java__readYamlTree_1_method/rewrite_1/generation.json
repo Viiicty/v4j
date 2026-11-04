@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static JsonNode readYamlTree(String contents) {\n    org.yaml.snakeyaml.Yaml parser = new org.yaml.snakeyaml.Yaml();\n    return Json.mapper().convertValue((parser.load(contents)), JsonNode.class);\n}",
+  "rationale": "Renames the local identifier and parenthesizes the load expression without changing evaluation order, API calls, or behavior."
+}

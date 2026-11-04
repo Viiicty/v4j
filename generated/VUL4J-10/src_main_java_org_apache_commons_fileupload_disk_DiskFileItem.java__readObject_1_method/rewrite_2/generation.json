@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "private void readObject(ObjectInputStream in)\n        throws IOException, ClassNotFoundException {\n    in.defaultReadObject();\n\n    OutputStream output = getOutputStream();\n    if (cachedContent == null) {\n        FileInputStream input = new FileInputStream(dfosFile);\n        IOUtils.copy(input, output);\n        dfosFile.delete();\n        dfosFile = null;\n    } else {\n        output.write(cachedContent);\n    }\n    output.close();\n\n    cachedContent = null;\n}",
+  "rationale": "Inverts the condition and exchanges its branches, preserving all operations and their ordering on each execution path."
+}

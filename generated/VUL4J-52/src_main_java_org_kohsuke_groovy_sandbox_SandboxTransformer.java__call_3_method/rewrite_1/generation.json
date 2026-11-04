@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {\n    if ((classNode) == null) {\n        return;\n    }\n\n    ClassCodeExpressionTransformer expressionVisitor = createVisitor(source, (classNode));\n\n    processConstructors(expressionVisitor, classNode);\n    for (MethodNode methodNode : classNode.getMethods()) {\n        expressionVisitor.visitMethod(methodNode);\n    }\n    for (Statement initializerStatement : classNode.getObjectInitializerStatements()) {\n        initializerStatement.visit(expressionVisitor);\n    }\n    for (FieldNode fieldNode : classNode.getFields()) {\n        expressionVisitor.visitField(fieldNode);\n    }\n}",
+  "rationale": "Renames local identifiers and parenthesizes local expressions without changing evaluation order, API calls, or behavior."
+}

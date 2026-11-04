@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-3/unit-1d21147a52cc/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-3/unit-1d21147a52cc/rewrite_2/project_file/camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java",
+  "project_path": "camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java",
+  "compile_code": 0,
+  "compile_seconds": 1048.127,
+  "pov_code": 0,
+  "pov_seconds": 293.261,
+  "pov_failure_count": 0,
+  "pov_reproduced": false,
+  "valid": false
+}

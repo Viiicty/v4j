@@ -1,0 +1,7 @@
+[36m2026-11-03 04:55:59[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-03 04:56:01[0m | [1mRunning PoV tests...[0m
+[36m2026-11-03 04:56:28[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-03 04:56:28[0m | [31m[1mFailing tests: [
+  "org.codehaus.plexus.archiver.zip.ZipUnArchiverTesttestExtractingZipWithEntryOutsideDestDirThrowsException"
+][0m
+[36m2026-11-03 04:56:29[0m | [1m========================= END TEST =========================[0m

@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-11",
+  "unit_id": "src_main_java_org_apache_commons_fileupload_FileUploadBase.java__FileItemIteratorImpl_1_constructor",
+  "project_path": "src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+  "method_key": "FileItemIteratorImpl/1/constructor",
+  "status": "materialized",
+  "rewrite_type": "identifier_expression"
+}

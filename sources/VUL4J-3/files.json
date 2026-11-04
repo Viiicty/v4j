@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-3",
+  "vulnerable_files": [
+    "camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java"
+  ],
+  "human_patch_files": [
+    "camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java"
+  ]
+}

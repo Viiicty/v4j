@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-17",
+  "vulnerable_files": [
+    "httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java"
+  ],
+  "human_patch_files": [
+    "httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java"
+  ]
+}

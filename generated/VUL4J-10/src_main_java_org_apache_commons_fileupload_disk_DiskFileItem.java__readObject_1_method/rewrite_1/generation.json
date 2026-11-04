@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "private void readObject(ObjectInputStream in)\n        throws IOException, ClassNotFoundException {\n    in.defaultReadObject();\n\n    OutputStream destination = getOutputStream();\n    if (null != cachedContent) {\n        destination.write(cachedContent);\n    } else {\n        FileInputStream source = new FileInputStream(dfosFile);\n        IOUtils.copy(source, destination);\n        dfosFile.delete();\n        dfosFile = null;\n    }\n    destination.close();\n\n    cachedContent = null;\n}",
+  "rationale": "Renames local stream identifiers and reverses the null-comparison operands without changing observable evaluation order, API calls, or behavior."
+}

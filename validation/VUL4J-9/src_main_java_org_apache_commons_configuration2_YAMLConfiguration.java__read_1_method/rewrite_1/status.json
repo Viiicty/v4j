@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-9/src_main_java_org_apache_commons_configuration2_YAMLConfiguration.java__read_1_method/rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-9/src_main_java_org_apache_commons_configuration2_YAMLConfiguration.java__read_1_method/rewrite_1/project_file/src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java",
+  "project_path": "src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java",
+  "compile_code": 0,
+  "compile_seconds": 378.544,
+  "pov_code": 0,
+  "pov_seconds": 123.065,
+  "pov_failure_count": 2,
+  "pov_reproduced": true,
+  "valid": true
+}

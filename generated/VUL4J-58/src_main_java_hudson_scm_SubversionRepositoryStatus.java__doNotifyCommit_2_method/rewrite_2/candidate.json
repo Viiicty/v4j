@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-58",
+  "unit_id": "src_main_java_hudson_scm_SubversionRepositoryStatus.java__doNotifyCommit_2_method",
+  "project_path": "src/main/java/hudson/scm/SubversionRepositoryStatus.java",
+  "method_key": "doNotifyCommit/2/method",
+  "status": "materialized",
+  "rewrite_type": "condition_structure"
+}

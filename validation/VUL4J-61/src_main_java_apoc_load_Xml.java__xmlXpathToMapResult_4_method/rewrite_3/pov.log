@@ -1,0 +1,7 @@
+[36m2026-11-03 05:48:27[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-03 05:48:31[0m | [1mRunning PoV tests...[0m
+[36m2026-11-03 05:49:13[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-03 05:49:13[0m | [31m[1mFailing tests: [
+  "apoc.load.XmlTesttestLoadXmlPreventXXEVulnerabilityThrowsQueryExecutionException"
+][0m
+[36m2026-11-03 05:49:13[0m | [1m========================= END TEST =========================[0m

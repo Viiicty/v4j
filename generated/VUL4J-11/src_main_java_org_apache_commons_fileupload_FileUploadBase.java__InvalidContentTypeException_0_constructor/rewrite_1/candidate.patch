@@ -1,0 +1,14 @@
+--- a/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
++++ b/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
+@@ -1182,9 +1182,8 @@
+          * Constructs a <code>InvalidContentTypeException</code> with no
+          * detail message.
+          */
+-        public InvalidContentTypeException() {
+-            // Nothing to do.
+-        }
++public InvalidContentTypeException() {
++}
+ 
+         /**
+          * Constructs an <code>InvalidContentTypeException</code> with

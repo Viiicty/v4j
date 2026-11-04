@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-18",
+  "unit_id": "jspwiki-main_src_main_java_org_apache_wiki_url_DefaultURLConstructor.java__getForwardPage_1_method",
+  "project_path": "jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java",
+  "method_key": "getForwardPage/1/method",
+  "status": "materialized",
+  "rewrite_type": "identifier_expression"
+}

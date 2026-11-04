@@ -1,0 +1,13 @@
+public static boolean isZipStream(InputStream in)
+    throws IOException
+{
+    byte[] fileHeader;
+    in.mark(MAGIC_NUMBER.length);
+    fileHeader = IOUtil.readBytes(in, MAGIC_NUMBER.length);
+    in.reset();
+    if (Arrays.equals(MAGIC_NUMBER, fileHeader)) {
+        return true;
+    } else {
+        return false;
+    }
+}

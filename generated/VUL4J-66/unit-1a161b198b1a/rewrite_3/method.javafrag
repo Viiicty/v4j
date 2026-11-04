@@ -1,0 +1,29 @@
+protected static boolean isValid(String str)
+{
+   int i = 0;
+   if (str == null || str.length() == 0) return false;
+   while (i < str.length()) {
+      switch (str.charAt(i))
+      {
+         case '/':
+         case '\\':
+         case '?':
+         case ':':
+         case '<':
+         case '>':
+         case ';':
+         case '(':
+         case ')':
+         case '@':
+         case ',':
+         case '[':
+         case ']':
+         case '=':
+            return false;
+         default:
+            break;
+      }
+      i++;
+   }
+   return true;
+}

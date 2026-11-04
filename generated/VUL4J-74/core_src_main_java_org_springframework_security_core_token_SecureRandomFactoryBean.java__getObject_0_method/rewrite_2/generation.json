@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public SecureRandom getObject() throws Exception {\n    SecureRandom rnd = SecureRandom.getInstance(algorithm);\n\n    if (seed == null) {\n        rnd.nextBytes(new byte[1]);\n    }\n    else {\n        byte[] seedBytes = FileCopyUtils.copyToByteArray(seed.getInputStream());\n        rnd.setSeed(seedBytes);\n    }\n\n    return rnd;\n}",
+  "rationale": "Inverts the null condition and exchanges the branches while preserving each execution path's operations and their order."
+}

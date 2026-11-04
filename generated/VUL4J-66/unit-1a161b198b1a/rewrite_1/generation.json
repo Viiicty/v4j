@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "protected static boolean isValid(String str)\n{\n   if (str == null || 0 == str.length()) return false;\n   for (int offset = 0; offset < str.length(); offset += 1) {\n      switch (str.charAt(offset))\n      {\n         case '/':\n         case '\\\\':\n         case '?':\n         case ':':\n         case '<':\n         case '>':\n         case ';':\n         case '(':\n         case ')':\n         case '@':\n         case ',':\n         case '[':\n         case ']':\n         case '=':\n            return false;\n         default:\n            break;\n      }\n   }\n   return true;\n}",
+  "rationale": "Renames the loop-local identifier and rewrites the zero comparison and increment while preserving API-call order, short-circuiting, and behavior."
+}

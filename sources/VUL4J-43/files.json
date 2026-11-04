@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-43",
+  "vulnerable_files": [
+    "util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java"
+  ],
+  "human_patch_files": [
+    "util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java"
+  ]
+}

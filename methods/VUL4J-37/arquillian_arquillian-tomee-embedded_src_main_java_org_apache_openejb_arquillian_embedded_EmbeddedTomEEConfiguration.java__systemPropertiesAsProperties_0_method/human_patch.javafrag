@@ -1,0 +1,15 @@
+    public Properties systemPropertiesAsProperties() {
+        if (properties == null || properties.isEmpty()) {
+            return new Properties();
+        }
+
+        final Properties properties = toProperties(this.properties);
+        if (properties != null && isUnsafeEjbd() &&
+            "*".equals(properties.getProperty("tomee.serialization.class.blacklist", "-").trim())) {
+
+            properties.remove("tomee.serialization.class.blacklist");
+            properties.put("tomee.serialization.class.whitelist", "*");
+        }
+
+        return properties;
+    }

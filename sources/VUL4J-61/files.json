@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-61",
+  "vulnerable_files": [
+    "src/main/java/apoc/load/Xml.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/apoc/load/Xml.java"
+  ]
+}

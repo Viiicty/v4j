@@ -1,0 +1,53 @@
+    public <T> T deserialze(DefaultJSONParser parser, Type type, Object fieldName) {
+        final JSONLexer jsonLexer = parser.lexer;
+        if (jsonLexer.token() == JSONToken.NULL) {
+            jsonLexer.nextToken(JSONToken.COMMA);
+            return null;
+        }
+
+        if (jsonLexer.token() == JSONToken.LITERAL_STRING) {
+            byte[] decodedBytes = jsonLexer.bytesValue();
+            jsonLexer.nextToken(JSONToken.COMMA);
+            return (T) decodedBytes;
+        }
+
+        Class resolvedComponentClass;
+        Type resolvedComponentType;
+        if (type instanceof GenericArrayType) {
+            GenericArrayType genericArrayType = (GenericArrayType) type;
+            resolvedComponentType = genericArrayType.getGenericComponentType();
+            if (resolvedComponentType instanceof TypeVariable) {
+                TypeVariable componentVariable = (TypeVariable) resolvedComponentType;
+                Type contextType = parser.getContext().type;
+                if (contextType instanceof ParameterizedType) {
+                    ParameterizedType parameterizedContext = (ParameterizedType) contextType;
+                    Type contextRawType = parameterizedContext.getRawType();
+                    Type matchedType = null;
+                    if (contextRawType instanceof Class) {
+                        TypeVariable[] contextParameters = ((Class) contextRawType).getTypeParameters();
+                        for (int parameterIndex = 0; parameterIndex < contextParameters.length; ++parameterIndex) {
+                            if (contextParameters[parameterIndex].getName().equals(componentVariable.getName())) {
+                                matchedType = parameterizedContext.getActualTypeArguments()[parameterIndex];
+                            }
+                        }
+                    }
+                    if (matchedType instanceof Class) {
+                        resolvedComponentClass = (Class) matchedType;
+                    } else {
+                        resolvedComponentClass = Object.class;
+                    }
+                } else {
+                    resolvedComponentClass = TypeUtils.getClass(componentVariable.getBounds()[0]);
+                }
+            } else {
+                resolvedComponentClass = TypeUtils.getClass(resolvedComponentType);
+            }
+        } else {
+            Class arrayClass = (Class) type;
+            resolvedComponentType = resolvedComponentClass = arrayClass.getComponentType();
+        }
+        JSONArray parsedValues = new JSONArray();
+        parser.parseArray(resolvedComponentClass, parsedValues, fieldName);
+
+        return (T) toObjectArray(parser, resolvedComponentClass, parsedValues);
+    }

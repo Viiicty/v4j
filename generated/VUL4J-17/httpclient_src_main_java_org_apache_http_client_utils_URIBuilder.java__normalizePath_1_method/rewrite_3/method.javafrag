@@ -1,0 +1,17 @@
+private static String normalizePath(final String path) {
+    int n = 0;
+    String s = path;
+    if (s == null) {
+        return null;
+    }
+    while (n < s.length()) {
+        if (s.charAt(n) != '/') {
+            break;
+        }
+        n++;
+    }
+    if (n > 1) {
+        s = s.substring(n - 1);
+    }
+    return s;
+}

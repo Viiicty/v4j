@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-43",
+  "unit_id": "util_src_main_java_org_eclipse_rdf4j_common_io_ZipUtil.java__writeEntry_3_method",
+  "project_path": "util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java",
+  "method_key": "writeEntry/3/method",
+  "vulnerable": {
+    "key": "writeEntry/3/method",
+    "name": "writeEntry",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 90,
+    "end_line": 105,
+    "start_offset": 2490,
+    "end_offset": 2853
+  },
+  "human_patch": {
+    "key": "writeEntry/3/method",
+    "name": "writeEntry",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 91,
+    "end_line": 107,
+    "start_offset": 2691,
+    "end_offset": 3223
+  }
+}

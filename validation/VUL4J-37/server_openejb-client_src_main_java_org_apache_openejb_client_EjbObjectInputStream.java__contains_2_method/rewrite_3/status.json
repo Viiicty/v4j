@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-37/server_openejb-client_src_main_java_org_apache_openejb_client_EjbObjectInputStream.java__contains_2_method/rewrite_3",
+  "candidate_file": "/work/generated/VUL4J-37/server_openejb-client_src_main_java_org_apache_openejb_client_EjbObjectInputStream.java__contains_2_method/rewrite_3/project_file/server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+  "project_path": "server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+  "compile_code": 0,
+  "compile_seconds": 1464.867,
+  "pov_code": 0,
+  "pov_seconds": 535.386,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

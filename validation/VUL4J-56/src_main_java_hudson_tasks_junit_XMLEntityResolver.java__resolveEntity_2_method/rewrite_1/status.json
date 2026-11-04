@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-56/src_main_java_hudson_tasks_junit_XMLEntityResolver.java__resolveEntity_2_method/rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-56/src_main_java_hudson_tasks_junit_XMLEntityResolver.java__resolveEntity_2_method/rewrite_1/project_file/src/main/java/hudson/tasks/junit/XMLEntityResolver.java",
+  "project_path": "src/main/java/hudson/tasks/junit/XMLEntityResolver.java",
+  "compile_code": 0,
+  "compile_seconds": 147.116,
+  "pov_code": 0,
+  "pov_seconds": 153.611,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

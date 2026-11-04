@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-43",
+  "unit_id": "util_src_main_java_org_eclipse_rdf4j_common_io_ZipUtil.java__extract_2_method",
+  "project_path": "util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java",
+  "method_key": "extract/2/method",
+  "vulnerable": {
+    "key": "extract/2/method",
+    "name": "extract",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 66,
+    "end_line": 76,
+    "start_offset": 1905,
+    "end_offset": 2211
+  },
+  "human_patch": {
+    "key": "extract/2/method",
+    "name": "extract",
+    "kind": "method",
+    "parameters": 2,
+    "start_line": 69,
+    "end_line": 77,
+    "start_offset": 2109,
+    "end_offset": 2412
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "private static Transformer createTransformer(InputStream templateStream) throws IOException {\n    final Transformer transformer;\n    try {\n        transformer = TRANSFORMER_FACTORY.newTransformer(new StreamSource(templateStream));\n    } catch (TransformerConfigurationException e) {\n        throw new ProcessingFailedException(\"Failed to create XSLT template\", e);\n    } finally {\n        templateStream.close();\n    }\n    return transformer;\n}",
+  "rationale": "There are no dependency-independent executable statements to reorder safely. This conservative control-flow rewrite stores the result and returns after the finally block, preserving creation-before-closure ordering and exception precedence."
+}

@@ -1,0 +1,49 @@
+private static PropertyPath create(String source, TypeInformation<?> type, String addTail, List<PropertyPath> base) {
+
+	PropertyReferenceException failure = null;
+	PropertyPath resolvedPath = null;
+
+	try {
+
+		resolvedPath = new PropertyPath(source, type, base);
+
+		if (!base.isEmpty()) {
+			base.get(base.size() - (1)).next = resolvedPath;
+		}
+
+		List<PropertyPath> extendedBase = new ArrayList<PropertyPath>(base);
+		extendedBase.add(resolvedPath);
+
+		if (StringUtils.hasText(addTail)) {
+			resolvedPath.next = create(addTail, resolvedPath.type, extendedBase);
+		}
+
+		return resolvedPath;
+
+	} catch (PropertyReferenceException caughtFailure) {
+
+		if (resolvedPath != null) {
+			throw caughtFailure;
+		}
+
+		failure = caughtFailure;
+	}
+
+	Pattern suffixPattern = Pattern.compile("\\p{Lu}+\\p{Ll}*$");
+	Matcher suffixMatcher = suffixPattern.matcher(source);
+
+	if (suffixMatcher.find() && suffixMatcher.start() != 0) {
+
+		int splitPosition = suffixMatcher.start();
+		String prefix = source.substring(0, splitPosition);
+		String suffix = source.substring(splitPosition);
+
+		try {
+			return create(prefix, type, suffix + (addTail), base);
+		} catch (PropertyReferenceException caughtFailure) {
+			throw caughtFailure.hasDeeperResolutionDepthThan(failure) ? caughtFailure : failure;
+		}
+	}
+
+	throw failure;
+}

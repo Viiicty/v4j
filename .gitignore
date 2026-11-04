@@ -1,13 +1,15 @@
-# Reproducible build outputs and nested repository metadata
-**/.git/
-**/target/
-**/.m2/
-*.class
-*.jar
-*.war
-*.zip
-*.tar.gz
-
-# Active per-sample workspace; validated outputs are stored separately
+# Temporary project workspaces and build products
 baseline/
+checkouts/
+extract_work/
+validation_work/
+method_test/
+**/target/
+**/.git/
 
+# Model predictions and evaluation metrics are stored outside this dataset
+clone_test/
+results/
+ranking.csv
+summary.json
+progress.json

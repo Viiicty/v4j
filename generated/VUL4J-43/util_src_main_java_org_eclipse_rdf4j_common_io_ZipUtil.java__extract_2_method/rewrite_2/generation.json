@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public static void extract(ZipFile zipFile, File destDir)\n    throws IOException\n{\n    assert destDir.isDirectory();\n\n    Enumeration<? extends ZipEntry> entries = zipFile.entries();\n    while (true) {\n        if (!entries.hasMoreElements()) {\n            break;\n        }\n        ZipEntry entry = entries.nextElement();\n        writeEntry(zipFile, entry, destDir);\n    }\n}",
+  "rationale": "Moves the loop termination condition into an explicit guard, preserving the order and number of condition checks and entry-processing calls."
+}

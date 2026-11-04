@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-10/src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-10/src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method/rewrite_2/project_file/src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java",
+  "project_path": "src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java",
+  "compile_code": 0,
+  "compile_seconds": 24.515,
+  "pov_code": 0,
+  "pov_seconds": 20.119,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

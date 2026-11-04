@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-74",
+  "unit_id": "core_src_main_java_org_springframework_security_core_token_SecureRandomFactoryBean.java__getObject_0_method",
+  "project_path": "core/src/main/java/org/springframework/security/core/token/SecureRandomFactoryBean.java",
+  "method_key": "getObject/0/method",
+  "vulnerable": {
+    "key": "getObject/0/method",
+    "name": "getObject",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 37,
+    "end_line": 52,
+    "start_offset": 1156,
+    "end_offset": 1579
+  },
+  "human_patch": {
+    "key": "getObject/0/method",
+    "name": "getObject",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 37,
+    "end_line": 51,
+    "start_offset": 1156,
+    "end_offset": 1619
+  }
+}

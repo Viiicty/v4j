@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-25",
+  "vulnerable_files": [
+    "src/main/java/org/apache/sling/xss/impl/XSSAPIImpl.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/apache/sling/xss/impl/XSSAPIImpl.java"
+  ]
+}

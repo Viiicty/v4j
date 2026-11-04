@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public static JsonNode readYamlTree(String contents) {\n    org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();\n    JsonNode result = Json.mapper().convertValue(yaml.load(contents), JsonNode.class);\n    return result;\n}",
+  "rationale": "No existing statements are dependency-independent and safely reorderable. Conservatively separates computation from return while preserving construction, mapper evaluation, loading, and conversion order."
+}

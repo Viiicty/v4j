@@ -1,0 +1,11 @@
+public static void extract(ZipFile zipFile, File destDir)
+    throws IOException
+{
+    assert destDir.isDirectory();
+
+    Enumeration<? extends ZipEntry> remainingEntries = zipFile.entries();
+    while ((remainingEntries.hasMoreElements())) {
+        ZipEntry currentEntry = remainingEntries.nextElement();
+        writeEntry(zipFile, currentEntry, destDir);
+    }
+}

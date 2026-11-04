@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-48",
+  "unit_id": "src_main_java_org_primeframework_jwt_JWTDecoder.java__decode_4_method",
+  "project_path": "src/main/java/org/primeframework/jwt/JWTDecoder.java",
+  "method_key": "decode/4/method",
+  "status": "materialized",
+  "rewrite_type": "condition_structure"
+}

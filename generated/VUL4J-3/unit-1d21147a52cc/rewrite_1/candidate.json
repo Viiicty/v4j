@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-3",
+  "unit_id": "unit-1d21147a52cc",
+  "project_path": "camel-core/src/main/java/org/apache/camel/converter/jaxp/XmlConverter.java",
+  "method_key": "toSAXSourceFromStream/2/method",
+  "status": "materialized",
+  "source_unit_id": "camel-core_src_main_java_org_apache_camel_converter_jaxp_XmlConverter.java__toSAXSourceFromStream_2_method",
+  "rewrite_type": "identifier_expression"
+}

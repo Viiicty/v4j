@@ -1,0 +1,26 @@
+--- a/src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java
++++ b/src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java
+@@ -128,11 +128,10 @@
+     }
+ 
+     @Override
+-    public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {
+-        if (classNode == null) { // TODO is this even possible? CpsTransformer implies it is not.
+-            return;
+-        }
+-
++public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {
++    if (classNode == null) {
++        return;
++    } else {
+         ClassCodeExpressionTransformer visitor = createVisitor(source, classNode);
+ 
+         processConstructors(visitor, classNode);
+@@ -146,6 +145,7 @@
+             visitor.visitField(f);
+         }
+     }
++}
+ 
+     /** Do not care about {@code super} calls for classes extending these types. */
+     private static final Set<String> TRIVIAL_CONSTRUCTORS = new HashSet<>(Arrays.asList(

@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-37",
+  "unit_id": "server_openejb-client_src_main_java_org_apache_openejb_client_EjbObjectInputStream.java__contains_2_method",
+  "project_path": "server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+  "method_key": "contains/2/method",
+  "status": "materialized",
+  "rewrite_type": "dependency_reorder"
+}

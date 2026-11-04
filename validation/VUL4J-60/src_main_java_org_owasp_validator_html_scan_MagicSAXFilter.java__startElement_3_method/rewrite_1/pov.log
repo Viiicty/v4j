@@ -1,0 +1,7 @@
+[36m2026-11-02 21:14:29[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 21:14:31[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 21:14:51[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-02 21:14:51[0m | [31m[1mFailing tests: [
+  "org.owasp.validator.html.test.AntiSamyTesttestIssue2"
+][0m
+[36m2026-11-02 21:14:51[0m | [1m========================= END TEST =========================[0m

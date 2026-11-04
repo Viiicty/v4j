@@ -1,0 +1,26 @@
+--- a/esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java
++++ b/esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java
+@@ -86,15 +86,15 @@
+         transformer = createTransformer(templateStream);
+     }
+ 
+-    private static Transformer createTransformer(InputStream templateStream) throws IOException {
+-        try {
+-            return TRANSFORMER_FACTORY.newTransformer(new StreamSource(templateStream));
+-        } catch (TransformerConfigurationException e) {
+-            throw new ProcessingFailedException("Failed to create XSLT template", e);
+-        } finally {
+-            templateStream.close();
+-        }
++private static Transformer createTransformer(InputStream templateStream) throws IOException {
++    try {
++        return TRANSFORMER_FACTORY.newTransformer(new StreamSource((templateStream)));
++    } catch (TransformerConfigurationException configurationFailure) {
++        throw new ProcessingFailedException("Failed to create XSLT template", configurationFailure);
++    } finally {
++        templateStream.close();
+     }
++}
+ 
+     /** {@inheritDoc} */
+     @Override

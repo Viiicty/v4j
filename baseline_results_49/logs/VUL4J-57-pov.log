@@ -1,0 +1,7 @@
+[36m2026-11-02 13:37:50[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 13:37:51[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 13:40:40[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-02 13:40:40[0m | [31m[1mFailing tests: [
+  "org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerStepTestpermissions"
+][0m
+[36m2026-11-02 13:40:40[0m | [1m========================= END TEST =========================[0m

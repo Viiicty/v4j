@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static boolean isZipStream(InputStream in)\n    throws IOException\n{\n    in.mark((MAGIC_NUMBER.length));\n    byte[] headerBytes = IOUtil.readBytes(in, (MAGIC_NUMBER.length));\n    in.reset();\n    return Arrays.equals(MAGIC_NUMBER, headerBytes);\n}",
+  "rationale": "Renames the local header variable and parenthesizes local expressions while preserving evaluation order and every API call."
+}

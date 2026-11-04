@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "private static boolean contains(final String[] list, String name) {\n    if (list != null) {\n        for (final String prefix : list) {\n            if (name.startsWith(prefix) != false) {\n                return true;\n            }\n        }\n    }\n    return false;\n}",
+  "rationale": "Renames the loop-local identifier and rewrites the boolean expression without changing evaluation order, API calls, or behavior."
+}

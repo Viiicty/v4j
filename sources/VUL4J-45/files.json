@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-45",
+  "vulnerable_files": [
+    "esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java"
+  ],
+  "human_patch_files": [
+    "esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java"
+  ]
+}

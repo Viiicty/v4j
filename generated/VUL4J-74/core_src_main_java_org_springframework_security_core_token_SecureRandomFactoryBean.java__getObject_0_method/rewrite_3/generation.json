@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public SecureRandom getObject() throws Exception {\n    SecureRandom rnd = SecureRandom.getInstance(algorithm);\n\n    if (seed != null) {\n        byte[] seedBytes = FileCopyUtils.copyToByteArray(seed.getInputStream());\n        rnd.setSeed(seedBytes);\n        return rnd;\n    }\n\n    rnd.nextBytes(new byte[1]);\n    return rnd;\n}",
+  "rationale": "No operational statements can safely be reordered independently. Applies the smallest conservative control-flow rewrite: returns directly from the explicit-seed branch and moves the default-seeding branch to fall-through, preserving dependencies and behavior."
+}

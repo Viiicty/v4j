@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-39",
+  "unit_id": "server_src_main_java_org_cloudfoundry_identity_uaa_authentication_UaaAuthenticationDetails.java__toString_0_method",
+  "project_path": "server/src/main/java/org/cloudfoundry/identity/uaa/authentication/UaaAuthenticationDetails.java",
+  "method_key": "toString/0/method",
+  "vulnerable": {
+    "key": "toString/0/method",
+    "name": "toString",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 105,
+    "end_line": 123,
+    "start_offset": 3641,
+    "end_offset": 4208
+  },
+  "human_patch": {
+    "key": "toString/0/method",
+    "name": "toString",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 105,
+    "end_line": 117,
+    "start_offset": 3641,
+    "end_offset": 4028
+  }
+}

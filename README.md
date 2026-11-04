@@ -1,9 +1,15 @@
-# Vul4J AI-rewrite experiment workspace
+# Vul4J AI rewrite dataset workspace
 
-This repository is a lightweight snapshot of `C:\haqthon\v4j_exp`.
+This directory contains the open-source dataset artifacts and their validation evidence.
 
-- `baseline_results/` contains baseline status and logs.
-- `checkouts/` contains retained Vul4J source checkouts and vulnerability metadata.
-- Generated build outputs (`target/`), nested Git metadata, dependency caches, and the active temporary `baseline/` workspace are excluded because they are reproducible or still being written.
+- `sources/`: vulnerable and official repaired source files;
+- `methods/`: affected vulnerable and repaired method pairs;
+- `generated/`: AI-rewritten candidates;
+- `validation/`: compilation and PoV validation evidence;
+- `manifest.csv`: final dataset index, created after candidate validation.
 
-The baseline batch may still be running, so this snapshot represents the state at commit time rather than the final experiment result.
+Temporary checkouts and build workspaces are excluded by `.gitignore`.
+
+Clone-model predictions, rankings, and evaluation metrics are stored separately in:
+
+`C:\haqthon\v4j_clone_experiment_results`

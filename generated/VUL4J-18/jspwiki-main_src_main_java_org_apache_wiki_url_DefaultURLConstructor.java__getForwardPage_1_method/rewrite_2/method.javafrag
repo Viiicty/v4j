@@ -1,0 +1,11 @@
+public String getForwardPage( HttpServletRequest request )
+{
+    if (true)
+    {
+        return request.getPathInfo();
+    }
+    else
+    {
+        return request.getPathInfo();
+    }
+}

@@ -1,0 +1,182 @@
+--- a/src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java
++++ b/src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java
+@@ -57,95 +57,91 @@
+ 
+     @SuppressWarnings({"unchecked", "rawtypes"}) // cannot get from ParameterizedJob back to ParameterizedJobMixIn trivially
+     @Override
+-    public boolean start() throws Exception {
+-        String job = step.getJob();
+-        Item item = Jenkins.getActiveInstance().getItem(job, invokingRun.getParent(), Item.class);
+-        if (item == null) {
+-            throw new AbortException("No item named " + job + " found");
+-        }
+-        if (step.getWait() && !(item instanceof Job)) {
+-            // TODO find some way of allowing ComputedFolders to hook into the listener code
+-            throw new AbortException("Waiting for non-job items is not supported");
+-        }
+-        if (item instanceof ParameterizedJobMixIn.ParameterizedJob) {
+-            final ParameterizedJobMixIn.ParameterizedJob project = (ParameterizedJobMixIn.ParameterizedJob) item;
+-            listener.getLogger().println("Scheduling project: " + ModelHyperlinkNote.encodeTo(project));
+-
+-            node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(project.getFullDisplayName())));
+-            List<Action> actions = new ArrayList<>();
+-            if (step.getWait()) {
+-                StepContext context = getContext();
+-                actions.add(new BuildTriggerAction(context, step.isPropagate()));
+-                LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{project, context});
+-            }
+-            actions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
+-            List<ParameterValue> parameters = step.getParameters();
+-            if (parameters != null) {
+-                parameters = completeDefaultParameters(parameters, (Job) project);
+-                actions.add(new ParametersAction(parameters));
+-            }
+-            Integer quietPeriod = step.getQuietPeriod();
+-            // TODO use new convenience method in 1.621
+-            if (quietPeriod == null) {
+-                quietPeriod = project.getQuietPeriod();
+-            }
+-            QueueTaskFuture<?> f = new ParameterizedJobMixIn() {
+-                @Override
+-                protected Job asJob() {
+-                    return (Job) project;
+-                }
+-            }.scheduleBuild2(quietPeriod, actions.toArray(new Action[actions.size()]));
+-            if (f == null) {
+-                throw new AbortException("Failed to trigger build of " + project.getFullName());
+-            }
+-        } else if (item instanceof Queue.Task){
+-            if (step.getParameters() != null && !step.getParameters().isEmpty()) {
+-                throw new AbortException("Item type does not support parameters");
+-            }
+-            Queue.Task task = (Queue.Task) item;
+-            listener.getLogger().println("Scheduling item: " + ModelHyperlinkNote.encodeTo(item));
+-            node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(task.getFullDisplayName())));
+-            List<Action> actions = new ArrayList<>();
+-            if (step.getWait()) {
+-                StepContext context = getContext();
+-                actions.add(new BuildTriggerAction(context, step.isPropagate()));
+-                LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{task, context});
+-            }
+-            actions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
+-            Integer quietPeriod = step.getQuietPeriod();
+-            if (quietPeriod == null) {
+-                try {
+-                    Method getQuietPeriod = task.getClass().getMethod("getQuietPeriod");
+-                    if (getQuietPeriod.getReturnType().equals(int.class)) {
+-                        quietPeriod = (Integer) getQuietPeriod.invoke(task);
+-                    }
+-                } catch (NoSuchMethodException e) {
+-                    // ignore, best effort only
+-                } catch (IllegalAccessError | IllegalArgumentException | InvocationTargetException e) {
+-                    LOGGER.log(Level.WARNING, "Could not determine quiet period of " + item.getFullName(), e);
+-                }
+-            }
+-            if (quietPeriod == null) {
+-                quietPeriod = Jenkins.getActiveInstance().getQuietPeriod();
+-            }
+-            ScheduleResult scheduleResult = Jenkins.getActiveInstance().getQueue().schedule2(task, quietPeriod,actions);
+-            if (scheduleResult.isRefused()) {
+-                throw new AbortException("Failed to trigger build of " + item.getFullName());
+-            }
+-        } else {
+-            throw new AbortException("The item named " + job + " is a "
+-                    + (item instanceof Describable
+-                    ? ((Describable) item).getDescriptor().getDisplayName()
+-                    : item.getClass().getName())
+-                    + " which is not something that can be built");
+-        }
++public boolean start() throws Exception {
++    String jobName = step.getJob();
++    Item targetItem = Jenkins.getActiveInstance().getItem(jobName, invokingRun.getParent(), Item.class);
++    if (targetItem == null) {
++        throw new AbortException("No item named " + jobName + " found");
++    }
++    if (step.getWait() && !(targetItem instanceof Job)) {
++        throw new AbortException("Waiting for non-job items is not supported");
++    }
++    if (targetItem instanceof ParameterizedJobMixIn.ParameterizedJob) {
++        final ParameterizedJobMixIn.ParameterizedJob targetProject = (ParameterizedJobMixIn.ParameterizedJob) targetItem;
++        listener.getLogger().println("Scheduling project: " + ModelHyperlinkNote.encodeTo(targetProject));
++        node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(targetProject.getFullDisplayName())));
++        List<Action> buildActions = new ArrayList<>();
+         if (step.getWait()) {
+-            return false;
+-        } else {
+-            getContext().onSuccess(null);
+-            return true;
+-        }
+-    }
++            StepContext executionContext = getContext();
++            buildActions.add(new BuildTriggerAction(executionContext, step.isPropagate()));
++            LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{targetProject, executionContext});
++        }
++        buildActions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
++        List<ParameterValue> buildParameters = step.getParameters();
++        if (buildParameters != null) {
++            buildParameters = completeDefaultParameters(buildParameters, (Job) targetProject);
++            buildActions.add(new ParametersAction(buildParameters));
++        }
++        Integer schedulingDelay = step.getQuietPeriod();
++        if (null == schedulingDelay) {
++            schedulingDelay = targetProject.getQuietPeriod();
++        }
++        QueueTaskFuture<?> buildFuture = new ParameterizedJobMixIn() {
++            @Override
++            protected Job asJob() {
++                return (Job) targetProject;
++            }
++        }.scheduleBuild2(schedulingDelay, buildActions.toArray(new Action[buildActions.size()]));
++        if (buildFuture == null) {
++            throw new AbortException("Failed to trigger build of " + targetProject.getFullName());
++        }
++    } else if (targetItem instanceof Queue.Task) {
++        if (step.getParameters() != null && !step.getParameters().isEmpty()) {
++            throw new AbortException("Item type does not support parameters");
++        }
++        Queue.Task queueTask = (Queue.Task) targetItem;
++        listener.getLogger().println("Scheduling item: " + ModelHyperlinkNote.encodeTo(targetItem));
++        node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(queueTask.getFullDisplayName())));
++        List<Action> buildActions = new ArrayList<>();
++        if (step.getWait()) {
++            StepContext executionContext = getContext();
++            buildActions.add(new BuildTriggerAction(executionContext, step.isPropagate()));
++            LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{queueTask, executionContext});
++        }
++        buildActions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
++        Integer schedulingDelay = step.getQuietPeriod();
++        if (null == schedulingDelay) {
++            try {
++                Method quietPeriodMethod = queueTask.getClass().getMethod("getQuietPeriod");
++                if (quietPeriodMethod.getReturnType().equals(int.class)) {
++                    schedulingDelay = (Integer) quietPeriodMethod.invoke(queueTask);
++                }
++            } catch (NoSuchMethodException missingMethod) {
++            } catch (IllegalAccessError | IllegalArgumentException | InvocationTargetException invocationFailure) {
++                LOGGER.log(Level.WARNING, "Could not determine quiet period of " + targetItem.getFullName(), invocationFailure);
++            }
++        }
++        if (null == schedulingDelay) {
++            schedulingDelay = Jenkins.getActiveInstance().getQuietPeriod();
++        }
++        ScheduleResult schedulingResult = Jenkins.getActiveInstance().getQueue().schedule2(queueTask, schedulingDelay, buildActions);
++        if (schedulingResult.isRefused()) {
++            throw new AbortException("Failed to trigger build of " + targetItem.getFullName());
++        }
++    } else {
++        throw new AbortException("The item named " + jobName + " is a "
++                + (targetItem instanceof Describable
++                ? ((Describable) targetItem).getDescriptor().getDisplayName()
++                : targetItem.getClass().getName())
++                + " which is not something that can be built");
++    }
++    if (step.getWait()) {
++        return false;
++    } else {
++        getContext().onSuccess(null);
++        return true;
++    }
++}
+ 
+     private List<ParameterValue> completeDefaultParameters(List<ParameterValue> parameters, Job<?,?> project) {
+         List<ParameterValue> completeListOfParameters = Lists.newArrayList(parameters);

@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-67",
+  "unit_id": "src_main_java_org_springframework_data_mapping_PropertyPath.java__create_4_method",
+  "project_path": "src/main/java/org/springframework/data/mapping/PropertyPath.java",
+  "method_key": "create/4/method",
+  "vulnerable": {
+    "key": "create/4/method",
+    "name": "create",
+    "kind": "method",
+    "parameters": 4,
+    "start_line": 322,
+    "end_line": 370,
+    "start_offset": 8682,
+    "end_offset": 9837
+  },
+  "human_patch": {
+    "key": "create/4/method",
+    "name": "create",
+    "kind": "method",
+    "parameters": 4,
+    "start_line": 324,
+    "end_line": 376,
+    "start_offset": 8865,
+    "end_offset": 10114
+  }
+}

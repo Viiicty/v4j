@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "private static boolean contains(final String[] list, String name) {\n    if (list == null) {\n        return false;\n    }\n    for (final String white : list) {\n        if (name.startsWith(white)) {\n            return true;\n        }\n    }\n    return false;\n}",
+  "rationale": "Replaces the enclosing non-null condition with an early null return, preserving iteration, short-circuit returns, and exceptions."
+}

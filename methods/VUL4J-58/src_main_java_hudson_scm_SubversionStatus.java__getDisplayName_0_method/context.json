@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-58",
+  "unit_id": "src_main_java_hudson_scm_SubversionStatus.java__getDisplayName_0_method",
+  "project_path": "src/main/java/hudson/scm/SubversionStatus.java",
+  "method_key": "getDisplayName/0/method",
+  "vulnerable": {
+    "key": "getDisplayName/0/method",
+    "name": "getDisplayName",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 41,
+    "end_line": 43,
+    "start_offset": 1583,
+    "end_offset": 1654
+  },
+  "human_patch": {
+    "key": "getDisplayName/0/method",
+    "name": "getDisplayName",
+    "kind": "method",
+    "parameters": 0,
+    "start_line": 40,
+    "end_line": 42,
+    "start_offset": 1514,
+    "end_offset": 1585
+  }
+}

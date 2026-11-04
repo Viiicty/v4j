@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-60",
+  "vulnerable_files": [
+    "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java"
+  ]
+}

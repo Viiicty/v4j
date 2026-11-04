@@ -1,0 +1,19 @@
+public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {
+  Objects.requireNonNull(encodedJWT);
+  Objects.requireNonNull(verifiers);
+
+  String[] parts = getParts(encodedJWT);
+  Header header = Mapper.deserialize(base64Decode(parts[0].getBytes(StandardCharsets.UTF_8)), Header.class);
+  if (header.algorithm == Algorithm.none && parts.length == 2 && verifiers.isEmpty()) {
+    return Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
+  }
+
+  Verifier verifier;
+  String key = keyFunction.apply(header);
+  verifier = verifiers.get(key);
+  if (verifier != null && !verifier.canVerify(header.algorithm)) {
+    verifier = null;
+  }
+
+  return decode(encodedJWT, header, parts, verifier);
+}

@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public static void extract(ZipFile zipFile, File destDir)\n    throws IOException\n{\n    assert destDir.isDirectory();\n\n    Enumeration<? extends ZipEntry> remainingEntries = zipFile.entries();\n    while ((remainingEntries.hasMoreElements())) {\n        ZipEntry currentEntry = remainingEntries.nextElement();\n        writeEntry(zipFile, currentEntry, destDir);\n    }\n}",
+  "rationale": "Renames local identifiers and parenthesizes the loop condition without changing evaluation order, API calls, or behavior."
+}

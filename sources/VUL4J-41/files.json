@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-41",
+  "vulnerable_files": [
+    "src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java"
+  ]
+}

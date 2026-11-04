@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-17",
+  "unit_id": "httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method",
+  "project_path": "httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java",
+  "method_key": "normalizePath/1/method",
+  "status": "materialized",
+  "source_unit_id": "httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method",
+  "rewrite_type": "dependency_reorder"
+}

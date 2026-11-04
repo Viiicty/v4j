@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-77",
+  "vulnerable_files": [
+    "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java"
+  ],
+  "human_patch_files": [
+    "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java"
+  ]
+}

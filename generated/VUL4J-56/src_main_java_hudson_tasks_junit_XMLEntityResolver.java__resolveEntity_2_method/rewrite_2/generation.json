@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {\n    if (systemId == null) {\n        return null;\n    }\n    if (LOGGER.isLoggable(Level.FINE)) {\n        LOGGER.fine(\"Will try to resolve systemId [\" + systemId + \"]\");\n    }\n    if (!systemId.startsWith(TESTNG_NAMESPACE)) {\n        return null;\n    }\n    LOGGER.fine(\"It's a TestNG document, will try to lookup DTD in classpath\");\n    String dtdFileName = systemId.substring(TESTNG_NAMESPACE.length());\n    URL url = getClass().getClassLoader().getResource(dtdFileName);\n    if (url != null) {\n        return new InputSource(url.toString());\n    }\n    return null;\n}",
+  "rationale": "Replaces nested guards with early returns while preserving the original order and conditions of logging, resource lookup, and InputSource construction."
+}

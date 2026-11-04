@@ -1,0 +1,7 @@
+[36m2026-10-30 18:26:52[0m | [1m======================== START TEST ========================[0m
+[36m2026-10-30 18:26:54[0m | [1mRunning PoV tests...[0m
+[36m2026-10-30 18:31:08[0m | [1mNumber of running tests: 1[0m
+[36m2026-10-30 18:31:08[0m | [31m[1mFailing tests: [
+  "org.springframework.data.mapping.PropertyPathUnitTestsrejectsTooLongPath"
+][0m
+[36m2026-10-30 18:31:08[0m | [1m========================= END TEST =========================[0m

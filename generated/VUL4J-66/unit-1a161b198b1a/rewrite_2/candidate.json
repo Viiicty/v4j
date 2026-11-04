@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-66",
+  "unit_id": "unit-1a161b198b1a",
+  "project_path": "resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java",
+  "method_key": "isValid/1/method",
+  "status": "materialized",
+  "source_unit_id": "resteasy-core_src_main_java_org_jboss_resteasy_plugins_delegates_MediaTypeHeaderDelegate.java__isValid_1_method",
+  "rewrite_type": "condition_structure"
+}

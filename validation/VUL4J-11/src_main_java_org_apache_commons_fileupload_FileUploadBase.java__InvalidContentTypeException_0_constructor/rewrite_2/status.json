@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-11/src_main_java_org_apache_commons_fileupload_FileUploadBase.java__InvalidContentTypeException_0_constructor/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-11/src_main_java_org_apache_commons_fileupload_FileUploadBase.java__InvalidContentTypeException_0_constructor/rewrite_2/project_file/src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+  "project_path": "src/main/java/org/apache/commons/fileupload/FileUploadBase.java",
+  "compile_code": 0,
+  "compile_seconds": 30.31,
+  "pov_code": 0,
+  "pov_seconds": 26.417,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

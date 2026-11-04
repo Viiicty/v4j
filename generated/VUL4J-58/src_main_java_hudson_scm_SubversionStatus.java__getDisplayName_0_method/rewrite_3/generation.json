@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public String getDisplayName() {\n    {\n        return \"Subversion\";\n    }\n}",
+  "rationale": "There are no dependency-independent statements to reorder, so the smallest conservative structural rewrite places the unchanged return in a nested block."
+}

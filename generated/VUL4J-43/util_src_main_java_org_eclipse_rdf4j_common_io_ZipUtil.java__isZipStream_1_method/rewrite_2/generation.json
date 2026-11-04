@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public static boolean isZipStream(InputStream in)\n    throws IOException\n{\n    in.mark(MAGIC_NUMBER.length);\n    byte[] fileHeader = IOUtil.readBytes(in, MAGIC_NUMBER.length);\n    in.reset();\n    if (Arrays.equals(MAGIC_NUMBER, fileHeader)) {\n        return true;\n    }\n    return false;\n}",
+  "rationale": "Replaces the direct boolean return with an equivalent conditional, keeping the comparison after reset."
+}

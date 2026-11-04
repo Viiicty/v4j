@@ -1,0 +1,34 @@
+--- a/src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java
++++ b/src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java
+@@ -113,19 +113,20 @@
+      * @throws ConfigurationException if an error occurs
+      */
+     @Override
+-    public void read(final InputStream in) throws ConfigurationException
++public void read(final InputStream in) throws ConfigurationException
++{
++    try
+     {
+-        try
+-        {
+-            final Yaml yaml = new Yaml();
+-            final Map<String, Object> map = (Map) yaml.load(in);
+-            load(map);
+-        }
+-        catch (final Exception e)
+-        {
+-            rethrowException(e);
+-        }
++        final Yaml yaml = new Yaml();
++        final Map<String, Object> map = (Map) yaml.load(in);
++        load(map);
++        return;
+     }
++    catch (final Exception e)
++    {
++        rethrowException(e);
++    }
++}
+ 
+     public void read(final InputStream in, final LoaderOptions options)
+             throws ConfigurationException

@@ -1,0 +1,9 @@
+[36m2026-11-02 10:42:34[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 10:42:45[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 10:43:23[0m | [1mNumber of running tests: 3[0m
+[36m2026-11-02 10:43:23[0m | [31m[1mFailing tests: [
+  "org.apache.shiro.web.util.WebUtilsTesttestGetContextPathIncludes",
+  "org.apache.shiro.web.util.WebUtilsTesttestGetContextPath",
+  "org.apache.shiro.web.util.WebUtilsTesttestGetPathWithinApplication"
+][0m
+[36m2026-11-02 10:43:24[0m | [1m========================= END TEST =========================[0m

@@ -1,0 +1,51 @@
+--- a/src/main/java/org/apache/commons/fileupload/MultipartStream.java
++++ b/src/main/java/org/apache/commons/fileupload/MultipartStream.java
+@@ -320,28 +320,26 @@
+      * @see #MultipartStream(InputStream, byte[],
+      *     MultipartStream.ProgressNotifier)
+      */
+-    public MultipartStream(InputStream input,
+-            byte[] boundary,
+-            int bufSize,
+-            ProgressNotifier pNotifier) {
+-        this.input = input;
+-        this.bufSize = bufSize;
+-        this.buffer = new byte[bufSize];
+-        this.notifier = pNotifier;
+-
+-        // We prepend CR/LF to the boundary to chop trailing CR/LF from
+-        // body-data tokens.
+-        this.boundary = new byte[boundary.length + BOUNDARY_PREFIX.length];
+-        this.boundaryLength = boundary.length + BOUNDARY_PREFIX.length;
+-        this.keepRegion = this.boundary.length;
+-        System.arraycopy(BOUNDARY_PREFIX, 0, this.boundary, 0,
+-                BOUNDARY_PREFIX.length);
+-        System.arraycopy(boundary, 0, this.boundary, BOUNDARY_PREFIX.length,
+-                boundary.length);
+-
+-        head = 0;
+-        tail = 0;
+-    }
++public MultipartStream(InputStream sourceInput,
++        byte[] delimiter,
++        int bufferSize,
++        ProgressNotifier progressNotifier) {
++    this.input = sourceInput;
++    this.bufSize = bufferSize;
++    this.buffer = new byte[bufferSize];
++    this.notifier = progressNotifier;
++
++    this.boundary = new byte[(delimiter.length + BOUNDARY_PREFIX.length)];
++    this.boundaryLength = (delimiter.length + BOUNDARY_PREFIX.length);
++    this.keepRegion = this.boundary.length;
++    System.arraycopy(BOUNDARY_PREFIX, 0, this.boundary, 0,
++            BOUNDARY_PREFIX.length);
++    System.arraycopy(delimiter, 0, this.boundary, BOUNDARY_PREFIX.length,
++            delimiter.length);
++
++    head = 0x0;
++    tail = 0x0;
++}
+ 
+     /**
+      * <p> Constructs a <code>MultipartStream</code> with a default size buffer.

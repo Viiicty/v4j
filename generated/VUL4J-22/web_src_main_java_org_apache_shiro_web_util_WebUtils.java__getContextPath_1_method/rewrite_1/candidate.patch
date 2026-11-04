@@ -1,0 +1,30 @@
+--- a/web/src/main/java/org/apache/shiro/web/util/WebUtils.java
++++ b/web/src/main/java/org/apache/shiro/web/util/WebUtils.java
+@@ -243,17 +243,16 @@
+      * @param request current HTTP request
+      * @return the context path
+      */
+-    public static String getContextPath(HttpServletRequest request) {
+-        String contextPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);
+-        if (contextPath == null) {
+-            contextPath = request.getContextPath();
+-        }
+-        if ("/".equals(contextPath)) {
+-            // Invalid case, but happens for includes on Jetty: silently adapt it.
+-            contextPath = "";
+-        }
+-        return decodeRequestString(request, contextPath);
+-    }
++public static String getContextPath(HttpServletRequest request) {
++    String resolvedPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);
++    if (null == resolvedPath) {
++        resolvedPath = request.getContextPath();
++    }
++    if ("/".equals(resolvedPath)) {
++        resolvedPath = "";
++    }
++    return decodeRequestString(request, resolvedPath);
++}
+ 
+     /**
+      * Find the Shiro {@link WebEnvironment} for this web application, which is typically loaded via the

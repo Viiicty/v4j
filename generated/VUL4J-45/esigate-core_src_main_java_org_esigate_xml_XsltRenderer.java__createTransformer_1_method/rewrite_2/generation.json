@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "private static Transformer createTransformer(InputStream templateStream) throws IOException {\n    try {\n        try {\n            return TRANSFORMER_FACTORY.newTransformer(new StreamSource(templateStream));\n        } catch (TransformerConfigurationException e) {\n            throw new ProcessingFailedException(\"Failed to create XSLT template\", e);\n        }\n    } finally {\n        templateStream.close();\n    }\n}",
+  "rationale": "Reorganizes exception handling into an inner try/catch and an outer try/finally. Closure still occurs after transformer creation or exception wrapping, and a closure exception still supersedes a pending return or exception."
+}

@@ -1,0 +1,10 @@
+[36m2026-11-03 05:01:14[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-03 05:01:15[0m | [1mRunning PoV tests...[0m
+[36m2026-11-03 05:01:29[0m | [1mNumber of running tests: 2[0m
+[36m2026-11-03 05:01:29[0m | [31m[1mFailing tests: [
+  "org.primeframework.jwt.JWTTesttest_SingedWithoutSignature"
+][0m
+[36m2026-11-03 05:01:29[0m | [31m[1mTests with errors: [
+  "org.primeframework.jwt.JWTTesttest_SingedWithoutSignature"
+][0m
+[36m2026-11-03 05:01:30[0m | [1m========================= END TEST =========================[0m

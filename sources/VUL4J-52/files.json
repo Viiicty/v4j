@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-52",
+  "vulnerable_files": [
+    "src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java"
+  ]
+}

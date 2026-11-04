@@ -1,0 +1,107 @@
+--- a/batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java
++++ b/batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java
+@@ -416,55 +416,57 @@
+      * @param is  The document input source.
+      * @exception IOException if an error occured while reading the document.
+      */
+-    protected Document createDocument(InputSource is)
+-        throws IOException {
+-        try {
+-            if (parserClassName != null) {
+-                parser = XMLReaderFactory.createXMLReader(parserClassName);
+-            } else {
+-                SAXParser saxParser;
+-                try {
+-                    saxParser = saxFactory.newSAXParser();
+-                } catch (ParserConfigurationException pce) {
+-                    throw new IOException("Could not create SAXParser: "
+-                            + pce.getMessage());
+-                }
+-                parser = saxParser.getXMLReader();
++protected Document createDocument(InputSource is)
++    throws IOException {
++    try {
++        if (parserClassName == null) {
++            SAXParser saxParser;
++            try {
++                saxParser = saxFactory.newSAXParser();
++            } catch (ParserConfigurationException pce) {
++                throw new IOException("Could not create SAXParser: "
++                        + pce.getMessage());
+             }
+-
+-            parser.setContentHandler(this);
+-            parser.setDTDHandler(this);
+-            parser.setEntityResolver(this);
+-            parser.setErrorHandler((errorHandler == null) ?
+-                                   this : errorHandler);
+-
+-            parser.setFeature("http://xml.org/sax/features/namespaces",
+-                              true);
+-            parser.setFeature("http://xml.org/sax/features/namespace-prefixes",
+-                              true);
+-            parser.setFeature("http://xml.org/sax/features/validation",
+-                              isValidating);
+-            parser.setFeature("http://xml.org/sax/features/external-general-entities", false);
+-            parser.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+-            parser.setProperty("http://xml.org/sax/properties/lexical-handler",
+-                               this);
+-            parser.parse(is);
+-        } catch (SAXException e) {
+-            Exception ex = e.getException();
+-            if (ex != null && ex instanceof InterruptedIOException) {
+-                throw (InterruptedIOException)ex;
++            parser = saxParser.getXMLReader();
++        } else {
++            parser = XMLReaderFactory.createXMLReader(parserClassName);
++        }
++
++        parser.setContentHandler(this);
++        parser.setDTDHandler(this);
++        parser.setEntityResolver(this);
++        parser.setErrorHandler((errorHandler == null) ?
++                               this : errorHandler);
++
++        parser.setFeature("http://xml.org/sax/features/namespaces",
++                          true);
++        parser.setFeature("http://xml.org/sax/features/namespace-prefixes",
++                          true);
++        parser.setFeature("http://xml.org/sax/features/validation",
++                          isValidating);
++        parser.setFeature("http://xml.org/sax/features/external-general-entities", false);
++        parser.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
++        parser.setProperty("http://xml.org/sax/properties/lexical-handler",
++                           this);
++        parser.parse(is);
++    } catch (SAXException e) {
++        Exception ex = e.getException();
++        if (ex != null) {
++            if (ex instanceof InterruptedIOException) {
++                throw (InterruptedIOException) ex;
+             }
+-            throw new SAXIOException(e);
+-        }
+-
+-        currentNode  = null;
+-        Document ret = document;
+-        document     = null;
+-        doctype      = null;
+-        locator      = null;
+-        parser       = null;
+-        return ret;
+-    }
++        }
++        throw new SAXIOException(e);
++    }
++
++    currentNode = null;
++    Document ret = document;
++    document = null;
++    doctype = null;
++    locator = null;
++    parser = null;
++    return ret;
++}
+ 
+     /**
+      * Returns the document descriptor associated with the latest created

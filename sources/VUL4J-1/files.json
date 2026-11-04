@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-1",
+  "vulnerable_files": [
+    "src/main/java/com/alibaba/fastjson/serializer/ObjectArrayCodec.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/com/alibaba/fastjson/serializer/ObjectArrayCodec.java"
+  ]
+}

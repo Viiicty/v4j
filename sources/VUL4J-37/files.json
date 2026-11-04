@@ -1,0 +1,19 @@
+{
+  "vul_id": "VUL4J-37",
+  "vulnerable_files": [
+    "arquillian/arquillian-tomee-common/src/main/java/org/apache/openejb/arquillian/common/Setup.java",
+    "arquillian/arquillian-tomee-common/src/main/java/org/apache/openejb/arquillian/common/TomEEConfiguration.java",
+    "arquillian/arquillian-tomee-embedded/src/main/java/org/apache/openejb/arquillian/embedded/EmbeddedTomEEConfiguration.java",
+    "container/openejb-core/src/main/java/org/apache/openejb/core/rmi/BlacklistClassResolver.java",
+    "server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+    "tomee/tomee-common/src/main/java/org/apache/tomee/installer/Installer.java"
+  ],
+  "human_patch_files": [
+    "arquillian/arquillian-tomee-common/src/main/java/org/apache/openejb/arquillian/common/Setup.java",
+    "arquillian/arquillian-tomee-common/src/main/java/org/apache/openejb/arquillian/common/TomEEConfiguration.java",
+    "arquillian/arquillian-tomee-embedded/src/main/java/org/apache/openejb/arquillian/embedded/EmbeddedTomEEConfiguration.java",
+    "container/openejb-core/src/main/java/org/apache/openejb/core/rmi/BlacklistClassResolver.java",
+    "server/openejb-client/src/main/java/org/apache/openejb/client/EjbObjectInputStream.java",
+    "tomee/tomee-common/src/main/java/org/apache/tomee/installer/Installer.java"
+  ]
+}

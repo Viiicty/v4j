@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-62",
+  "vulnerable_files": [
+    "enterprise/security/src/main/java/org/neo4j/server/security/enterprise/auth/LdapRealm.java"
+  ],
+  "human_patch_files": [
+    "enterprise/security/src/main/java/org/neo4j/server/security/enterprise/auth/LdapRealm.java"
+  ]
+}

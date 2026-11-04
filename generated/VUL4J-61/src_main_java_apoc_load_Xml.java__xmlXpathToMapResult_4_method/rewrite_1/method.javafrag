@@ -1,0 +1,45 @@
+private Stream<MapResult> xmlXpathToMapResult(@Name("url") String url, boolean simpleMode, String path, Map<String, Object> config) throws Exception {
+    if (config == null) config = Collections.emptyMap();
+    boolean propagateErrors = (boolean) config.getOrDefault("failOnError", true);
+    List<MapResult> mappedResults = new ArrayList<>();
+    try {
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        builderFactory.setNamespaceAware(true);
+        builderFactory.setIgnoringElementContentWhitespace(true);
+        DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+        FileUtils.checkReadAllowed(url);
+
+        Map<String, Object> requestHeaders = (Map) config.getOrDefault("headers", Collections.emptyMap());
+
+        Document document = builder.parse(Util.openInputStream(url, requestHeaders, null));
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        XPath xpath = xpathFactory.newXPath();
+
+        path = StringUtils.isEmpty(path) ? "/" : path;
+        XPathExpression compiledPath = xpath.compile(path);
+        NodeList matchingNodes = (NodeList) compiledPath.evaluate(document, XPathConstants.NODESET);
+
+        for (int nodeIndex = 0; nodeIndex < matchingNodes.getLength(); nodeIndex += 1) {
+            final Deque<Map<String, Object>> pendingMaps = new LinkedList<>();
+
+            handleNode(pendingMaps, matchingNodes.item(nodeIndex), simpleMode);
+            for (int mapIndex = 0; mapIndex < pendingMaps.size(); mapIndex += 1) {
+                mappedResults.add(new MapResult(pendingMaps.pollFirst()));
+            }
+        }
+    }
+    catch (FileNotFoundException failure) {
+        if (!propagateErrors)
+            return Stream.of(new MapResult(Collections.emptyMap()));
+        else
+            throw new FileNotFoundException(failure.getMessage());
+    }
+    catch (Exception failure) {
+        if (!propagateErrors)
+            return Stream.of(new MapResult(Collections.emptyMap()));
+        else
+            throw new Exception(failure);
+    }
+    return mappedResults.stream();
+}

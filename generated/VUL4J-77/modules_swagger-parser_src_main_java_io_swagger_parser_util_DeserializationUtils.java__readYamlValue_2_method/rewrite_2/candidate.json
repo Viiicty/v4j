@@ -1,0 +1,8 @@
+{
+  "vul_id": "VUL4J-77",
+  "unit_id": "modules_swagger-parser_src_main_java_io_swagger_parser_util_DeserializationUtils.java__readYamlValue_2_method",
+  "project_path": "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java",
+  "method_key": "readYamlValue/2/method",
+  "status": "materialized",
+  "rewrite_type": "condition_structure"
+}

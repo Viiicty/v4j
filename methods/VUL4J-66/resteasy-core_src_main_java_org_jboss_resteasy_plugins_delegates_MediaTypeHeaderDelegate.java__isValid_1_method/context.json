@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-66",
+  "unit_id": "resteasy-core_src_main_java_org_jboss_resteasy_plugins_delegates_MediaTypeHeaderDelegate.java__isValid_1_method",
+  "project_path": "resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java",
+  "method_key": "isValid/1/method",
+  "vulnerable": {
+    "key": "isValid/1/method",
+    "name": "isValid",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 32,
+    "end_line": 58,
+    "start_offset": 1128,
+    "end_offset": 1752
+  },
+  "human_patch": {
+    "key": "isValid/1/method",
+    "name": "isValid",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 32,
+    "end_line": 59,
+    "start_offset": 1128,
+    "end_offset": 1775
+  }
+}

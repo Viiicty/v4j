@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-73",
+  "unit_id": "core_src_main_java_org_springframework_security_authentication_encoding_PlaintextPasswordEncoder.java__isPasswordValid_3_method",
+  "project_path": "core/src/main/java/org/springframework/security/authentication/encoding/PlaintextPasswordEncoder.java",
+  "method_key": "isPasswordValid/3/method",
+  "vulnerable": {
+    "key": "isPasswordValid/3/method",
+    "name": "isPasswordValid",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 53,
+    "end_line": 68,
+    "start_offset": 1755,
+    "end_offset": 2410
+  },
+  "human_patch": {
+    "key": "isPasswordValid/3/method",
+    "name": "isPasswordValid",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 53,
+    "end_line": 71,
+    "start_offset": 1755,
+    "end_offset": 2456
+  }
+}

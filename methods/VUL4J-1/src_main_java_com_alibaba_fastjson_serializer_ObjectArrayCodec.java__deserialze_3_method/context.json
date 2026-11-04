@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-1",
+  "unit_id": "src_main_java_com_alibaba_fastjson_serializer_ObjectArrayCodec.java__deserialze_3_method",
+  "project_path": "src/main/java/com/alibaba/fastjson/serializer/ObjectArrayCodec.java",
+  "method_key": "deserialze/3/method",
+  "vulnerable": {
+    "key": "deserialze/3/method",
+    "name": "deserialze",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 128,
+    "end_line": 180,
+    "start_offset": 4219,
+    "end_offset": 6573
+  },
+  "human_patch": {
+    "key": "deserialze/3/method",
+    "name": "deserialze",
+    "kind": "method",
+    "parameters": 3,
+    "start_line": 128,
+    "end_line": 180,
+    "start_offset": 4219,
+    "end_offset": 6572
+  }
+}

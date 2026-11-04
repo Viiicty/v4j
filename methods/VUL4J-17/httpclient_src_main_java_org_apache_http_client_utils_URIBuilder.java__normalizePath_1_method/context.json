@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-17",
+  "unit_id": "httpclient_src_main_java_org_apache_http_client_utils_URIBuilder.java__normalizePath_1_method",
+  "project_path": "httpclient/src/main/java/org/apache/http/client/utils/URIBuilder.java",
+  "method_key": "normalizePath/1/method",
+  "vulnerable": {
+    "key": "normalizePath/1/method",
+    "name": "normalizePath",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 493,
+    "end_line": 508,
+    "start_offset": 15227,
+    "end_offset": 15605
+  },
+  "human_patch": {
+    "key": "normalizePath/1/method",
+    "name": "normalizePath",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 493,
+    "end_line": 511,
+    "start_offset": 15227,
+    "end_offset": 15673
+  }
+}

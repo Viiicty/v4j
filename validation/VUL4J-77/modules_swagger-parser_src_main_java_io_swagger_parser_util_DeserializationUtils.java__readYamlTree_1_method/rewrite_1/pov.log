@@ -1,0 +1,9 @@
+[36m2026-11-02 22:19:25[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 22:19:28[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 22:20:04[0m | [1mNumber of running tests: 107[0m
+[36m2026-11-02 22:20:04[0m | [32m[1mNumber of passing tests: 57[0m
+[36m2026-11-02 22:20:04[0m | [31m[1mFailing tests: [
+  "io.swagger.parser.util.SwaggerDeserializerTesttestCVE_2017_1000207",
+  "io.swagger.parser.util.SwaggerDeserializerTesttestCVE_2017_1000207"
+][0m
+[36m2026-11-02 22:20:04[0m | [1m========================= END TEST =========================[0m

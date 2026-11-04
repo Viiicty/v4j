@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public String getDisplayName() {\n    if (true) {\n        return \"Subversion\";\n    } else {\n        return \"Subversion\";\n    }\n}",
+  "rationale": "Introduces a constant conditional whose branches preserve the original return behavior without side effects or API calls."
+}

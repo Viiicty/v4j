@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public String getForwardPage( HttpServletRequest request )\n{\n    {\n        return request.getPathInfo();\n    }\n}",
+  "rationale": "There are no dependency-independent statements to reorder. A nested block is the smallest conservative structural rewrite, preserving the sole statement and all behavior."
+}

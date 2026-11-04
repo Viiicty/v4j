@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public String getForwardPage( HttpServletRequest request )\n{\n    if (true)\n    {\n        return request.getPathInfo();\n    }\n    else\n    {\n        return request.getPathInfo();\n    }\n}",
+  "rationale": "Introduces a constant conditional; exactly one unchanged API call executes, preserving all original behavior."
+}

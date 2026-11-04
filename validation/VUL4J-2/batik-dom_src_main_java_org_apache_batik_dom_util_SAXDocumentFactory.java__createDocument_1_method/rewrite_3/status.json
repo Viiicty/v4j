@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-2/batik-dom_src_main_java_org_apache_batik_dom_util_SAXDocumentFactory.java__createDocument_1_method/rewrite_3",
+  "candidate_file": "/work/generated/VUL4J-2/batik-dom_src_main_java_org_apache_batik_dom_util_SAXDocumentFactory.java__createDocument_1_method/rewrite_3/project_file/batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java",
+  "project_path": "batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java",
+  "compile_code": 0,
+  "compile_seconds": 641.6,
+  "pov_code": 0,
+  "pov_seconds": 47.179,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

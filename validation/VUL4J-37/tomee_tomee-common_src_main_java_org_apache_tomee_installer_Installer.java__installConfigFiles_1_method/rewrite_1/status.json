@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-37/tomee_tomee-common_src_main_java_org_apache_tomee_installer_Installer.java__installConfigFiles_1_method/rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-37/tomee_tomee-common_src_main_java_org_apache_tomee_installer_Installer.java__installConfigFiles_1_method/rewrite_1/project_file/tomee/tomee-common/src/main/java/org/apache/tomee/installer/Installer.java",
+  "project_path": "tomee/tomee-common/src/main/java/org/apache/tomee/installer/Installer.java",
+  "compile_code": 0,
+  "compile_seconds": 1341.47,
+  "pov_code": 0,
+  "pov_seconds": 475.522,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

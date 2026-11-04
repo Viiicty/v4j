@@ -1,0 +1,45 @@
+--- a/src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java
++++ b/src/main/java/org/kohsuke/groovy/sandbox/SandboxTransformer.java
+@@ -128,24 +128,24 @@
+     }
+ 
+     @Override
+-    public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {
+-        if (classNode == null) { // TODO is this even possible? CpsTransformer implies it is not.
+-            return;
+-        }
+-
+-        ClassCodeExpressionTransformer visitor = createVisitor(source, classNode);
+-
+-        processConstructors(visitor, classNode);
+-        for (MethodNode m : classNode.getMethods()) {
+-            visitor.visitMethod(m);
+-        }
+-        for (Statement s : classNode.getObjectInitializerStatements()) {
+-            s.visit(visitor);
+-        }
+-        for (FieldNode f : classNode.getFields()) {
+-            visitor.visitField(f);
+-        }
+-    }
++public void call(final SourceUnit source, GeneratorContext context, ClassNode classNode) {
++    if ((classNode) == null) {
++        return;
++    }
++
++    ClassCodeExpressionTransformer expressionVisitor = createVisitor(source, (classNode));
++
++    processConstructors(expressionVisitor, classNode);
++    for (MethodNode methodNode : classNode.getMethods()) {
++        expressionVisitor.visitMethod(methodNode);
++    }
++    for (Statement initializerStatement : classNode.getObjectInitializerStatements()) {
++        initializerStatement.visit(expressionVisitor);
++    }
++    for (FieldNode fieldNode : classNode.getFields()) {
++        expressionVisitor.visitField(fieldNode);
++    }
++}
+ 
+     /** Do not care about {@code super} calls for classes extending these types. */
+     private static final Set<String> TRIVIAL_CONSTRUCTORS = new HashSet<>(Arrays.asList(

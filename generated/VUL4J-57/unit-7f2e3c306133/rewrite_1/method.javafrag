@@ -1,0 +1,85 @@
+public boolean start() throws Exception {
+    String jobName = step.getJob();
+    Item targetItem = Jenkins.getActiveInstance().getItem(jobName, invokingRun.getParent(), Item.class);
+    if (targetItem == null) {
+        throw new AbortException("No item named " + jobName + " found");
+    }
+    if (step.getWait() && !(targetItem instanceof Job)) {
+        throw new AbortException("Waiting for non-job items is not supported");
+    }
+    if (targetItem instanceof ParameterizedJobMixIn.ParameterizedJob) {
+        final ParameterizedJobMixIn.ParameterizedJob targetProject = (ParameterizedJobMixIn.ParameterizedJob) targetItem;
+        listener.getLogger().println("Scheduling project: " + ModelHyperlinkNote.encodeTo(targetProject));
+        node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(targetProject.getFullDisplayName())));
+        List<Action> buildActions = new ArrayList<>();
+        if (step.getWait()) {
+            StepContext executionContext = getContext();
+            buildActions.add(new BuildTriggerAction(executionContext, step.isPropagate()));
+            LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{targetProject, executionContext});
+        }
+        buildActions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
+        List<ParameterValue> buildParameters = step.getParameters();
+        if (buildParameters != null) {
+            buildParameters = completeDefaultParameters(buildParameters, (Job) targetProject);
+            buildActions.add(new ParametersAction(buildParameters));
+        }
+        Integer schedulingDelay = step.getQuietPeriod();
+        if (null == schedulingDelay) {
+            schedulingDelay = targetProject.getQuietPeriod();
+        }
+        QueueTaskFuture<?> buildFuture = new ParameterizedJobMixIn() {
+            @Override
+            protected Job asJob() {
+                return (Job) targetProject;
+            }
+        }.scheduleBuild2(schedulingDelay, buildActions.toArray(new Action[buildActions.size()]));
+        if (buildFuture == null) {
+            throw new AbortException("Failed to trigger build of " + targetProject.getFullName());
+        }
+    } else if (targetItem instanceof Queue.Task) {
+        if (step.getParameters() != null && !step.getParameters().isEmpty()) {
+            throw new AbortException("Item type does not support parameters");
+        }
+        Queue.Task queueTask = (Queue.Task) targetItem;
+        listener.getLogger().println("Scheduling item: " + ModelHyperlinkNote.encodeTo(targetItem));
+        node.addAction(new LabelAction(Messages.BuildTriggerStepExecution_building_(queueTask.getFullDisplayName())));
+        List<Action> buildActions = new ArrayList<>();
+        if (step.getWait()) {
+            StepContext executionContext = getContext();
+            buildActions.add(new BuildTriggerAction(executionContext, step.isPropagate()));
+            LOGGER.log(Level.FINER, "scheduling a build of {0} from {1}", new Object[]{queueTask, executionContext});
+        }
+        buildActions.add(new CauseAction(new Cause.UpstreamCause(invokingRun)));
+        Integer schedulingDelay = step.getQuietPeriod();
+        if (null == schedulingDelay) {
+            try {
+                Method quietPeriodMethod = queueTask.getClass().getMethod("getQuietPeriod");
+                if (quietPeriodMethod.getReturnType().equals(int.class)) {
+                    schedulingDelay = (Integer) quietPeriodMethod.invoke(queueTask);
+                }
+            } catch (NoSuchMethodException missingMethod) {
+            } catch (IllegalAccessError | IllegalArgumentException | InvocationTargetException invocationFailure) {
+                LOGGER.log(Level.WARNING, "Could not determine quiet period of " + targetItem.getFullName(), invocationFailure);
+            }
+        }
+        if (null == schedulingDelay) {
+            schedulingDelay = Jenkins.getActiveInstance().getQuietPeriod();
+        }
+        ScheduleResult schedulingResult = Jenkins.getActiveInstance().getQueue().schedule2(queueTask, schedulingDelay, buildActions);
+        if (schedulingResult.isRefused()) {
+            throw new AbortException("Failed to trigger build of " + targetItem.getFullName());
+        }
+    } else {
+        throw new AbortException("The item named " + jobName + " is a "
+                + (targetItem instanceof Describable
+                ? ((Describable) targetItem).getDescriptor().getDisplayName()
+                : targetItem.getClass().getName())
+                + " which is not something that can be built");
+    }
+    if (step.getWait()) {
+        return false;
+    } else {
+        getContext().onSuccess(null);
+        return true;
+    }
+}

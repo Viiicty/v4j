@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-22",
+  "vulnerable_files": [
+    "web/src/main/java/org/apache/shiro/web/util/WebUtils.java"
+  ],
+  "human_patch_files": [
+    "web/src/main/java/org/apache/shiro/web/util/WebUtils.java"
+  ]
+}

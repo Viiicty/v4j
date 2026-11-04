@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public InvalidContentTypeException() {\n    return;\n}",
+  "rationale": "An explicit constructor return replaces implicit completion without changing behavior or the implicit superclass invocation."
+}

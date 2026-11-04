@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-66",
+  "vulnerable_files": [
+    "resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java"
+  ],
+  "human_patch_files": [
+    "resteasy-core/src/main/java/org/jboss/resteasy/plugins/delegates/MediaTypeHeaderDelegate.java"
+  ]
+}

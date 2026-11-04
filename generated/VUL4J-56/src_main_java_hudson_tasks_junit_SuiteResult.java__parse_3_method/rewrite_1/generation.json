@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)\n        throws DocumentException, IOException, InterruptedException {\n    List<SuiteResult> suiteResults = new ArrayList<SuiteResult>();\n\n    SAXReader reportReader = new SAXReader();\n    reportReader.setEntityResolver(new XMLEntityResolver());\n\n    FileInputStream reportInput = new FileInputStream(xmlReport);\n    try {\n        Document reportDocument = reportReader.read(reportInput);\n        Element reportRoot = (reportDocument).getRootElement();\n\n        parseSuite(xmlReport, keepLongStdio, suiteResults, reportRoot, pipelineTestDetails);\n    } finally {\n        reportInput.close();\n    }\n\n    return (suiteResults);\n}",
+  "rationale": "Renames local identifiers and parenthesizes local expressions without changing evaluation order, API calls, or exception and cleanup behavior."
+}

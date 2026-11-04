@@ -1,0 +1,44 @@
+--- a/src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java
++++ b/src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java
+@@ -651,24 +651,23 @@
+      * @throws IOException if an error occurs.
+      * @throws ClassNotFoundException if class cannot be found.
+      */
+-    private void readObject(ObjectInputStream in)
+-            throws IOException, ClassNotFoundException {
+-        // read values
+-        in.defaultReadObject();
+-
+-        OutputStream output = getOutputStream();
+-        if (cachedContent != null) {
+-            output.write(cachedContent);
+-        } else {
+-            FileInputStream input = new FileInputStream(dfosFile);
+-            IOUtils.copy(input, output);
+-            dfosFile.delete();
+-            dfosFile = null;
+-        }
+-        output.close();
+-
+-        cachedContent = null;
+-    }
++private void readObject(ObjectInputStream in)
++        throws IOException, ClassNotFoundException {
++    in.defaultReadObject();
++
++    OutputStream destination = getOutputStream();
++    if (null != cachedContent) {
++        destination.write(cachedContent);
++    } else {
++        FileInputStream source = new FileInputStream(dfosFile);
++        IOUtils.copy(source, destination);
++        dfosFile.delete();
++        dfosFile = null;
++    }
++    destination.close();
++
++    cachedContent = null;
++}
+ 
+     /**
+      * Returns the file item headers.

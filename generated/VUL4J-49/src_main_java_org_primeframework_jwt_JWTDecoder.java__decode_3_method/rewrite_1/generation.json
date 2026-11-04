@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {\n  Objects.requireNonNull(encodedJWT);\n  Objects.requireNonNull(verifiers);\n\n  String[] tokenParts = getParts(encodedJWT);\n  Header tokenHeader = Mapper.deserialize(base64Decode(tokenParts[0].getBytes(StandardCharsets.UTF_8)), Header.class);\n  if (tokenHeader.algorithm == Algorithm.none && tokenParts.length == 2 && verifiers.isEmpty()) {\n    return Mapper.deserialize(base64Decode(tokenParts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);\n  }\n\n  String verificationKey = keyFunction.apply(tokenHeader);\n  Verifier selectedVerifier = verifiers.get(verificationKey);\n  if (!(selectedVerifier == null)) {\n    if (!selectedVerifier.canVerify(tokenHeader.algorithm)) {\n      selectedVerifier = null;\n    }\n  }\n\n  return decode(encodedJWT, tokenHeader, tokenParts, selectedVerifier);\n}",
+  "rationale": "Renames local identifiers and expresses the verifier null check through negated equality, preserving evaluation order and behavior."
+}

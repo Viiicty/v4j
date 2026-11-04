@@ -1,0 +1,121 @@
+--- a/src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java
++++ b/src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java
+@@ -300,64 +300,62 @@
+         this.ignorePermissions = ignorePermissions;
+     }
+ 
+-    protected void extractFile( final File srcF, final File dir, final InputStream compressedInputStream,
+-                                final String entryName, final Date entryDate, final boolean isDirectory,
+-                                final Integer mode, String symlinkDestination )
+-        throws IOException, ArchiverException
+-    {
+-        // Hmm. Symlinks re-evaluate back to the original file here. Unsure if this is a good thing...
+-        final File f = FileUtils.resolveFile( dir, entryName );
+-
+-        try
+-        {
+-            if ( !isOverwrite() && f.exists() && ( f.lastModified() >= entryDate.getTime() ) )
++protected void extractFile( final File srcF, final File dir, final InputStream compressedInputStream,
++                            final String entryName, final Date entryDate, final boolean isDirectory,
++                            final Integer mode, String symlinkDestination )
++    throws IOException, ArchiverException
++{
++    final File targetFile = FileUtils.resolveFile( dir, entryName );
++
++    try
++    {
++        if ( !isOverwrite() && targetFile.exists() && ( entryDate.getTime() <= targetFile.lastModified() ) )
++        {
++            return;
++        }
++
++        final File parentDirectory = targetFile.getParentFile();
++        if ( parentDirectory != null )
++        {
++            parentDirectory.mkdirs();
++        }
++
++        if ( !StringUtils.isEmpty( symlinkDestination ) )
++        {
++            SymlinkUtils.createSymbolicLink( targetFile, new File( symlinkDestination ) );
++        }
++        else if ( isDirectory )
++        {
++            targetFile.mkdirs();
++        }
++        else
++        {
++            OutputStream outputStream = null;
++            try
+             {
+-                return;
++                outputStream = new FileOutputStream( targetFile );
++
++                IOUtil.copy( compressedInputStream, outputStream );
++                outputStream.close();
++                outputStream = null;
+             }
+-
+-            // create intermediary directories - sometimes zip don't add them
+-            final File dirF = f.getParentFile();
+-            if ( dirF != null )
++            finally
+             {
+-                dirF.mkdirs();
++                IOUtil.close( outputStream );
+             }
+-
+-            if ( !StringUtils.isEmpty( symlinkDestination ) )
+-            {
+-                SymlinkUtils.createSymbolicLink( f, new File( symlinkDestination ) );
+-            }
+-            else if ( isDirectory )
+-            {
+-                f.mkdirs();
+-            }
+-            else
+-            {
+-                OutputStream out = null;
+-                try
+-                {
+-                    out = new FileOutputStream( f );
+-
+-                    IOUtil.copy( compressedInputStream, out );
+-                    out.close();
+-                    out = null;
+-                }
+-                finally
+-                {
+-                    IOUtil.close( out );
+-                }
+-            }
+-
+-            f.setLastModified( entryDate.getTime() );
+-
+-            if ( !isIgnorePermissions() && mode != null && !isDirectory )
+-            {
+-                ArchiveEntryUtils.chmod( f, mode );
+-            }
+-        }
+-        catch ( final FileNotFoundException ex )
+-        {
+-            getLogger().warn( "Unable to expand to file " + f.getPath() );
+-        }
+-    }
+-
++        }
++
++        targetFile.setLastModified( entryDate.getTime() );
++
++        if ( !isIgnorePermissions() && mode != null && !isDirectory )
++        {
++            ArchiveEntryUtils.chmod( targetFile, mode );
++        }
++    }
++    catch ( final FileNotFoundException failure )
++    {
++        getLogger().warn( "Unable to expand to file " + targetFile.getPath() );
++    }
+ }
++
++}

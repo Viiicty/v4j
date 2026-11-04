@@ -1,0 +1,48 @@
+--- a/src/main/java/org/primeframework/jwt/JWTDecoder.java
++++ b/src/main/java/org/primeframework/jwt/JWTDecoder.java
+@@ -109,28 +109,26 @@
+    * @param keyFunction A function used to lookup the verifier key from the header.
+    * @return a decoded JWT.
+    */
+-  public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {
+-    Objects.requireNonNull(encodedJWT);
+-    Objects.requireNonNull(verifiers);
++public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {
++  Objects.requireNonNull(encodedJWT);
++  Objects.requireNonNull(verifiers);
+ 
+-    String[] parts = getParts(encodedJWT);
+-    Header header = Mapper.deserialize(base64Decode(parts[0].getBytes(StandardCharsets.UTF_8)), Header.class);
+-    // Be particular about decoding an unsecured JWT. If the JWT is signed or any verifiers were provided don't do it.
+-    if (header.algorithm == Algorithm.none && parts.length == 2 && verifiers.isEmpty()) {
+-      return Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
++  String[] tokenParts = getParts(encodedJWT);
++  Header tokenHeader = Mapper.deserialize(base64Decode(tokenParts[0].getBytes(StandardCharsets.UTF_8)), Header.class);
++  if (tokenHeader.algorithm == Algorithm.none && tokenParts.length == 2 && verifiers.isEmpty()) {
++    return Mapper.deserialize(base64Decode(tokenParts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
++  }
++
++  String verificationKey = keyFunction.apply(tokenHeader);
++  Verifier selectedVerifier = verifiers.get(verificationKey);
++  if (!(selectedVerifier == null)) {
++    if (!selectedVerifier.canVerify(tokenHeader.algorithm)) {
++      selectedVerifier = null;
+     }
++  }
+ 
+-    // If verifiers were provided, ensure it is able to verify this JWT.
+-    String key = keyFunction.apply(header);
+-    Verifier verifier = verifiers.get(key);
+-    if (verifier != null) {
+-      if (!verifier.canVerify(header.algorithm)) {
+-        verifier = null;
+-      }
+-    }
+-
+-    return decode(encodedJWT, header, parts, verifier);
+-  }
++  return decode(encodedJWT, tokenHeader, tokenParts, selectedVerifier);
++}
+ 
+   private byte[] base64Decode(byte[] bytes) {
+     try {

@@ -1,0 +1,43 @@
+protected Object doGetDocument(Exchange exchange, Object body) throws Exception {
+    if (null == body) {
+        return null;
+    }
+
+    Object document = null;
+
+    Class<?> documentType = getDocumentType();
+    Exception conversionFailure = null;
+    if (null != documentType) {
+        try {
+            document = exchange.getContext().getTypeConverter().convertTo(documentType, exchange, body);
+        } catch (Exception failure) {
+            conversionFailure = failure;
+        }
+    }
+
+    if (null == document) {
+        if (body instanceof WrappedFile) {
+            InputStream stream = exchange.getContext().getTypeConverter().convertTo(InputStream.class, exchange, body);
+            document = new InputSource(stream);
+        } else if (body instanceof BeanInvocation) {
+            BeanInvocation invocation = exchange.getContext().getTypeConverter().convertTo(BeanInvocation.class, exchange, body);
+            if (invocation.getArgs() != null && invocation.getArgs().length == 1 && null == invocation.getArgs()[0]) {
+                document = null;
+            }
+        } else if (body instanceof String) {
+            document = new InputSource(new StringReader((String) body));
+        }
+    }
+
+    if (null == documentType && null == document) {
+        document = body;
+    } else if (null == document) {
+        if (null != conversionFailure) {
+            throw conversionFailure;
+        } else {
+            throw new NoTypeConversionAvailableException(body, documentType);
+        }
+    }
+
+    return document;
+}

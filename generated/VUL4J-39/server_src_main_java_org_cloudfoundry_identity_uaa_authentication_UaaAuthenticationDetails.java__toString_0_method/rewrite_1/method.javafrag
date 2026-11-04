@@ -1,0 +1,19 @@
+public String toString() {
+    StringBuilder result = new StringBuilder();
+    if (origin != null) {
+        result.append("remoteAddress=").append(origin);
+    }
+    if (clientId != null) {
+        if (result.length() != 0) {
+            result.append(", ");
+        }
+        result.append("clientId=").append(clientId);
+    }
+    if (sessionId != null) {
+        if (result.length() != 0) {
+            result.append(", ");
+        }
+        result.append("sessionId=").append(sessionId);
+    }
+    return result.toString();
+}

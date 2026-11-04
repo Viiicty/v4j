@@ -1,0 +1,15 @@
+--- a/src/main/java/hudson/scm/SubversionStatus.java
++++ b/src/main/java/hudson/scm/SubversionStatus.java
+@@ -38,9 +38,9 @@
+  */
+ @Extension
+ public class SubversionStatus extends AbstractModelObject implements UnprotectedRootAction {
+-    public String getDisplayName() {
+-        return "Subversion";
+-    }
++public String getDisplayName() {
++    return ("Subversion");
++}
+ 
+     public String getSearchUrl() {
+         return getUrlName();

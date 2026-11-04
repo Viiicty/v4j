@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-60/src_main_java_org_owasp_validator_html_scan_MagicSAXFilter.java__startElement_3_method/rewrite_2",
+  "candidate_file": "/work/generated/VUL4J-60/src_main_java_org_owasp_validator_html_scan_MagicSAXFilter.java__startElement_3_method/rewrite_2/project_file/src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java",
+  "project_path": "src/main/java/org/owasp/validator/html/scan/MagicSAXFilter.java",
+  "compile_code": 0,
+  "compile_seconds": 42.683,
+  "pov_code": 0,
+  "pov_seconds": 21.721,
+  "pov_failure_count": 1,
+  "pov_reproduced": true,
+  "valid": true
+}

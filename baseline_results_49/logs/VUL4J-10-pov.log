@@ -1,0 +1,7 @@
+[36m2026-11-02 09:13:54[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 09:13:55[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 09:14:20[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-02 09:14:20[0m | [31m[1mFailing tests: [
+  "org.apache.commons.fileupload.DiskFileItemSerializeTesttestInvalidRepositoryWithNullChar"
+][0m
+[36m2026-11-02 09:14:21[0m | [1m========================= END TEST =========================[0m

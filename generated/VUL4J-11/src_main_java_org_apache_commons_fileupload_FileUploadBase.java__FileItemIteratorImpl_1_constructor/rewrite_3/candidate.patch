@@ -1,0 +1,34 @@
+--- a/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
++++ b/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
+@@ -949,16 +949,15 @@
+                                MULTIPART_FORM_DATA, MULTIPART_FORM_DATA, contentType));
+             }
+ 
++            String charEncoding;
+             InputStream input = ctx.getInputStream();
+ 
+-            @SuppressWarnings("deprecation") // still has to be backward compatible
++            @SuppressWarnings("deprecation")
+             final int contentLengthInt = ctx.getContentLength();
+ 
+             final long requestSize = UploadContext.class.isAssignableFrom(ctx.getClass())
+-                                     // Inline conditional is OK here CHECKSTYLE:OFF
+                                      ? ((UploadContext) ctx).contentLength()
+                                      : contentLengthInt;
+-                                     // CHECKSTYLE:ON
+ 
+             if (sizeMax >= 0) {
+                 if (requestSize != -1 && requestSize > sizeMax) {
+@@ -980,10 +979,8 @@
+                 };
+             }
+ 
+-            String charEncoding = headerEncoding;
+-            if (charEncoding == null) {
+-                charEncoding = ctx.getCharacterEncoding();
+-            }
++            charEncoding = headerEncoding;
++            charEncoding = charEncoding == null ? ctx.getCharacterEncoding() : charEncoding;
+ 
+             boundary = getBoundary(contentType);
+             if (boundary == null) {

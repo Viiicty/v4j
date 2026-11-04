@@ -1,0 +1,7 @@
+[36m2026-11-02 07:43:39[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 07:43:41[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 07:44:05[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-02 07:44:05[0m | [31m[1mFailing tests: [
+  "org.apache.commons.fileupload.MultipartStreamTesttestSmallBuffer"
+][0m
+[36m2026-11-02 07:44:06[0m | [1m========================= END TEST =========================[0m

@@ -1,0 +1,7 @@
+[36m2026-11-02 22:56:32[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 22:56:37[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 22:57:47[0m | [1mNumber of running tests: 1[0m
+[36m2026-11-02 22:57:47[0m | [31m[1mFailing tests: [
+  "org.apache.http.client.utils.TestURIBuildertestMalformedPath"
+][0m
+[36m2026-11-02 22:57:47[0m | [1m========================= END TEST =========================[0m

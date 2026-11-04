@@ -1,0 +1,2 @@
+﻿pair_id,query_id,candidate_id,feature_path,label,pair_role,rewrite_type,pov_reproduced,code_type
+VUL4J-1__rewrite-1,VUL4J-1,VUL4J-1-rewrite-1,features\VUL4J-1__rewrite-1.pkl,1,ai_vulnerable_rewrite,identifier_expression,1,vul4j

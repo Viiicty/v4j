@@ -1,0 +1,38 @@
+    public static void configureSystemProperties(final File tomeeHome, final TomEEConfiguration configuration) {
+        final File file = Files.path(tomeeHome, "conf", "system.properties");
+
+        // Must use an actual properties object to avoid duplicate keys
+        final Properties properties = new Properties();
+
+        if (file.exists()) {
+            try {
+                IO.readProperties(file, properties);
+            } catch (final IOException e) {
+                LOGGER.log(Level.SEVERE, "Can't read " + file.getAbsolutePath(), e);
+            }
+        }
+
+        if (configuration.getProperties() != null) {
+            try {
+                final InputStream bytes = IO.read(configuration.getProperties().getBytes());
+                IO.readProperties(bytes, properties);
+            } catch (final IOException e) {
+                LOGGER.log(Level.SEVERE, "Can't parse <property name=\"properties\"> value '" + configuration.getProperties() + "'", e);
+            }
+        }
+
+        if (configuration.isQuickSession()) {
+            properties.put("openejb.session.manager", "org.apache.tomee.catalina.session.QuickSessionManager");
+        }
+
+        if (configuration.isUnsafeEjbd() && "*".equals(properties.getProperty("tomee.serialization.class.blacklist", "-").trim())) {
+            properties.remove("tomee.serialization.class.blacklist");
+            properties.put("tomee.serialization.class.whitelist", "*");
+        }
+
+        try {
+            IO.writeProperties(file, properties);
+        } catch (final IOException e) {
+            LOGGER.log(Level.SEVERE, "Can't save system properties " + file.getAbsolutePath(), e);
+        }
+    }

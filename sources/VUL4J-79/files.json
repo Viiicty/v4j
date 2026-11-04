@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-79",
+  "vulnerable_files": [
+    "src/main/java/org/zeroturnaround/zip/ZipUtil.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/zeroturnaround/zip/ZipUtil.java"
+  ]
+}

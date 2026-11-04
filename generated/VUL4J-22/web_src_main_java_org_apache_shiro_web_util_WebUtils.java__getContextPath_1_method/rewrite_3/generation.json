@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public static String getContextPath(HttpServletRequest request) {\n    String contextPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);\n    if (contextPath == null) {\n        contextPath = request.getContextPath();\n    }\n    contextPath = \"/\".equals(contextPath) ? \"\" : contextPath;\n    return decodeRequestString(request, contextPath);\n}",
+  "rationale": "No statements can safely be reordered across their dependencies, so their order is retained. The normalization branch becomes a conservative conditional expression."
+}

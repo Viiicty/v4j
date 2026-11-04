@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-67",
+  "unit_id": "src_main_java_org_springframework_data_history_AnnotationRevisionMetadata.java__AnnotationRevisionMetadata_3_constructor",
+  "project_path": "src/main/java/org/springframework/data/history/AnnotationRevisionMetadata.java",
+  "method_key": "AnnotationRevisionMetadata/3/constructor",
+  "vulnerable": {
+    "key": "AnnotationRevisionMetadata/3/constructor",
+    "name": "AnnotationRevisionMetadata",
+    "kind": "constructor",
+    "parameters": 3,
+    "start_line": 45,
+    "end_line": 67,
+    "start_offset": 1727,
+    "end_offset": 2680
+  },
+  "human_patch": {
+    "key": "AnnotationRevisionMetadata/3/constructor",
+    "name": "AnnotationRevisionMetadata",
+    "kind": "constructor",
+    "parameters": 3,
+    "start_line": 45,
+    "end_line": 67,
+    "start_offset": 1727,
+    "end_offset": 2672
+  }
+}

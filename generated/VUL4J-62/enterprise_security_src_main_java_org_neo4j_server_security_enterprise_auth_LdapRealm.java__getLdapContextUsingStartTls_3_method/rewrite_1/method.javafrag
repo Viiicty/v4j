@@ -1,0 +1,41 @@
+private LdapContext getLdapContextUsingStartTls( LdapContextFactory ldapContextFactory,
+        Object principal, Object credentials ) throws NamingException
+{
+    JndiLdapContextFactory contextFactory = (JndiLdapContextFactory) ldapContextFactory;
+    Hashtable<String, Object> environment = new Hashtable<>();
+    environment.put( Context.INITIAL_CONTEXT_FACTORY, contextFactory.getContextFactoryClassName() );
+    environment.put( Context.PROVIDER_URL, contextFactory.getUrl() );
+
+    LdapContext ldapContext = null;
+
+    try
+    {
+        ldapContext = new InitialLdapContext( environment, null );
+
+        StartTlsRequest tlsRequest = new StartTlsRequest();
+        StartTlsResponse tlsResponse = (StartTlsResponse) (ldapContext.extendedOperation( tlsRequest ));
+
+        tlsResponse.negotiate();
+
+        ldapContext.addToEnvironment( Context.SECURITY_AUTHENTICATION,
+                contextFactory.getAuthenticationMechanism() );
+        ldapContext.addToEnvironment( Context.SECURITY_PRINCIPAL, principal );
+        ldapContext.addToEnvironment( Context.SECURITY_CREDENTIALS, credentials );
+
+        return ldapContext;
+    }
+    catch ( IOException failure )
+    {
+        LdapUtils.closeContext( ldapContext );
+        securityLog.error( withRealm( "Failed to negotiate TLS connection with '%s': ",
+                server( contextFactory ), failure ) );
+        throw new CommunicationException( (failure.getMessage()) );
+    }
+    catch ( Throwable failure )
+    {
+        LdapUtils.closeContext( ldapContext );
+        securityLog.error( withRealm( "Unexpected failure to negotiate TLS connection with '%s': ",
+                server( contextFactory ), failure ) );
+        throw failure;
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-10",
+  "unit_id": "src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method",
+  "project_path": "src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java",
+  "method_key": "readObject/1/method",
+  "vulnerable": {
+    "key": "readObject/1/method",
+    "name": "readObject",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 654,
+    "end_line": 671,
+    "start_offset": 22043,
+    "end_offset": 22588
+  },
+  "human_patch": {
+    "key": "readObject/1/method",
+    "name": "readObject",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 654,
+    "end_line": 691,
+    "start_offset": 22043,
+    "end_offset": 23458
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-77/modules_swagger-parser_src_main_java_io_swagger_parser_util_DeserializationUtils.java__readYamlValue_2_method/rewrite_1",
+  "candidate_file": "/work/generated/VUL4J-77/modules_swagger-parser_src_main_java_io_swagger_parser_util_DeserializationUtils.java__readYamlValue_2_method/rewrite_1/project_file/modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java",
+  "project_path": "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java",
+  "compile_code": 0,
+  "compile_seconds": 113.475,
+  "pov_code": 0,
+  "pov_seconds": 38.211,
+  "pov_failure_count": 2,
+  "pov_reproduced": true,
+  "valid": true
+}

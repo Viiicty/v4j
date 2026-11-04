@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-2",
+  "vulnerable_files": [
+    "batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java"
+  ],
+  "human_patch_files": [
+    "batik-dom/src/main/java/org/apache/batik/dom/util/SAXDocumentFactory.java"
+  ]
+}

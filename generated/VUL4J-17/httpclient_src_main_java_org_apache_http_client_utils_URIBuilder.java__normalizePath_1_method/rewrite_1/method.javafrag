@@ -1,0 +1,16 @@
+private static String normalizePath(final String path) {
+    String normalized = path;
+    if (normalized == null) {
+        return null;
+    }
+    int leadingSlashCount = 0;
+    for (; leadingSlashCount < normalized.length(); leadingSlashCount++) {
+        if (normalized.charAt(leadingSlashCount) != '/') {
+            break;
+        }
+    }
+    if (leadingSlashCount > 1) {
+        normalized = normalized.substring(leadingSlashCount + (-1));
+    }
+    return normalized;
+}

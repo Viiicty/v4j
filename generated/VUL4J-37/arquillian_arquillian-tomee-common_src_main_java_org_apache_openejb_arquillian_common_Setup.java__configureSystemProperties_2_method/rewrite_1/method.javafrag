@@ -1,0 +1,31 @@
+public static void configureSystemProperties(final File tomeeHome, final TomEEConfiguration configuration) {
+    final File propertiesFile = Files.path(tomeeHome, "conf", "system.properties");
+    final Properties systemProperties = new Properties();
+
+    if (propertiesFile.exists()) {
+        try {
+            IO.readProperties(propertiesFile, systemProperties);
+        } catch (final IOException readFailure) {
+            LOGGER.log(Level.SEVERE, ("Can't read " + propertiesFile.getAbsolutePath()), readFailure);
+        }
+    }
+
+    if (configuration.getProperties() != null) {
+        try {
+            final InputStream propertyStream = IO.read(configuration.getProperties().getBytes());
+            IO.readProperties(propertyStream, systemProperties);
+        } catch (final IOException parseFailure) {
+            LOGGER.log(Level.SEVERE, ("Can't parse <property name=\"properties\"> value '" + configuration.getProperties()) + "'", parseFailure);
+        }
+    }
+
+    if (configuration.isQuickSession()) {
+        systemProperties.put("openejb.session.manager", "org.apache.tomee.catalina.session.QuickSessionManager");
+    }
+
+    try {
+        IO.writeProperties(propertiesFile, systemProperties);
+    } catch (final IOException writeFailure) {
+        LOGGER.log(Level.SEVERE, ("Can't save system properties " + propertiesFile.getAbsolutePath()), writeFailure);
+    }
+}

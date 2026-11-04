@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "protected static boolean isValid(String str)\n{\n   if (str == null) return false;\n   if (str.length() == 0) return false;\n   for (int i = 0; i < str.length(); i++) {\n      switch (str.charAt(i))\n      {\n         case '/':\n         case '\\\\':\n         case '?':\n         case ':':\n         case '<':\n         case '>':\n         case ';':\n         case '(':\n         case ')':\n         case '@':\n         case ',':\n         case '[':\n         case ']':\n         case '=':\n            return false;\n         default:\n            break;\n      }\n   }\n   return true;\n}",
+  "rationale": "Splits the initial short-circuit condition into sequential guards, retaining null handling and the original evaluation order."
+}

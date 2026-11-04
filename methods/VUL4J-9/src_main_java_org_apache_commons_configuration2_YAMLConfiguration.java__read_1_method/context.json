@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-9",
+  "unit_id": "src_main_java_org_apache_commons_configuration2_YAMLConfiguration.java__read_1_method",
+  "project_path": "src/main/java/org/apache/commons/configuration2/YAMLConfiguration.java",
+  "method_key": "read/1/method",
+  "vulnerable": {
+    "key": "read/1/method",
+    "name": "read",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 116,
+    "end_line": 128,
+    "start_offset": 3427,
+    "end_offset": 3760
+  },
+  "human_patch": {
+    "key": "read/1/method",
+    "name": "read",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 119,
+    "end_line": 131,
+    "start_offset": 3647,
+    "end_offset": 4011
+  }
+}

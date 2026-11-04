@@ -1,0 +1,19 @@
+static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)
+        throws DocumentException, IOException, InterruptedException {
+    List<SuiteResult> suiteResults = new ArrayList<SuiteResult>();
+
+    SAXReader reportReader = new SAXReader();
+    reportReader.setEntityResolver(new XMLEntityResolver());
+
+    FileInputStream reportInput = new FileInputStream(xmlReport);
+    try {
+        Document reportDocument = reportReader.read(reportInput);
+        Element reportRoot = (reportDocument).getRootElement();
+
+        parseSuite(xmlReport, keepLongStdio, suiteResults, reportRoot, pipelineTestDetails);
+    } finally {
+        reportInput.close();
+    }
+
+    return (suiteResults);
+}

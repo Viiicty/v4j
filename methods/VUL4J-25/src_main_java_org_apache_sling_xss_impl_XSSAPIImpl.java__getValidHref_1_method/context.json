@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-25",
+  "unit_id": "src_main_java_org_apache_sling_xss_impl_XSSAPIImpl.java__getValidHref_1_method",
+  "project_path": "src/main/java/org/apache/sling/xss/impl/XSSAPIImpl.java",
+  "method_key": "getValidHref/1/method",
+  "vulnerable": {
+    "key": "getValidHref/1/method",
+    "name": "getValidHref",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 229,
+    "end_line": 262,
+    "start_offset": 8052,
+    "end_offset": 9727
+  },
+  "human_patch": {
+    "key": "getValidHref/1/method",
+    "name": "getValidHref",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 225,
+    "end_line": 247,
+    "start_offset": 7886,
+    "end_offset": 8922
+  }
+}

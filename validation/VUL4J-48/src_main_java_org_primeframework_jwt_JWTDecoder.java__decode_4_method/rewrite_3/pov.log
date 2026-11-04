@@ -1,0 +1,10 @@
+[36m2026-11-02 19:51:58[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 19:51:58[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 19:52:12[0m | [1mNumber of running tests: 2[0m
+[36m2026-11-02 19:52:12[0m | [31m[1mFailing tests: [
+  "org.primeframework.jwt.VulnerabilityTesttest_unsecuredJWT_validation"
+][0m
+[36m2026-11-02 19:52:12[0m | [31m[1mTests with errors: [
+  "org.primeframework.jwt.VulnerabilityTesttest_unsecuredJWT_validation"
+][0m
+[36m2026-11-02 19:52:13[0m | [1m========================= END TEST =========================[0m

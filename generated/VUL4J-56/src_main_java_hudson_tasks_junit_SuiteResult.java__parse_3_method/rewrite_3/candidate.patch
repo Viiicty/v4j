@@ -1,0 +1,47 @@
+--- a/src/main/java/hudson/tasks/junit/SuiteResult.java
++++ b/src/main/java/hudson/tasks/junit/SuiteResult.java
+@@ -156,26 +156,25 @@
+      * This method returns a collection, as a single XML may have multiple &lt;testsuite>
+      * elements wrapped into the top-level &lt;testsuites>.
+      */
+-    static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)
+-            throws DocumentException, IOException, InterruptedException {
+-        List<SuiteResult> r = new ArrayList<SuiteResult>();
+-
+-        // parse into DOM
+-        SAXReader saxReader = new SAXReader();
+-        saxReader.setEntityResolver(new XMLEntityResolver());
+-
+-        FileInputStream xmlReportStream = new FileInputStream(xmlReport);
+-        try {
+-            Document result = saxReader.read(xmlReportStream);
+-            Element root = result.getRootElement();
+-
+-            parseSuite(xmlReport, keepLongStdio, r, root, pipelineTestDetails);
+-        } finally {
+-            xmlReportStream.close();
+-        }
+-
++static List<SuiteResult> parse(File xmlReport, boolean keepLongStdio, PipelineTestDetails pipelineTestDetails)
++        throws DocumentException, IOException, InterruptedException {
++    List<SuiteResult> r = new ArrayList<SuiteResult>();
++    FileInputStream xmlReportStream;
++
++    SAXReader saxReader = new SAXReader();
++    saxReader.setEntityResolver(new XMLEntityResolver());
++
++    xmlReportStream = new FileInputStream(xmlReport);
++    try {
++        Document result = saxReader.read(xmlReportStream);
++        Element root = result.getRootElement();
++
++        parseSuite(xmlReport, keepLongStdio, r, root, pipelineTestDetails);
+         return r;
+-    }
++    } finally {
++        xmlReportStream.close();
++    }
++}
+ 
+     private static void parseSuite(File xmlReport, boolean keepLongStdio, List<SuiteResult> r, Element root,
+                                    PipelineTestDetails pipelineTestDetails) throws DocumentException, IOException {

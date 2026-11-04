@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-77",
+  "unit_id": "modules_swagger-parser_src_main_java_io_swagger_parser_util_DeserializationUtils.java__readYamlTree_1_method",
+  "project_path": "modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java",
+  "method_key": "readYamlTree/1/method",
+  "vulnerable": {
+    "key": "readYamlTree/1/method",
+    "name": "readYamlTree",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 59,
+    "end_line": 62,
+    "start_offset": 1810,
+    "end_offset": 2024
+  },
+  "human_patch": {
+    "key": "readYamlTree/1/method",
+    "name": "readYamlTree",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 60,
+    "end_line": 63,
+    "start_offset": 1865,
+    "end_offset": 2100
+  }
+}

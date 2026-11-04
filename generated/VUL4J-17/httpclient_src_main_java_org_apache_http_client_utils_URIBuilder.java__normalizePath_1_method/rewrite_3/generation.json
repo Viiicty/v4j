@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "private static String normalizePath(final String path) {\n    int n = 0;\n    String s = path;\n    if (s == null) {\n        return null;\n    }\n    while (n < s.length()) {\n        if (s.charAt(n) != '/') {\n            break;\n        }\n        n++;\n    }\n    if (n > 1) {\n        s = s.substring(n - 1);\n    }\n    return s;\n}",
+  "rationale": "Moves the independent integer initialization before the string initialization and converts the for loop into an equivalent while loop, preserving API-call order and increment behavior."
+}

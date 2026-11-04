@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "identifier_expression",
+  "method": "public String getDisplayName() {\n    return (\"Subversion\");\n}",
+  "rationale": "Adds expression parentheses without changing evaluation or the returned value; the original has no local identifiers to rename."
+}

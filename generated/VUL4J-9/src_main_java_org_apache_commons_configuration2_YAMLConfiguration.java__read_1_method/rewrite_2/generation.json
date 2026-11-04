@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public void read(final InputStream in) throws ConfigurationException\n{\n    try\n    {\n        final Yaml yaml = new Yaml();\n        final Map<String, Object> map = (Map) yaml.load(in);\n        load(map);\n        return;\n    }\n    catch (final Exception e)\n    {\n        rethrowException(e);\n    }\n}",
+  "rationale": "Makes the successful void return explicit without changing the catch boundary or behavior when rethrowException returns or throws."
+}

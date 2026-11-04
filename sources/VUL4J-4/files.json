@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-4",
+  "vulnerable_files": [
+    "camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java"
+  ],
+  "human_patch_files": [
+    "camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java"
+  ]
+}

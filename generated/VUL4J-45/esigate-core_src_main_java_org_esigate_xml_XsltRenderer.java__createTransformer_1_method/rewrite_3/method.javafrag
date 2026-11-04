@@ -1,0 +1,11 @@
+private static Transformer createTransformer(InputStream templateStream) throws IOException {
+    final Transformer transformer;
+    try {
+        transformer = TRANSFORMER_FACTORY.newTransformer(new StreamSource(templateStream));
+    } catch (TransformerConfigurationException e) {
+        throw new ProcessingFailedException("Failed to create XSLT template", e);
+    } finally {
+        templateStream.close();
+    }
+    return transformer;
+}

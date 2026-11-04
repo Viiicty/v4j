@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-45",
+  "unit_id": "esigate-core_src_main_java_org_esigate_xml_XsltRenderer.java__createTransformer_1_method",
+  "project_path": "esigate-core/src/main/java/org/esigate/xml/XsltRenderer.java",
+  "method_key": "createTransformer/1/method",
+  "vulnerable": {
+    "key": "createTransformer/1/method",
+    "name": "createTransformer",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 89,
+    "end_line": 97,
+    "start_offset": 3198,
+    "end_offset": 3612
+  },
+  "human_patch": {
+    "key": "createTransformer/1/method",
+    "name": "createTransformer",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 91,
+    "end_line": 101,
+    "start_offset": 3230,
+    "end_offset": 3811
+  }
+}

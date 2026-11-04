@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {\n  Objects.requireNonNull(encodedJWT);\n  Objects.requireNonNull(verifiers);\n\n  String[] parts = getParts(encodedJWT);\n  Header header = Mapper.deserialize(base64Decode(parts[0].getBytes(StandardCharsets.UTF_8)), Header.class);\n  if (header.algorithm == Algorithm.none) {\n    if (parts.length == 2) {\n      if (verifiers.isEmpty()) {\n        return Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);\n      }\n    }\n  }\n\n  String key = keyFunction.apply(header);\n  Verifier verifier = verifiers.get(key);\n  if (verifier != null && !verifier.canVerify(header.algorithm)) {\n    verifier = null;\n  }\n\n  return decode(encodedJWT, header, parts, verifier);\n}",
+  "rationale": "Expands the unsecured-token conjunction into nested conditions and combines verifier checks using short-circuit evaluation, preserving their original order."
+}

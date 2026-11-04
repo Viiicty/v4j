@@ -1,0 +1,37 @@
+--- a/util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java
++++ b/util/src/main/java/org/eclipse/rdf4j/common/io/ZipUtil.java
+@@ -87,20 +87,20 @@
+ 	 * @throws IOException
+ 	 *         if the entry could not be processed
+ 	 */
+-	public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)
+-		throws IOException
+-	{
+-		File outFile = new File(destDir, entry.getName());
++public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)
++    throws IOException
++{
++    File outFile = new File(destDir, entry.getName());
+ 
+-		if (entry.isDirectory()) {
+-			outFile.mkdirs();
+-		}
+-		else {
+-			outFile.getParentFile().mkdirs();
++    if (entry.isDirectory()) {
++        outFile.mkdirs();
++        return;
++    }
+ 
+-			try (InputStream in = zipFile.getInputStream(entry)) {
+-				IOUtil.writeStream(in, outFile);
+-			}
+-		}
+-	}
++    outFile.getParentFile().mkdirs();
++
++    try (InputStream in = zipFile.getInputStream(entry)) {
++        IOUtil.writeStream(in, outFile);
++    }
+ }
++}

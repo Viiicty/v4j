@@ -1,0 +1,11 @@
+{
+  "vul_id": "VUL4J-56",
+  "vulnerable_files": [
+    "src/main/java/hudson/tasks/junit/SuiteResult.java",
+    "src/main/java/hudson/tasks/junit/XMLEntityResolver.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/hudson/tasks/junit/SuiteResult.java",
+    "src/main/java/hudson/tasks/junit/XMLEntityResolver.java"
+  ]
+}

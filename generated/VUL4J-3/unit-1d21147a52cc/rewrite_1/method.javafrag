@@ -1,0 +1,31 @@
+public SAXSource toSAXSourceFromStream(StreamSource source, Exchange exchange) throws SAXException {
+    InputSource saxInput;
+    if (source.getReader() != null) {
+        saxInput = new InputSource(source.getReader());
+    } else {
+        saxInput = new InputSource(source.getInputStream());
+    }
+    saxInput.setSystemId(source.getSystemId());
+    saxInput.setPublicId(source.getPublicId());
+    XMLReader reader = null;
+    SAXParserFactory factory = null;
+    try {
+        if (exchange != null) {
+            factory = exchange.getProperty(Exchange.SAXPARSER_FACTORY, SAXParserFactory.class);
+        }
+        if (factory == null) {
+            factory = SAXParserFactory.newInstance();
+            try {
+                factory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            } catch (Exception featureFailure) {
+                LOG.warn("SAXParser doesn't support the feature {} with value {}, due to {}.", new Object[]{javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, "true", featureFailure});
+            }
+        }
+        factory.setNamespaceAware(true);
+        SAXParser saxParser = factory.newSAXParser();
+        reader = saxParser.getXMLReader();
+    } catch (Exception creationFailure) {
+        LOG.warn("Cannot create the SAXParser XMLReader, due to {}", creationFailure);
+    }
+    return new SAXSource((reader), (saxInput));
+}

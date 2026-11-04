@@ -1,0 +1,178 @@
+public void installConfigFiles(final boolean builtIn) {
+    final File coreArchiveFile = paths.getOpenEJBCoreJar();
+    final File configurationDirectory = paths.getCatalinaConfDir();
+    final Alerts notifications = this.alerts;
+    if (null == coreArchiveFile) {
+        return;
+    }
+    final JarFile coreArchive;
+    try {
+        coreArchive = new JarFile(coreArchiveFile);
+    } catch (final IOException failure) {
+        return;
+    }
+    final File configurationXmlFile = new File(configurationDirectory, "tomee.xml");
+    if (!configurationXmlFile.exists()) {
+        final String configurationXml = Installers.readEntry(coreArchive, "default.openejb.conf", notifications);
+        if (null != configurationXml) {
+            if (Installers.writeAll(configurationXmlFile, (configurationXml.replace("<openejb>", "<tomee>")).replace("</openejb>", "</tomee>"), notifications)) {
+                notifications.addInfo("Copy tomee.xml to conf");
+            }
+        }
+    }
+    final String loggingDefaults = "################################\r\n" +
+            "# OpenEJB/TomEE specific loggers\r\n" +
+            "################################\r\n" +
+            "#\r\n" +
+            "# ACTIVATE LEVEL/HANDLERS YOU WANT\r\n" +
+            "# IF YOU ACTIVATE 5tomee.org.apache.juli.FileHandler\r\n" +
+            "# ADD IT TO handlers LINE LIKE:\r\n" +
+            "#\r\n" +
+            "# handlers = 1catalina.org.apache.juli.FileHandler, 2localhost.org.apache.juli.FileHandler, 3manager.org.apache.juli.FileHandler, 4host-manager.org.apache.juli.FileHandler, 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "#\r\n" +
+            "# LEVELS:\r\n" +
+            "# =======\r\n" +
+            "#\r\n" +
+            "# OpenEJB.level             = WARNING\r\n" +
+            "# OpenEJB.options.level     = INFO\r\n" +
+            "# OpenEJB.server.level      = INFO\r\n" +
+            "# OpenEJB.startup.level     = INFO\r\n" +
+            "# OpenEJB.startup.service.level = WARNING\r\n" +
+            "# OpenEJB.startup.config.level = INFO\r\n" +
+            "# OpenEJB.hsql.level        = INFO\r\n" +
+            "# CORBA-Adapter.level       = WARNING\r\n" +
+            "# Transaction.level         = WARNING\r\n" +
+            "# org.apache.activemq.level = SEVERE\r\n" +
+            "# org.apache.geronimo.level = SEVERE\r\n" +
+            "# openjpa.level             = WARNING\r\n" +
+            "# OpenEJB.cdi.level         = INFO\r\n" +
+            "# org.apache.webbeans.level = INFO\r\n" +
+            "# org.apache.openejb.level = FINE\r\n" +
+            "#\r\n" +
+            "# HANDLERS:\r\n" +
+            "# =========\r\n" +
+            "#\r\n" +
+            "# OpenEJB.handlers             = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.options.handlers     = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.server.handlers      = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.startup.handlers     = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.startup.service.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.startup.config.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.hsql.handlers        = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# CORBA-Adapter.handlers       = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# Transaction.handlers         = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# org.apache.activemq.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# org.apache.geronimo.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# openjpa.handlers             = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# OpenEJB.cdi.handlers         = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# org.apache.webbeans.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "# org.apache.openejb.handlers = 5tomee.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler\r\n" +
+            "#\r\n" +
+            "# TOMEE HANDLER SAMPLE:\r\n" +
+            "# =====================\r\n" +
+            "#\r\n" +
+            "# 5tomee.org.apache.juli.FileHandler.level = FINEST\r\n" +
+            "# 5tomee.org.apache.juli.FileHandler.directory = ${catalina.base}/logs\r\n" +
+            "# 5tomee.org.apache.juli.FileHandler.prefix = tomee.\r\n";
+    final File loggingFile = new File(configurationDirectory, "logging.properties");
+    String pendingLogging = null;
+    if (!loggingFile.exists()) {
+        pendingLogging = loggingDefaults;
+    } else {
+        final String originalLogging = Installers.readAll(loggingFile, notifications);
+        if (!originalLogging.toLowerCase().contains("openejb")) {
+            pendingLogging = ((originalLogging + "\r\n\r\n") + loggingDefaults) + "\r\n";
+        }
+    }
+    if (builtIn) {
+        installTomEEJuli(notifications, loggingFile, pendingLogging);
+    }
+    final File systemFile = new File(configurationDirectory, "system.properties");
+    if (!systemFile.exists()) {
+        FileWriter systemWriter = null;
+        try {
+            systemWriter = new FileWriter(systemFile);
+            systemWriter.write("# all this properties are added at JVM system properties at startup\n");
+            systemWriter.write("# here some default Apache TomEE system properties\n");
+            systemWriter.write("# for more information please see http://tomee.apache.org/properties-listing.html\n");
+            systemWriter.write("\n");
+            systemWriter.write("# openejb.check.classloader = false\n");
+            systemWriter.write("# openejb.check.classloader.verbose = false\n");
+            systemWriter.write("\n");
+            systemWriter.write("# tomee.jaxws.subcontext = webservices\n");
+            systemWriter.write("# tomee.jaxws.oldsubcontext = false\n");
+            systemWriter.write("\n");
+            systemWriter.write("# if you want to propagate a deployment on a cluster when a tomcat cluster is defined\n");
+            systemWriter.write("# tomee.cluster.deployment = false\n");
+            systemWriter.write("\n");
+            systemWriter.write("# openejb.system.apps = true\n");
+            systemWriter.write("# openejb.servicemanager.enabled = true\n");
+            systemWriter.write("# openejb.jmx.active = false\n");
+            systemWriter.write("# openejb.descriptors.output = false\n");
+            systemWriter.write("# openejb.strict.interface.declaration = false\n");
+            systemWriter.write("# openejb.conf.file = conf/tomee.xml\n");
+            systemWriter.write("# openejb.debuggable-vm-hackery = false\n");
+            systemWriter.write("# openejb.validation.skip = false\n");
+            systemWriter.write("# openejb.webservices.enabled = true\n");
+            systemWriter.write("# openejb.validation.output.level = MEDIUM\n");
+            systemWriter.write("# openejb.user.mbeans.list = *\n");
+            systemWriter.write("# openejb.deploymentId.format = {appId}/{ejbJarId}/{ejbName}\n");
+            systemWriter.write("# openejb.jndiname.format = {deploymentId}{interfaceType.annotationName}\n");
+            systemWriter.write("# openejb.deployments.package.include = .*\n");
+            systemWriter.write("# openejb.deployments.package.exclude = \n");
+            systemWriter.write("# openejb.autocreate.jta-datasource-from-non-jta-one = true\n");
+            systemWriter.write("# openejb.altdd.prefix = \n");
+            systemWriter.write("# org.apache.openejb.default.system.interceptors = \n");
+            systemWriter.write("# openejb.jndiname.failoncollision = true\n");
+            systemWriter.write("# openejb.wsAddress.format = /{ejbDeploymentId}\n");
+            systemWriter.write("# org.apache.openejb.server.webservices.saaj.provider = \n");
+            systemWriter.write("# openejb.nobanner = true\n");
+            systemWriter.write("# openejb.offline = false\n");
+            systemWriter.write("# openejb.jmx.active = true\n");
+            systemWriter.write("# openejb.exclude-include.order = include-exclude\n");
+            systemWriter.write("# openejb.additional.exclude =\n");
+            systemWriter.write("# openejb.additional.include =\n");
+            systemWriter.write("# openejb.crosscontext = false\n");
+            systemWriter.write("# openejb.jsessionid-support = \n");
+            systemWriter.write("# openejb.myfaces.disable-default-values = true\n");
+            systemWriter.write("# openejb.web.xml.major = \n");
+            systemWriter.write("# openjpa.Log = \n");
+            systemWriter.write("# openejb.jdbc.log = false\n");
+            systemWriter.write("# javax.persistence.provider = org.apache.openjpa.persistence.PersistenceProviderImpl\n");
+            systemWriter.write("# javax.persistence.transactionType = \n");
+            systemWriter.write("# javax.persistence.jtaDataSource = \n");
+            systemWriter.write("# javax.persistence.nonJtaDataSource = \n");
+            systemWriter.write("#\n");
+            systemWriter.write("# Properties for JAS RS\n");
+            systemWriter.write("# openejb.jaxrs.application = \n");
+            systemWriter.write("# openejb.cxf-rs.wadl-generator.ignoreRequests = false\n");
+            systemWriter.write("# openejb.cxf-rs.wadl-generator.ignoreMessageWriters = true\n");
+            systemWriter.write("#\n");
+            systemWriter.write("# These properties are only for cxf service (SOAP webservices) and TomEE+\n");
+            systemWriter.write("# If you don't use special tricks and sun default implementation, uncommenting these 4 lines forces TomEE to use it without overhead at all = \n");
+            systemWriter.write("# javax.xml.soap.MessageFactory = com.sun.xml.messaging.saaj.soap.ver1_1.SOAPMessageFactory1_1Impl\n");
+            systemWriter.write("# javax.xml.soap.SOAPFactory = com.sun.xml.messaging.saaj.soap.ver1_1.SOAPFactory1_1Impl\n");
+            systemWriter.write("# javax.xml.soap.SOAPConnectionFactory = com.sun.xml.messaging.saaj.client.p2p.HttpSOAPConnectionFactory\n");
+            systemWriter.write("# javax.xml.soap.MetaFactory = com.sun.xml.messaging.saaj.soap.SAAJMetaFactoryImpl\n");
+        } catch (final IOException failure) {
+        } finally {
+            if (null != systemWriter) {
+                try {
+                    systemWriter.close();
+                } catch (final IOException failure) {
+                }
+            }
+        }
+    }
+    final JarFile tomcatArchive;
+    try {
+        tomcatArchive = new JarFile(paths.geOpenEJBTomcatCommonJar());
+    } catch (final IOException failure) {
+        return;
+    }
+    final File deploymentXmlFile = new File(configurationDirectory, "web.xml");
+    final String deploymentXml = Installers.readEntry(tomcatArchive, "conf/web.xml", notifications);
+    if (Installers.writeAll(deploymentXmlFile, deploymentXml, notifications)) {
+        notifications.addInfo("Set jasper in production mode in TomEE web.xml");
+    }
+}

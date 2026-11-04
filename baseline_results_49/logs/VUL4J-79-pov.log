@@ -1,0 +1,8 @@
+[36m2026-11-02 14:02:08[0m | [1m======================== START TEST ========================[0m
+[36m2026-11-02 14:02:09[0m | [1mRunning PoV tests...[0m
+[36m2026-11-02 14:02:17[0m | [1mNumber of running tests: 2[0m
+[36m2026-11-02 14:02:17[0m | [31m[1mFailing tests: [
+  "org.zeroturnaround.zip.DirectoryTraversalMaliciousTesttestUnwrapDoesntLeaveTarget",
+  "org.zeroturnaround.zip.DirectoryTraversalMaliciousTesttestUnpackDoesntLeaveTarget"
+][0m
+[36m2026-11-02 14:02:18[0m | [1m========================= END TEST =========================[0m

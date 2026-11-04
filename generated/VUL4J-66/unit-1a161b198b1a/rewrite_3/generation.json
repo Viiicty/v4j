@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "protected static boolean isValid(String str)\n{\n   int i = 0;\n   if (str == null || str.length() == 0) return false;\n   while (i < str.length()) {\n      switch (str.charAt(i))\n      {\n         case '/':\n         case '\\\\':\n         case '?':\n         case ':':\n         case '<':\n         case '>':\n         case ';':\n         case '(':\n         case ')':\n         case '@':\n         case ',':\n         case '[':\n         case ']':\n         case '=':\n            return false;\n         default:\n            break;\n      }\n      i++;\n   }\n   return true;\n}",
+  "rationale": "Moves only the dependency-independent, side-effect-free index initialization before the guard and conservatively converts the for loop to a while loop, preserving condition checks, character access, increments, and early returns."
+}

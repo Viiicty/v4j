@@ -1,0 +1,13 @@
+public SecureRandom getObject() throws Exception {
+    SecureRandom rnd = SecureRandom.getInstance(algorithm);
+
+    if (seed == null) {
+        rnd.nextBytes(new byte[1]);
+    }
+    else {
+        byte[] seedBytes = FileCopyUtils.copyToByteArray(seed.getInputStream());
+        rnd.setSeed(seedBytes);
+    }
+
+    return rnd;
+}

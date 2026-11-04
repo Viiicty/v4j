@@ -1,0 +1,15 @@
+--- a/modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java
++++ b/modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java
+@@ -61,8 +61,8 @@
+         return Json.mapper().convertValue(yaml.load(contents), JsonNode.class);
+     }
+ 
+-    public static <T> T readYamlValue(String contents, Class<T> expectedType) {
+-        org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();
+-        return Json.mapper().convertValue(yaml.load(contents), expectedType);
+-    }
++public static <T> T readYamlValue(String contents, Class<T> expectedType) {
++    org.yaml.snakeyaml.Yaml parser = new org.yaml.snakeyaml.Yaml();
++    return Json.mapper().convertValue((parser.load(contents)), expectedType);
+ }
++}

@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-41",
+  "unit_id": "src_main_java_org_codehaus_plexus_archiver_AbstractUnArchiver.java__extractFile_8_method",
+  "project_path": "src/main/java/org/codehaus/plexus/archiver/AbstractUnArchiver.java",
+  "method_key": "extractFile/8/method",
+  "vulnerable": {
+    "key": "extractFile/8/method",
+    "name": "extractFile",
+    "kind": "method",
+    "parameters": 8,
+    "start_line": 303,
+    "end_line": 361,
+    "start_offset": 7255,
+    "end_offset": 9217
+  },
+  "human_patch": {
+    "key": "extractFile/8/method",
+    "name": "extractFile",
+    "kind": "method",
+    "parameters": 8,
+    "start_line": 303,
+    "end_line": 370,
+    "start_offset": 7255,
+    "end_offset": 9633
+  }
+}

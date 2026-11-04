@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "dependency_reorder",
+  "method": "public static boolean isZipStream(InputStream in)\n    throws IOException\n{\n    byte[] fileHeader;\n    in.mark(MAGIC_NUMBER.length);\n    fileHeader = IOUtil.readBytes(in, MAGIC_NUMBER.length);\n    in.reset();\n    if (Arrays.equals(MAGIC_NUMBER, fileHeader)) {\n        return true;\n    } else {\n        return false;\n    }\n}",
+  "rationale": "Moves only the side-effect-free local declaration before mark, retaining its assignment in the original read position, and uses an equivalent if/else return. All API calls and their ordering remain unchanged."
+}

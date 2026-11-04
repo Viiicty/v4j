@@ -1,0 +1,33 @@
+    protected Object doGetDocument(Exchange exchange, Object body) throws Exception {
+        if (body == null) {
+            return null;
+        }
+
+        Object answer = null;
+
+        Class<?> type = getDocumentType();
+        Exception cause = null;
+        if (type != null) {
+            // try to get the body as the desired type
+            try {
+                answer = exchange.getContext().getTypeConverter().convertTo(type, exchange, body);
+            } catch (Exception e) {
+                // we want to store the caused exception, if we could not convert
+                cause = e;
+            }
+        }
+
+        if (type == null && answer == null) {
+            // fallback to get the body as is
+            answer = body;
+        } else if (answer == null) {
+            // there was a type, and we could not convert to it, then fail
+            if (cause != null) {
+                throw cause;
+            } else {
+                throw new NoTypeConversionAvailableException(body, type);
+            }
+        }
+
+        return answer;
+    }

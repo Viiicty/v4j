@@ -1,0 +1,26 @@
+{
+  "vul_id": "VUL4J-18",
+  "unit_id": "jspwiki-main_src_main_java_org_apache_wiki_url_DefaultURLConstructor.java__getForwardPage_1_method",
+  "project_path": "jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java",
+  "method_key": "getForwardPage/1/method",
+  "vulnerable": {
+    "key": "getForwardPage/1/method",
+    "name": "getForwardPage",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 278,
+    "end_line": 281,
+    "start_offset": 9019,
+    "end_offset": 9131
+  },
+  "human_patch": {
+    "key": "getForwardPage/1/method",
+    "name": "getForwardPage",
+    "kind": "method",
+    "parameters": 1,
+    "start_line": 278,
+    "end_line": 281,
+    "start_offset": 9019,
+    "end_offset": 9120
+  }
+}

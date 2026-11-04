@@ -1,0 +1,14 @@
+--- a/jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java
++++ b/jspwiki-main/src/main/java/org/apache/wiki/url/DefaultURLConstructor.java
+@@ -275,8 +275,10 @@
+      * @return "Wiki.jsp", "PageInfo.jsp", etc.  Just return the name,
+      *         JSPWiki will figure out the page.
+      */
+-    public String getForwardPage( HttpServletRequest request )
++public String getForwardPage( HttpServletRequest request )
++{
+     {
+         return request.getPathInfo();
+     }
+ }
++}

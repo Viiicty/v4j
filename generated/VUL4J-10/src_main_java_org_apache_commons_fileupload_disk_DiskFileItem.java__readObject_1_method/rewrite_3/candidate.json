@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-10",
+  "unit_id": "src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method",
+  "project_path": "src/main/java/org/apache/commons/fileupload/disk/DiskFileItem.java",
+  "method_key": "readObject/1/method",
+  "status": "materialized",
+  "source_unit_id": "src_main_java_org_apache_commons_fileupload_disk_DiskFileItem.java__readObject_1_method",
+  "rewrite_type": "dependency_reorder"
+}

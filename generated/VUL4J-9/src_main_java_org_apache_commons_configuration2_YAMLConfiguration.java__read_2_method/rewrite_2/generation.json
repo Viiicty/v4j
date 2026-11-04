@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public void read(final InputStream in, final LoaderOptions options)\n        throws ConfigurationException\n{\n    try\n    {\n        final Yaml yaml = new Yaml(options);\n        final Map<String, Object> map = (Map) yaml.load(in);\n        load(map);\n        return;\n    }\n    catch (final Exception e)\n    {\n        rethrowException(e);\n    }\n}",
+  "rationale": "Makes normal completion explicit with a return after load(map). Exceptions still reach the same catch block, and there is no subsequent work to skip."
+}

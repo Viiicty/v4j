@@ -1,0 +1,102 @@
+--- a/camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java
++++ b/camel-core/src/main/java/org/apache/camel/builder/xml/XPathBuilder.java
+@@ -1094,58 +1094,55 @@
+         }
+     }
+ 
+-    protected Object doGetDocument(Exchange exchange, Object body) throws Exception {
+-        if (body == null) {
+-            return null;
+-        }
+-
+-        Object answer = null;
+-
+-        Class<?> type = getDocumentType();
+-        Exception cause = null;
+-        if (type != null) {
+-            // try to get the body as the desired type
+-            try {
+-                answer = exchange.getContext().getTypeConverter().convertTo(type, exchange, body);
+-            } catch (Exception e) {
+-                // we want to store the caused exception, if we could not convert
+-                cause = e;
+-            }
+-        }
+-
+-        // okay we can try to remedy the failed conversion by some special types
+-        if (answer == null) {
+-            // let's try coercing some common types into something JAXP work with the best for special types
+-            if (body instanceof WrappedFile) {
+-                // special for files so we can work with them out of the box
+-                InputStream is = exchange.getContext().getTypeConverter().convertTo(InputStream.class, exchange, body);
+-                answer = new InputSource(is);
+-            } else if (body instanceof BeanInvocation) {
+-                // if its a null bean invocation then handle that specially
+-                BeanInvocation bi = exchange.getContext().getTypeConverter().convertTo(BeanInvocation.class, exchange, body);
+-                if (bi.getArgs() != null && bi.getArgs().length == 1 && bi.getArgs()[0] == null) {
+-                    // its a null argument from the bean invocation so use null as answer
+-                    answer = null;
++protected Object doGetDocument(Exchange exchange, Object body) throws Exception {
++    if (body == null) {
++        return null;
++    }
++
++    Object answer = null;
++
++    Class<?> type = getDocumentType();
++    Exception cause = null;
++    if (type != null) {
++        try {
++            answer = exchange.getContext().getTypeConverter().convertTo(type, exchange, body);
++        } catch (Exception e) {
++            cause = e;
++        }
++    }
++
++    if (answer == null) {
++        if (body instanceof WrappedFile) {
++            InputStream is = exchange.getContext().getTypeConverter().convertTo(InputStream.class, exchange, body);
++            answer = new InputSource(is);
++        } else if (body instanceof BeanInvocation) {
++            BeanInvocation bi = exchange.getContext().getTypeConverter().convertTo(BeanInvocation.class, exchange, body);
++            if (bi.getArgs() != null) {
++                if (bi.getArgs().length == 1) {
++                    if (bi.getArgs()[0] == null) {
++                        answer = null;
++                    }
+                 }
+-            } else if (body instanceof String) {
+-                answer = new InputSource(new StringReader((String) body));
+-            }
+-        }
+-
+-        if (type == null && answer == null) {
+-            // fallback to get the body as is
++            }
++        } else if (body instanceof String) {
++            answer = new InputSource(new StringReader((String) body));
++        }
++    }
++
++    if (answer == null) {
++        if (type == null) {
+             answer = body;
+-        } else if (answer == null) {
+-            // there was a type, and we could not convert to it, then fail
++        } else {
+             if (cause != null) {
+                 throw cause;
+             } else {
+                 throw new NoTypeConversionAvailableException(body, type);
+             }
+         }
+-
+-        return answer;
+-    }
++    }
++
++    return answer;
++}
+ 
+     private MessageVariableResolver getVariableResolver() {
+         return variableResolver;

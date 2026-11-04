@@ -1,0 +1,3 @@
+        public InvalidContentTypeException() {
+            // Nothing to do.
+        }

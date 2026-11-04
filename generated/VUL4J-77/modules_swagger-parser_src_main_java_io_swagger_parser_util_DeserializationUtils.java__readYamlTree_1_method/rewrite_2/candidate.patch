@@ -1,0 +1,19 @@
+--- a/modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java
++++ b/modules/swagger-parser/src/main/java/io/swagger/parser/util/DeserializationUtils.java
+@@ -56,10 +56,14 @@
+         return contents.toString().trim().startsWith("{");
+     }
+ 
+-    public static JsonNode readYamlTree(String contents) {
+-        org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();
++public static JsonNode readYamlTree(String contents) {
++    org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();
++    if (true) {
++        return Json.mapper().convertValue(yaml.load(contents), JsonNode.class);
++    } else {
+         return Json.mapper().convertValue(yaml.load(contents), JsonNode.class);
+     }
++}
+ 
+     public static <T> T readYamlValue(String contents, Class<T> expectedType) {
+         org.yaml.snakeyaml.Yaml yaml = new org.yaml.snakeyaml.Yaml();

@@ -1,0 +1,12 @@
+{
+  "checkout": "/runtime/validation_work/VUL4J-22/web_src_main_java_org_apache_shiro_web_util_WebUtils.java__getContextPath_1_method/rewrite_3",
+  "candidate_file": "/work/generated/VUL4J-22/web_src_main_java_org_apache_shiro_web_util_WebUtils.java__getContextPath_1_method/rewrite_3/project_file/web/src/main/java/org/apache/shiro/web/util/WebUtils.java",
+  "project_path": "web/src/main/java/org/apache/shiro/web/util/WebUtils.java",
+  "compile_code": 0,
+  "compile_seconds": 381.769,
+  "pov_code": 0,
+  "pov_seconds": 49.827,
+  "pov_failure_count": 3,
+  "pov_reproduced": true,
+  "valid": true
+}

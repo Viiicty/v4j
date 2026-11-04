@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-57",
+  "vulnerable_files": [
+    "src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java"
+  ],
+  "human_patch_files": [
+    "src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java"
+  ]
+}

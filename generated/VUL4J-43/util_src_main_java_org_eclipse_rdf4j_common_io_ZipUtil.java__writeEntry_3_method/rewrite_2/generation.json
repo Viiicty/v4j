@@ -1,0 +1,5 @@
+{
+  "rewrite_type": "condition_structure",
+  "method": "public static void writeEntry(ZipFile zipFile, ZipEntry entry, File destDir)\n    throws IOException\n{\n    File outFile = new File(destDir, entry.getName());\n\n    if (!entry.isDirectory()) {\n        outFile.getParentFile().mkdirs();\n\n        try (InputStream in = zipFile.getInputStream(entry)) {\n            IOUtil.writeStream(in, outFile);\n        }\n    }\n    else {\n        outFile.mkdirs();\n    }\n}",
+  "rationale": "Negates the condition and exchanges its branches, preserving the single condition evaluation and all branch-specific operations."
+}

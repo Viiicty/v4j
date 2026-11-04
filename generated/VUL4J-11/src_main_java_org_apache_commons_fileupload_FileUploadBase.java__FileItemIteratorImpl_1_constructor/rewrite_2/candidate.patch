@@ -1,0 +1,38 @@
+--- a/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
++++ b/src/main/java/org/apache/commons/fileupload/FileUploadBase.java
+@@ -951,21 +951,24 @@
+ 
+             InputStream input = ctx.getInputStream();
+ 
+-            @SuppressWarnings("deprecation") // still has to be backward compatible
++            @SuppressWarnings("deprecation")
+             final int contentLengthInt = ctx.getContentLength();
+ 
+-            final long requestSize = UploadContext.class.isAssignableFrom(ctx.getClass())
+-                                     // Inline conditional is OK here CHECKSTYLE:OFF
+-                                     ? ((UploadContext) ctx).contentLength()
+-                                     : contentLengthInt;
+-                                     // CHECKSTYLE:ON
++            final long requestSize;
++            if (UploadContext.class.isAssignableFrom(ctx.getClass())) {
++                requestSize = ((UploadContext) ctx).contentLength();
++            } else {
++                requestSize = contentLengthInt;
++            }
+ 
+             if (sizeMax >= 0) {
+-                if (requestSize != -1 && requestSize > sizeMax) {
+-                    throw new SizeLimitExceededException(
+-                        format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
+-                                Long.valueOf(requestSize), Long.valueOf(sizeMax)),
+-                               requestSize, sizeMax);
++                if (requestSize != -1) {
++                    if (requestSize > sizeMax) {
++                        throw new SizeLimitExceededException(
++                            format("the request was rejected because its size (%s) exceeds the configured maximum (%s)",
++                                    Long.valueOf(requestSize), Long.valueOf(sizeMax)),
++                                   requestSize, sizeMax);
++                    }
+                 }
+                 input = new LimitedInputStream(input, sizeMax) {
+                     @Override

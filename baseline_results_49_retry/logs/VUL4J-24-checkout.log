@@ -1,0 +1,6 @@
+[36m2026-11-02 14:27:30[0m | [1m====================== START CHECKOUT ======================[0m
+[36m2026-11-02 14:27:30[0m | [1mCloning project into temporary folder: '/root/vul4j_data/clone/VUL4J-24'[0m
+[36m2026-11-02 14:27:31[0m | [31m[1mGitCommandError: Cmd('git') failed due to: exit code(128)
+  cmdline: git checkout fb2719e8299fadddae62245482de112052a0e08c
+  stderr: 'fatal: unable to read tree (fb2719e8299fadddae62245482de112052a0e08c)'[0m
+[36m2026-11-02 14:27:32[0m | [1m======================= END CHECKOUT =======================[0m

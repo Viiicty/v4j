@@ -1,0 +1,26 @@
+  public JWT decode(String encodedJWT, Map<String, Verifier> verifiers, Function<Header, String> keyFunction) {
+    Objects.requireNonNull(encodedJWT);
+    Objects.requireNonNull(verifiers);
+
+    String[] parts = getParts(encodedJWT);
+    Header header = Mapper.deserialize(base64Decode(parts[0].getBytes(StandardCharsets.UTF_8)), Header.class);
+    // If parts.length == 2 we have no signature, if no verifiers were provided, decode if header says 'none', else throw an exception
+    if (parts.length == 2 && verifiers.isEmpty()) {
+      if (header.algorithm == Algorithm.none) {
+        return Mapper.deserialize(base64Decode(parts[1].getBytes(StandardCharsets.UTF_8)), JWT.class);
+      } else {
+        throw new InvalidJWTSignatureException();
+      }
+    }
+
+    // If verifiers were provided, ensure it is able to verify this JWT.
+    String key = keyFunction.apply(header);
+    Verifier verifier = verifiers.get(key);
+    if (verifier != null) {
+      if (!verifier.canVerify(header.algorithm)) {
+        verifier = null;
+      }
+    }
+
+    return decode(encodedJWT, header, parts, verifier);
+  }

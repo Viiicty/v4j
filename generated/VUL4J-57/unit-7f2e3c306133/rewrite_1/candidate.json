@@ -1,0 +1,9 @@
+{
+  "vul_id": "VUL4J-57",
+  "unit_id": "unit-7f2e3c306133",
+  "project_path": "src/main/java/org/jenkinsci/plugins/workflow/support/steps/build/BuildTriggerStepExecution.java",
+  "method_key": "start/0/method",
+  "status": "materialized",
+  "source_unit_id": "src_main_java_org_jenkinsci_plugins_workflow_support_steps_build_BuildTriggerStepExecution.java__start_0_method",
+  "rewrite_type": "identifier_expression"
+}
